@@ -1,7 +1,6 @@
 async function get_colors_by_img() {
     imgName = $("img.league_main_img, img.team_main_img, img.country_flag").attr("src");
     imgClass = $("img.league_main_img, img.team_main_img, img.country_flag").attr("class");
-    console.log("IMG NAME: ", imgName)
     imgName = imgName.split("/")
     imgName = imgName[imgName.length - 1]
     folder = "leagues"
@@ -51,6 +50,7 @@ function apply_colors(background_color = false, text_color = false) {
         $("body > nav *:not(small)").css("color", text_color)
         $("body > nav .line").css("background-color", text_color)
         $("body > nav input").css("border-bottom-color", text_color)
+        $("nav input::placeholder").css("color", text_color);
         $("body > nav").css("fill", text_color)
         $("body > nav").css("stroke", text_color)
         $(".data_list_ul").css("border-color", background_color)
@@ -61,7 +61,6 @@ function apply_colors(background_color = false, text_color = false) {
 
         $("#id_text_color").val(text_color)
     }
-
 
 }
 
@@ -90,14 +89,14 @@ $(document).ready(async function () {
         background_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors(new_color, "")
-            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
         })
 
         var text_color = document.querySelector("input#new_text_color")
         text_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors("", new_color)
-            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
         })
 
 
@@ -108,7 +107,7 @@ $(document).ready(async function () {
             apply_colors(old_background_color, old_text_color)
             background_color.value = old_background_color
             text_color.value = old_text_color
-            $(".update_color_form button").addClass("opacity-40")
+            $(".update_color_form button").addClass("opacity-40", "pointer-events-none")
         })
 
 
@@ -118,7 +117,7 @@ $(document).ready(async function () {
             background_color.value = background_color_from_img
             text_color.value = text_color_from_img
 
-            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
         })
 
 
@@ -133,9 +132,9 @@ $(document).ready(async function () {
             apply_colors(txt_color, bg_color)
 
             if (txt_color !== old_text_color) {
-                $(".update_color_form button").addClass("opacity-40")
+                $(".update_color_form button").addClass("opacity-40", "pointer-events-none")
             } else {
-                $(".update_color_form button").removeClass("opacity-40")
+                $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
             }
         })
 

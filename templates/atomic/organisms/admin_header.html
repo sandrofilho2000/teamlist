@@ -16,7 +16,7 @@
   <form method="post" class="update_color_form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="p-[4px] px-[7px] bg-green-700 text-white text-[12px] rounded-[4px] &.active:opacity-100 opacity-40 &.active:hover:opacity-80">SALVAR</button>
+    <button type="submit" class="p-[4px] px-[7px] bg-green-700 text-white text-[12px] rounded-[4px] opacity-40 pointer-events-none">SALVAR</button>
   </form>
 </header>
 {% endif %}
