@@ -1,97 +1,87 @@
-{% extends "atomic/pages/list.html" with page_title = 'Equipes' %} 
+{% extends "atomic/pages/list.html" %}
 
-
+<!-- Page title for teams list page -->
+{% block list_page_title %}
+  Equipes | Teams List
+{% endblock list_page_title %}
 
 {% block content %}
 {% load custom_filters %}
 
+<!-- Main content section -->
 <h2 class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1">
   {% include 'icons/ball.html' %}
-  Equipes 
+  Equipes
 </h2>
 
+<!-- Table container -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="overflow-hidden">
+      <!-- Teams list table -->
       <table class="min-w-full">
-          <thead class="bg-white border-b">
-            <tr>
-              <th
-                scope="col"
-                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
-                #
-              </th>
-              <th
-                scope="col"
-                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
-                <a
-                  href="{% url 'team_list'  %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
-                >
-                  Equipe
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </a>
-              </th>
-              <th
-                scope="col"
-                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-              >
-                <a href="{% url 'team_list' %}?field=average_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                  Valor médio de mercado               
-                   <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </a>
-              </th>
-              <th
-                scope="col"
-                class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
-              >
-                <a href="{% url 'team_list' %}?field=total_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                  Valor de mercado total 
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </a>
-              </th>
-              <th
-                scope="col"
-                class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
-              >
-                <a href="{% url 'team_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                  Competições que joga
-                  <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </a>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for team in page_obj %}
-            <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <a href="{% url 'team_detail' pk=team.pk %}" class="flex items-center justify-start gap-1">
-                  <span class="hover:underline">{{ team.name }}</span>
-                </a>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <span>{{ team.average_market_value|passToFloat }}</span>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
-                <span>{{ team.total_market_value|passToFloat }}</span>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
-                <span>{{ team.num_leagues }}</span>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        
-        </table>
+        <thead class="bg-white border-b">
+          <tr>
+            <!-- Table headers -->
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">#</th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
+              <!-- Column header for team name -->
+              <a href="{% url 'team_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
+              <!-- Column header for average market value -->
+              <a href="{% url 'team_list' %}?field=average_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
+              <!-- Column header for total market value -->
+              <a href="{% url 'team_list' %}?field=total_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
+              <!-- Column header for number of leagues -->
+              <a href="{% url 'team_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Teams list -->
+          {% for team in page_obj %}
+          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
+            <!-- Team data -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
+              <!-- Team name -->
+              <a href="{% url 'team_detail' pk=team.pk %}" class="flex items-center justify-start gap-1 hover:underline">{{ team.name }}</a>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
+              <!-- Average market value -->
+              <span>{{ team.average_market_value|passToFloat }}</span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
+              <!-- Total market value -->
+              <span>{{ team.total_market_value|passToFloat }}</span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
+              <!-- Number of leagues -->
+              <span>{{ team.num_leagues }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-  
 
+<!-- Include pagination -->
 {% include 'atomic/organisms/list_pagination.html' %}
-
 {% endblock content %}

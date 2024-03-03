@@ -2,19 +2,30 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block page_title %}{% endblock page_title %}</title>
+  <!-- Include links -->
+  {% include 'atomic/cells/links.html' %}
+</head>
 
-  {% include 'atomic/organisms/head.html' %}
+<body class="{% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
+  <!-- Include admin header -->
   {% include 'atomic/organisms/admin_header.html' %}
 
-  <body class="{% if user.is_authenticated and user.is_staff %} pt-[35px] {% endif %}">
+  <!-- Navigation -->
+  {% include 'atomic/organisms/nav.html' %}
 
-    {% include 'atomic/organisms/nav.html' %}
-    {% include 'atomic/organisms/aside.html' %}
+  <!-- Sidebar -->
+  {% include 'atomic/organisms/aside.html' %}
 
-    <main class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto">
-      {% block content %} {% endblock content %}
-    </main>
+  <!-- Main content -->
+  <main class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto">
+    {% block content %}{% endblock content %}
+  </main>
 
-    {% include 'atomic/cells/scripts.html' %}
-  </body>
+  <!-- Include scripts -->
+  {% include 'atomic/cells/scripts.html' %}
+</body>
 </html>

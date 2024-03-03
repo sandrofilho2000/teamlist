@@ -1,5 +1,13 @@
-{% extends "base.html" with page_title = page_title %} 
+{% extends "base.html" %} 
 
+<!-- Page title block -->
+{% block page_title %}
+    {% block list_page_title %}
+
+    {% endblock list_page_title %}
+{% endblock page_title %}
+
+<!-- Main content block -->
 {% block content %}
     {% block list_content %}
 
