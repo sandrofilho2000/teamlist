@@ -18,7 +18,7 @@ def rgb_to_hex(rgb):
 
 def get_most_common_colors(folder, image_filename):
     # Open the image file
-    image_path = os.path.join("static", "images", folder, image_filename)
+    image_path = os.path.join("media", "images", folder, image_filename)
     with Image.open(image_path) as img:
         # Convert the image to RGB mode
         img = img.convert("RGB")

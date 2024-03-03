@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block page_title %} Lista de times {% endblock page_title %} {% block content %}
 {% load custom_filters %}
-{% load set_url_param %}
+{% load set_pagination_params %}
 
 <h2 class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1">
   {% include 'icons/flag.html' %}
@@ -118,7 +118,7 @@
       {% endif %}
 
       {%with url=request.build_absolute_uri %}
-      <input class="font-bold text-center w-[15px] bg-transparent" max="{{ page_obj.paginator.num_pages }}" url="{{ url|set_url_param }}" id="paginationInput" min="1" type="number"  value="{{ page_obj.number }}"/>
+      <input class="font-bold text-center w-[15px] bg-transparent" max="{{ page_obj.paginator.num_pages }}" url="{{ url|set_pagination_params }}" id="paginationInput" min="1" type="number"  value="{{ page_obj.number }}"/>
       {% endwith %}
       /
       <span class="font-bold">{{ page_obj.paginator.num_pages }}</span>

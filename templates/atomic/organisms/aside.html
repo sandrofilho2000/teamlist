@@ -1,0 +1,92 @@
+<!-- skeleton_loading.html -->
+<aside class="border-l-solid border-l-[10px] border-l-white h-screen fixed shadow-[1px_0px_35px_1px_#00000024] z-10 overflow-x-hidden">
+
+    <ul class="absolute z-2 top-[50px]">
+        <!-- Skeleton loading list items -->
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'country_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/home.html' %}
+                        </div>
+                        <span>
+                            Home
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'league_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/league.html' %}
+                        </div>
+                        <span>
+                            Ligas
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/ball.html' %}
+                        </div>
+                        <span>
+                            Equipes
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/player.html' %}
+                        </div>
+                        <span>
+                            Jogadores
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/flag.html' %}
+                        </div>
+                        <span>
+                            Países
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/stadium.html' %}
+                        </div>
+                        <span>
+                            Estádios
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                            {% include 'icons/trophy.html' %}
+                        </div>
+                        <span>
+                            Taças
+                        </span>
+                    </div>
+                </a>
+            </li>
+    </ul>
+
+</aside>

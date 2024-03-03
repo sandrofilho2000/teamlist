@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block page_title %} Lista de times {% endblock page_title %} {% block content %}
-{% load custom_filters %}
 
 {% include 'color_palette.html' with background_color=country.background_color text_color=country.text_color %}
+
 {% if user.is_authenticated and user.is_staff %}
     <a href="/admin/country/countries/{{country.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
         {% include 'icons/pencil.html' %}
@@ -10,44 +10,45 @@
         {% include 'icons/palette.html' %}
     </div>
 {% endif %}
+
 <div class="flex items-center m-auto justify-center mb-4">
   <img src="{{ country_flag }}" class="inline-block justify-start country_flag"/>
   <h2 class="inline-block sm:px-2 lg:px-4 text-2xl">
     {{ country.name }} 
   </h2>
 </div>
-  <div class="highlights flex justify-around gap-2">
-    <div>
-      <p>Principais ligas</p>
-      <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center">
-      </div>
-    </div>
-    <div>
-      <p class="text-sm font-sm block w-auto p-1 color-text">TOP 3 JOGADORES</p>
-      <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center flex flex-col justify-center">
-        
-        <div class="slider">
-          <div class="slider-card">
-            <a href="#">
-              <img width="52" height="52" src="https://img.a.transfermarkt.technology/portrait/header/28003-1694590254.jpg?lm=1" class="object-cover rounded-full w-[52px] h-[52px] m-auto block">
-              <p>  #2 Lionel Messi </p> <p class="text-green-700 font-bold bold">€35.00m</p>
-            </a>
-            <a class="flex gap-2 justify-center w-full" href="/teams/213/">
-              <span class="min-w-[28px] min-h-[28px] grid place-items-center">
-                  <img width="28" height="20" src="/static/images/teams/inter-miami-cf213.png">
-              </span>
-              <span class="whitespace-nowrap flex items-center text-[13px]">Inter Miami CF</span>
-            </a>
-        </div>
-        </div>
-      
-      </div>
-    </div>
-    <div>
-      <p>Times destaque</p>
-      <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center">
-      </div>
+<div class="highlights flex justify-around gap-2">
+  <div>
+    <p>Principais ligas</p>
+    <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center">
     </div>
   </div>
+  <div>
+    <p class="text-sm font-sm block w-auto p-1 color-text">TOP 3 JOGADORES</p>
+    <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center flex flex-col justify-center">
+      
+      <div class="slider">
+        <div class="slider-card">
+          <a href="#">
+            <img width="52" height="52" src="https://img.a.transfermarkt.technology/portrait/header/28003-1694590254.jpg?lm=1" class="object-cover rounded-full w-[52px] h-[52px] m-auto block">
+            <p>  #2 Lionel Messi </p> <p class="text-green-700 font-bold bold">€35.00m</p>
+          </a>
+          <a class="flex gap-2 justify-center w-full" href="/teams/213/">
+            <span class="min-w-[28px] min-h-[28px] grid place-items-center">
+                <img width="28" height="20" src="/media/images/teams/inter-miami-cf213.png">
+            </span>
+            <span class="whitespace-nowrap flex items-center text-[13px]">Inter Miami CF</span>
+          </a>
+      </div>
+      </div>
+    
+    </div>
+  </div>
+  <div>
+    <p>Times destaque</p>
+    <div class="highlight_card shadow-[1px_0px_15px_1px_#0000000d] bg-white rounded-lg w-[170px] h-[150px] text-center">
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

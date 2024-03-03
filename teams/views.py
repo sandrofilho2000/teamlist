@@ -86,7 +86,7 @@ class TeamInfoView(View):
         
         
         image_name = f"{team.slug}{team.id}.png"
-        image_url = f"/static/images/teams/{image_name}"  
+        image_url = f"/media/images/teams/{image_name}"  
         
 
         context = {

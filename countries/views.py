@@ -57,7 +57,7 @@ class CountryDetailView(ListView):
 
                 
         image_name = f"{country.slug}{country.id}.png"
-        country_flag = f"/static/images/countries/{image_name}"  
+        country_flag = f"/media/images/countries/{image_name}"  
             
 
         context = {

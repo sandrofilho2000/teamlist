@@ -81,9 +81,8 @@ $(document).ready(async function () {
     })
 
     if ($("img.league_main_img, img.team_main_img, img.country_flag").attr("src")) {
+        
         var { background_color: background_color_from_img, text_color: text_color_from_img } = await get_colors_by_img()
-
-
 
         var background_color = document.querySelector("input#new_background_color")
         background_color.addEventListener("change", function (e) {
