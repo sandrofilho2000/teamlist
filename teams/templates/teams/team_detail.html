@@ -1,10 +1,17 @@
-{% extends "base.html" %} 
-{% block page_title %}
-Lista de times
-{% endblock page_title %} 
-{% block content %} {% include 'breadcrumb.html' %} 
-{% load custom_filters %} {% load static %}
+{% extends "atomic/pages/detail.html" %}
+{% load custom_filters %}
 
+
+{% block detail_page_title %}
+  {{team.name}} | Teams List
+{% endblock detail_page_title %}
+
+
+{% block detail_content %}
+
+{% include 'color_palette.html' with background_color=team.background_color text_color=team.text_color %}
+
+<!-- Main content section -->
 <div class="w-[280px] m-auto">
   <div class="flex items-center justify-center gap-1">
     <img src="{{ team.country_img }}" />
@@ -14,17 +21,7 @@ Lista de times
   <img src="{{ image_url }}" class="m-auto block team_main_img" />
 </div>
 
-{% include 'color_palette.html' with background_color=team.background_color text_color=team.text_color %}
-
-{% if user.is_authenticated and user.is_staff %}
-    <a href="/admin/teams/team/{{team.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/pencil.html' %}
-    </a>
-    <div title="Editar cores" class="edit_component open_palette fixed cursor-pointer rounded-md right-2 bottom-14 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/palette.html' %}
-    </div>
-{% endif %}
-
+<!-- Table container -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="overflow-hidden">
@@ -129,8 +126,8 @@ Lista de times
       </table>
     </div>
   </div>
+</div>
 
-  {% include 'pagination.html' with url=request.build_absolute_uri related_items=players %}
-
-
-{% endblock content %}
+<!-- Include pagination -->
+{% include 'atomic/organisms/detail_pagination.html' %}
+{% endblock detail_content %}

@@ -5,14 +5,17 @@
   Países | Teams List
 {% endblock list_page_title %}
 
-{% block content %}
+{% block list_content %}
 {% load custom_filters %}
 
 <!-- Main content section -->
-<h2 class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1">
+<div class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1 justify-center my-[14px]">
+
   {% include 'icons/flag.html' %}
-  Países <small>({{ page_obj|length }})</small> 
-</h2>
+  <h2 class="background-color rounded-md">
+    Países <small>({{ page_obj|length }})</small> 
+  </h2>
+</div>
 
 <!-- Table container with overflow -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
@@ -91,4 +94,4 @@
 
 <!-- Include pagination -->
 {% include 'atomic/organisms/list_pagination.html' %}
-{% endblock content %}
+{% endblock list_content %}

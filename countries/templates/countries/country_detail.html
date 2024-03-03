@@ -1,15 +1,15 @@
-{% extends "base.html" %} {% block page_title %} Lista de times {% endblock page_title %} {% block content %}
+{% extends "atomic/pages/detail.html" %}
+{% load custom_filters %}
+
+
+{% block detail_page_title %}
+  {{country.name}} | Teams List
+{% endblock detail_page_title %}
+
+
+{% block detail_content %}
 
 {% include 'color_palette.html' with background_color=country.background_color text_color=country.text_color %}
-
-{% if user.is_authenticated and user.is_staff %}
-    <a href="/admin/country/countries/{{country.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/pencil.html' %}
-    </a>
-    <div title="Editar cores" class="edit_component open_palette fixed cursor-pointer rounded-md right-2 bottom-14 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/palette.html' %}
-    </div>
-{% endif %}
 
 <div class="flex items-center m-auto justify-center mb-4">
   <img src="{{ country_flag }}" class="inline-block justify-start country_flag"/>
@@ -17,6 +17,7 @@
     {{ country.name }} 
   </h2>
 </div>
+
 <div class="highlights flex justify-around gap-2">
   <div>
     <p>Principais ligas</p>
@@ -51,4 +52,6 @@
   </div>
 </div>
 
-{% endblock content %}
+<!-- Include pagination -->
+{% include 'atomic/organisms/detail_pagination.html' %}
+{% endblock detail_content %}

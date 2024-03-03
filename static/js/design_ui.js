@@ -41,6 +41,8 @@ function apply_colors(background_color = false, text_color = false) {
         $(".edit_component").css("border-color", background_color)
         $(".edit_component *").css("color", background_color)
         $(".edit_component *").css("fill", background_color)
+        $("aside span").css("color", background_color)
+        $("aside svg").css("fill", background_color)
 
         $("#id_background_color").val(background_color)
     }
