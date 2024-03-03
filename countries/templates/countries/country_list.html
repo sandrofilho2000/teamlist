@@ -1,0 +1,174 @@
+{% extends "base.html" %} {% block page_title %} Lista de times {% endblock page_title %} {% block content %}
+{% load custom_filters %}
+{% load set_url_param %}
+
+<h2 class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1">
+  {% include 'icons/flag.html' %}
+  Países <small>({{ page_obj|length }})</small> 
+</h2>
+
+
+
+  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+
+              <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                País 
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+
+                
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                <a href="{% url 'country_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Número de ligas 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+  
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Número de times 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
+              >
+                
+                <a  href="{% url 'country_list' %}?field=num_players{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Número de jogadores 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for country in page_obj %}
+            {% cycle 'bg-gray-100 border-b' 'bg-white border-b' as row_class silent %}
+            <tr
+              class="{% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %} bg-white border-b {% endif %}"
+            >
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 "
+              >
+                <img src="{{ country.flag }}" class="inline-block"/>
+                <a href="{% url 'country_detail' pk=country.pk %}">
+                  <span class="hover:underline">{{country.name}}</span>
+                </a>
+              </td>
+              <td
+              class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+              <a href="#" class="flex items-center justify-start gap-1" id="{{country.slug}}-num-leagues">
+                <span>{{country.num_leagues}}</span>
+                </a>
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <a href="#" class="flex items-center justify-start gap-1" id="{{country.slug}}-num-teams">
+                  <span>{{country.num_teams}}</span>
+                </a>
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <a href="#" class="flex items-center justify-end gap-1 text-right" id="{{country.slug}}-num-players">
+                  <span>{{country.num_players}}</span>
+                </a>
+              </td>            
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Pagination links -->
+  <div class="mt-4 sm:px-6 lg:px-8">
+    <span class="text-sm text-gray-700 flex gap-1 pb-5 items-center">
+      {% if page_obj.has_previous %}
+      <a href="?page=1{% url_params request %}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+      </a>
+      <a href="?page={{ page_obj.previous_page_number }}{% url_params request %}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+      </a> 
+      {% endif %}
+
+      {%with url=request.build_absolute_uri %}
+      <input class="font-bold text-center w-[15px] bg-transparent" max="{{ page_obj.paginator.num_pages }}" url="{{ url|set_url_param }}" id="paginationInput" min="1" type="number"  value="{{ page_obj.number }}"/>
+      {% endwith %}
+      /
+      <span class="font-bold">{{ page_obj.paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% url_params request %}"  class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+      </a>
+      <a href="?page={{ page_obj.paginator.num_pages }}{% url_params request %}"  class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+      </a>
+      {% endif %}
+    </span>
+  </div>
+
+  <script>
+    var paginationInput = document.getElementById('paginationInput');
+    if (paginationInput) {
+  
+        paginationInput.addEventListener("keyup", (e)=>{
+          value = e.target.value;
+          url = e.target.getAttribute('url')
+          redirectUrl =  url + "page=" + value; 
+          if(value > 99){
+            e.target.classList.add("w-[25px]")
+          }else{
+            e.target.classList.add("w-[15px]")
+          }
+  
+          if (e.key === 'Enter') {
+            window.location.href = redirectUrl; // Redirect the user to the new URL
+          }
+        })
+  
+    }
+
+  // Fetch country counts asynchronously
+  fetch('/api/country-counts/')
+      .then(response => response.json())
+      .then(data => {
+          // Update HTML elements with the counts
+          data.counts.forEach(country => {
+              document.getElementById(`${country.name}-num-teams`).innerText = country.num_teams;
+              document.getElementById(`${country.name}-num-players`).innerText = country.num_players;
+              document.getElementById(`${country.name}-num-leagues`).innerText = country.num_leagues;
+          });
+      });
+
+
+
+    </script>
+{% endblock content %}

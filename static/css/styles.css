@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+}
+
+.hsla-shadow {
+  --shadow-color: hsla(210, 8%, 62%, 0.2);
+  box-shadow: var(--shadow-color) 0px 8px 24px;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  border: unset; 
+}
+
+
+h1, h2, h3{
+  font-family: "Montserrat", sans-serif;
+}
+
+.update_color_form *:not(button){
+  display: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input::placeholder {
+  user-select: none;
+  color: white;
+}
+
+* ::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+  left: -10px;
+  margin-left: -10px;
+}
+
+/* Track */
+* ::-webkit-scrollbar-track {
+  background: #fff;
+  margin-left: -10px;
+}
+
+/* Handle */
+* ::-webkit-scrollbar-thumb {
+  margin-left: -10px;
+  background: #a3a3a3;
+  width: 5px;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+* ::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+.transition-primary {
+  transition: all 0.3s ease 0s;
+  opacity: 1;
+}
+
+.toggle-menu {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  height: 36px;
+  cursor: pointer;
+  z-index: 3;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.toggle-menu .line {
+  max-width: 36px;
+  width: 100%;
+  background: #fff;
+  height: 4px;
+  border-radius: 3px;
+}
+
+html, body {
+  overflow-x: hidden;
+  min-width: 100vw;
+  opacity: 0;
+}
+
+body.menu-active aside {
+  width: 250px;
+}
+
+body aside {
+  width: 70px;
+}
+
+body main {
+  min-width: calc(-80px + 100vw);
+}
+body.menu-active main {
+  left: 250px;
+  min-width: calc(-100px + 100vw);
+}
+
+
+.data_list_ul.active{
+  padding-top: 5px;
+}
+
+.data_list_ul small{
+  margin-left: 15px
+}
+
+
+.leagues_data_list_ul.active li:first-of-type::before{
+  content: "Ligas";
+}
+
+.teams_data_list_ul.active li:first-of-type::before{
+  content: "Times";
+}
+
+.players_data_list_ul.active li:first-of-type::before{
+  content: "Jogadores";
+}
+
+.countries_data_list_ul.active li:first-of-type::before{
+  content: "Países";
+}
+
+.data_list_ul.active li:first-of-type::before{
+  position: relative;
+  top: 0px;
+  font-size: 13px;
+  left: 15px;
+  color: black;
+}
+
+.data_list_ul a {
+  color: black;
+}
+

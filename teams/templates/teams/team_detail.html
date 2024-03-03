@@ -1,0 +1,136 @@
+{% extends "base.html" %} 
+{% block page_title %}
+Lista de times
+{% endblock page_title %} 
+{% block content %} {% include 'breadcrumb.html' %} 
+{% load custom_filters %} {% load static %}
+
+<div class="w-[280px] m-auto">
+  <div class="flex items-center justify-center gap-1">
+    <img src="{{ team.country_img }}" />
+    <small class="text-center block"> {{ team.country_name }} </small>
+  </div>
+  <h2 class="text-center">{{ team.name }}</h2>
+  <img src="{{ image_url }}" class="m-auto block team_main_img" />
+</div>
+
+{% include 'color_palette.html' with background_color=team.background_color text_color=team.text_color %}
+
+{% if user.is_authenticated and user.is_staff %}
+    <a href="/admin/teams/team/{{team.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
+        {% include 'icons/pencil.html' %}
+    </a>
+    <div title="Editar cores" class="edit_component open_palette fixed cursor-pointer rounded-md right-2 bottom-14 h-10 w-10 border-[1px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
+        {% include 'icons/palette.html' %}
+    </div>
+{% endif %}
+
+<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="overflow-hidden">
+      <table class="min-w-full">
+        <thead class="bg-white border-b">
+          <tr>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+            >
+              <a
+              href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+            >
+            Numº
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </a>
+            </th>
+
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+            >
+              <a
+                href="{% url 'team_detail' pk=team.pk %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+              >
+                Jogador
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th
+            scope="col"
+            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"s
+          >
+            <a
+              href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+            >
+              Posição
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </a>
+          </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+            >
+              <a href="{% url 'team_detail' pk=team.pk %}?field=birth{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Nascimento              
+                 <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+            >
+              <a href="{% url 'team_detail' pk=team.pk %}?field=country_name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                País de origem 
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+            <th
+              scope="col"
+              class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
+            >
+              <a href="{% url 'team_detail' pk=team.pk %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Valor de mercado 
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players %}
+          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <span>{{ player.num }}</span>
+            </td>
+ 
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex flex-col justify-left align-center">
+              <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
+                <a href="#" class="gap-1 text-center hover:underline">
+                  {{ player.name }}
+                </a>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <span>{{ player.pos }}</span>
+            </td>
+
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <span class="hover:underline">{{ player.birth }}</span>
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
+              <span>{{ player.country_name }}</span>
+            </td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
+              <span>{{ player.value_market }}</span>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      
+      </table>
+    </div>
+  </div>
+
+  {% include 'pagination.html' with url=request.build_absolute_uri related_items=players %}
+
+
+{% endblock content %}

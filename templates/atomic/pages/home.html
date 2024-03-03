@@ -1,0 +1,24 @@
+<header
+  class="h-[35px] z-40 fixed top-0 bg-[#417690] w-full px-3 flex items-center justify-between text-[#f5dd5d]"
+>
+  <div>
+    <span>
+      Olá, {{ user.get_full_name|default:user.username }}!
+      <a href="/admin/" target="_blank" class="text-[11px]">
+        VER O PAINEL ->
+      </a>
+    </span>
+  </div>
+
+
+  <form method="post" class="update_color_form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="p-[4px] px-[7px] bg-green-700 text-white text-[12px] rounded-[4px] &.active:opacity-100 opacity-40 &.active:hover:opacity-80">SALVAR</button>
+  </form>
+  
+
+ 
+
+
+</header>

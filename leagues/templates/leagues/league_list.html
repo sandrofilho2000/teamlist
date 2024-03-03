@@ -1,0 +1,181 @@
+{% extends "base.html" %} {% block page_title %} Lista de times {% endblock page_title %} {% block content %}
+{% load custom_filters %}
+{% load set_url_param %}
+
+<h2 class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1">
+  {% include 'icons/league.html' %}
+  Ligas 
+</h2>
+
+  <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                #
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+
+              <a href="{% url 'league_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                Liga 
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+
+                
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                <a href="{% url 'league_list' %}?field=outcomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Despesas 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+  
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                <a href="{% url 'league_list' %}?field=incomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Renda 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                
+                <a href="{% url 'league_list' %}?field=balance{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Saldo 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+
+                </a>
+              </th>
+            <th
+            scope="col"
+            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+          >
+
+          <a href="{% url 'league_list' %}?field=num_teams{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+            Equipes 
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+
+            
+          </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for league in page_obj %}
+            {% cycle 'bg-gray-100 border-b' 'bg-white border-b' as row_class silent %}
+            <tr
+              class="{% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %} bg-white border-b {% endif %}"
+            >
+              <td
+                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+              >
+                <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
+                  <img src="{{ league.country_img }}" />
+                  <span class="hover:underline"> {{ league.name }} </span>
+                </a>
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <span> {{ league.outcomes|passToFloat }} </span>
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <span>{{ league.incomes|passToFloat }}</span>
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                {% if "-" in league.balance %}
+                    <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                {% else %}
+                    <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                {% endif %}
+            </td>
+            
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                {{ league.num_teams  }}
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Pagination links -->
+  <div class="mt-4 sm:px-6 lg:px-8">
+    <span class="text-sm text-gray-700 flex gap-1 pb-5 items-center">
+      {% if page_obj.has_previous %}
+      <a href="?page=1{% url_params request %}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+      </a>
+      <a href="?page={{ page_obj.previous_page_number }}{% url_params request %}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-left" aria-hidden="true"></i>
+      </a> 
+      {% endif %}
+
+      {%with url=request.build_absolute_uri %}
+      <input class="font-bold text-center w-[15px] bg-transparent" max="{{ page_obj.paginator.num_pages }}" url="{{ url|set_url_param }}" id="paginationInput" min="1" type="number"  value="{{ page_obj.number }}"/>
+      {% endwith %}
+      /
+      <span class="font-bold">{{ page_obj.paginator.num_pages }}</span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% url_params request %}"  class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+      </a>
+      <a href="?page={{ page_obj.paginator.num_pages }}{% url_params request %}"  class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+      </a>
+      {% endif %}
+    </span>
+  </div>
+
+  <script>
+    var paginationInput = document.getElementById('paginationInput');
+    if (paginationInput) {
+  
+        paginationInput.addEventListener("keyup", (e)=>{
+          value = e.target.value;
+          url = e.target.getAttribute('url')
+          redirectUrl =  url + "page=" + value; 
+          if(value > 99){
+            e.target.classList.add("w-[25px]")
+          }else{
+            e.target.classList.add("w-[15px]")
+          }
+  
+          if (e.key === 'Enter') {
+            window.location.href = redirectUrl; // Redirect the user to the new URL
+          }
+        })
+  
+    }
+    </script>
+{% endblock content %}

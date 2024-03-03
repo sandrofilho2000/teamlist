@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TEAMS LIST | {% block page_title %}{% endblock page_title %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/slick/slick-theme.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/slick/slick.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://www.cssscript.com/demo/interactive-svg-world-map/dist/svg-worldmap.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Include Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        /* Set the map container size */
+        #map { height: 400px; }
+    </style>
+  </head>
+  {% if user.is_authenticated and user.is_staff %}
+    {% include 'admin_header.html' %}
+  {% endif %}
+  <body class="{% if user.is_authenticated and user.is_staff %} pt-[35px] {% endif %}">
+    <nav
+      class="background-color flex justify-between items-center  bg-[#06AA48] fixed w-screen left-0 z-20 h-[50px] pr-4 transition ease-in-out delay-150 shadow-[7px_6px_10px_0px_#00000024]"
+    >
+      <div class="toggle-menu">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <h1
+        class="m-auto absolute left-[50%] -translate-x-[50%] text-2xl font-bold"
+      >
+        <a href="/" class="mb-0 text-white flex items-center gap-1">
+          <i class="fa fa-futbol-o text-[20px]" aria-hidden="true"></i>
+          TEAMS LIST
+        </a>
+      </h1>
+
+      {% include 'datalist.html' %}
+    </nav>
+
+    {% include 'aside.html' %}
+
+
+    <main
+      class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto"
+    >
+      {% block content %} {% endblock content %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/design_ui.js' %}"></script>
+    <script src="{% static 'js/slick/slick.js' %}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+    <script>
+      $('.slider').slick({
+        arrows: false,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 2000,
+      });
+    </script>
+  </body>
+</html>
