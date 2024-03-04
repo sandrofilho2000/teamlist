@@ -77,8 +77,8 @@ def set_pagination_params(url = False):
     return new_url
 
 
-@register.filter(name='set_pagination_params')
-def set_pagination_params(request, tab = False):
+@register.filter(name='set_country_pagination_params')
+def set_country_pagination_params(request, tab = False):
     params = request.GET.dict()
     
     if not params['tab']:

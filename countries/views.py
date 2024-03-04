@@ -39,23 +39,52 @@ class CountryDetailView(ListView):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  
-        order_by_param = self.request.GET.get('field', 'name')
-        order_dir_param = self.request.GET.get('order', '')
-        order = order_dir_param + order_by_param
+        
+        order_by_param_league = self.request.GET.get('field', 'name')
+        order_dir_param_league = self.request.GET.get('order', '')
+        order_league = order_dir_param_league + order_by_param_league
+        
+        if order_dir_param_league == "desc":
+            order_dir_param_league = "-"
+        else :
+            order_dir_param_league = ""
+
+        
+        order_by_param_team = self.request.GET.get('field', '-average_market_value')
+        order_dir_param_team = self.request.GET.get('order', '')
+        order_team = order_dir_param_team + order_by_param_team
+        
+        if order_dir_param_team == "desc":
+            order_dir_param_team = "-"
+        else :
+            order_dir_param_team = ""
+            
+            
+        order_by_param_player = self.request.GET.get('field', '-value_market')
+        order_dir_param_player = self.request.GET.get('order', '')
+        order_player = order_dir_param_player + order_by_param_player
+        
+        if order_dir_param_player == "desc":
+            order_dir_param_player = "-"
+        else :
+            order_dir_param_player = ""
+
 
         country = get_object_or_404(Country, pk=pk) 
-        players = Player.objects.filter(id_country_id=pk).order_by(order)
-        leagues = League.objects.filter(id_country_id=pk).order_by(order)
-        teams = Team.objects.filter(id_country_id=pk).order_by(order)
+        leagues = League.objects.filter(id_country_id=pk).order_by(order_league)
+        top_league = League.objects.filter(id_country_id=pk).order_by("balance").first()
+        
+        teams = Team.objects.filter(id_country_id=pk).order_by(order_team)
+        top_team = Team.objects.filter(id_country_id=pk).order_by("-average_market_value").first()
+        
+        players = Player.objects.filter(id_country_id=pk).order_by(order_player)
+        top_players = Player.objects.filter(id_team__id_country_id=pk).order_by("-value_market")[:3]
+
         
         form = CountryColorForm(instance=Country)
         
-        if order_dir_param == "desc":
-            order_dir_param = "-"
-        else :
-            order_dir_param = ""
+
         
-        order = order_dir_param + order_by_param
 
                 
         image_name = f"{country.slug}{country.id}.png"
@@ -65,7 +94,7 @@ class CountryDetailView(ListView):
 
         paginator = Paginator(leagues, 10) 
         paginator_teams = Paginator(teams, 10) 
-        paginator_players = Paginator(players, 3) 
+        paginator_players = Paginator(players, 10) 
 
         
         try:
@@ -93,17 +122,18 @@ class CountryDetailView(ListView):
         context = {
             'country': country,
             'leagues': leagues,
+            'top_league': top_league,
             'country_flag': country_flag,
             'players': players,
+            'top_players': top_players,
             'teams': teams,
+            'top_team': top_team,
             'paginator': paginator,
             'paginator_teams': paginator_teams,
             'paginator_players': paginator_players,
             'form': form
         }
-        
-        print("country_flag: ", country_flag)
-        
+                
         return render(request, self.template_name, context )
 
 

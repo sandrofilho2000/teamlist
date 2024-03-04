@@ -13,10 +13,6 @@ from slugify import slugify
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_dir)
 
-from teams.utils.get_imgs import download_image
-from teams.utils.passToFloat import pass_to_float
-from teams.utils.slugfy import *
-from teams.utils.sql_commands import *
 
 
 players_link = []
