@@ -13,27 +13,27 @@ def passToFloat(value = 0):
       
     try:
         value = float(value)
+
+        if(value >= 1000000000):
+            new_value =  value / 1000000000
+            new_value = str(new_value * positive) + " bilhões €"
+            return new_value
+        
+        elif(value >= 1000000):
+            new_value =  value / 1000000
+            new_value = str(new_value * positive) + " mi. €"
+            return new_value
+        
+        elif(value >= 1000):
+            new_value =  value / 1000
+            new_value = str(new_value * positive) + " mil €"
+            return new_value
+        
+        else:
+            return "-"
+    
     except:
-        print("VALOR: ", value)    
-    
-    if(value >= 1000000000):
-        new_value =  value / 1000000000
-        new_value = str(new_value * positive) + " bilhões €"
-        return new_value
-    
-    elif(value >= 1000000):
-        new_value =  value / 1000000
-        new_value = str(new_value * positive) + " mi. €"
-        return new_value
-    
-    elif(value >= 1000):
-        new_value =  value / 1000
-        new_value = str(new_value * positive) + " mil €"
-        return new_value
-    
-    else:
-        return "-"
-    
+        return '-'
     
 @register.filter(name='enshort_name')
 def enshort_name(value):
@@ -75,3 +75,29 @@ def set_pagination_params(url = False):
             new_url = f"?{params[-1]}&"
      
     return new_url
+
+
+@register.filter(name='set_pagination_params')
+def set_pagination_params(request, tab = False):
+    params = request.GET.dict()
+    
+    if not params['tab']:
+        if tab!="leagues":
+            return 'hidden'
+        else: 
+            return ''
+        
+    else:
+        if params['tab'] == "leagues":
+            if tab != "leagues":
+                return 'hidden'
+            
+        elif params['tab'] == "teams":
+            if tab != "teams":
+                return 'hidden'
+            
+        elif params['tab'] == "players":
+            if tab != "players":
+                return 'hidden'
+            
+        return ""

@@ -71,19 +71,6 @@ class TeamInfoView(View):
             players = paginator.page(paginator.num_pages)
             
             
-        if league_id:
-            league = League.objects.get(pk=league_id)
-            breadcrumbs = [
-                {'url': f"/leagues/", 'name': "Ligas"},
-                {'url': f"/leagues/{league.id}/", 'name': league.name},
-                {'url': f"/{team.id}/", 'name': team.name}
-            ]
-        else:
-            breadcrumbs = [
-                {'url': f"/teams/", 'name': "Equipes"},
-                {'url': f"/{team.id}/", 'name': team.name}
-            ]
-        
         
         image_name = f"{team.slug}{team.id}.png"
         image_url = f"/media/images/teams/{image_name}"  
@@ -94,7 +81,6 @@ class TeamInfoView(View):
             'related_leagues': related_leagues,
             'players': players,
             'paginator': paginator,
-            'breadcrumbs': breadcrumbs,
             'image_url': image_url,
             'form': form
         }

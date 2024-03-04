@@ -42,7 +42,7 @@ function apply_colors(background_color = false, text_color = false) {
         $(".edit_component *").css("fill", background_color)
         $("aside span").css("color", background_color)
         $("aside svg").css("fill", background_color)
-
+        $("nav path.fill-white").css("fill", background_color)
         $("#id_background_color").val(background_color)
     }
 
@@ -50,15 +50,12 @@ function apply_colors(background_color = false, text_color = false) {
         $("body > nav *:not(small)").css("color", text_color)
         $("body > nav .line").css("background-color", text_color)
         $("body > nav input").css("border-bottom-color", text_color)
-        $("nav input::placeholder").css("color", text_color);
-        $("body > nav").css("fill", text_color)
         $("body > nav").css("stroke", text_color)
         $(".data_list_ul").css("border-color", background_color)
         $("aside").css("background-color", text_color)
         $("aside").css("border-left-color", text_color)
         $(".edit_component").css("background-color", text_color)
         $("aside ul").css("background-color", text_color)
-
         $("#id_text_color").val(text_color)
     }
 

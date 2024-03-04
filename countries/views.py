@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView
 from django.db.models import Count
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from countries.models import Country
 from .models import CountryColorForm
 from leagues.models import League
@@ -46,6 +46,8 @@ class CountryDetailView(ListView):
         country = get_object_or_404(Country, pk=pk) 
         players = Player.objects.filter(id_country_id=pk).order_by(order)
         leagues = League.objects.filter(id_country_id=pk).order_by(order)
+        teams = Team.objects.filter(id_country_id=pk).order_by(order)
+        
         form = CountryColorForm(instance=Country)
         
         if order_dir_param == "desc":
@@ -58,13 +60,45 @@ class CountryDetailView(ListView):
                 
         image_name = f"{country.slug}{country.id}.png"
         country_flag = f"/media/images/countries/{image_name}"  
-            
+        
+        page = request.GET.get('page')
 
+        paginator = Paginator(leagues, 10) 
+        paginator_teams = Paginator(teams, 10) 
+        paginator_players = Paginator(players, 3) 
+
+        
+        try:
+            leagues = paginator.page(page)
+        except PageNotAnInteger:
+            leagues = paginator.page(1)
+        except EmptyPage:
+            leagues = paginator.page(paginator.num_pages)
+            
+        
+        try:
+            teams = paginator_teams.page(page)
+        except PageNotAnInteger:
+            teams = paginator_teams.page(1)
+        except EmptyPage:
+            teams = paginator_teams.page(paginator_teams.num_pages)
+        
+        try:
+            players = paginator_players.page(page)
+        except PageNotAnInteger:
+            players = paginator_players.page(1)
+        except EmptyPage:
+            players = paginator_players.page(paginator_players.num_pages)
+            
         context = {
             'country': country,
             'leagues': leagues,
             'country_flag': country_flag,
             'players': players,
+            'teams': teams,
+            'paginator': paginator,
+            'paginator_teams': paginator_teams,
+            'paginator_players': paginator_players,
             'form': form
         }
         
