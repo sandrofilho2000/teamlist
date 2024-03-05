@@ -20,18 +20,25 @@ class CountryListView(ListView):
     paginate_by = 20  
 
     def get_queryset(self):
-            queryset = super().get_queryset()
-            queryset = queryset.annotate(num_teams=Count('team', distinct=True))
-            queryset = queryset.annotate(num_leagues=Count('league', distinct=True))
-            queryset = queryset.annotate(num_players=Count('player', distinct=True))
-            order_by_param = self.request.GET.get('field')
-            order_dir_param = self.request.GET.get('order', 'asc')  
-            if order_dir_param == 'desc':
-                queryset = order_list(queryset, order_by_param, "-")
-            else:
-                queryset = order_list(queryset, order_by_param, "")
+        queryset = super().get_queryset()
+        queryset = queryset.annotate(num_teams=Count('team', distinct=True))
+        queryset = queryset.annotate(num_leagues=Count('league', distinct=True))
+        queryset = queryset.annotate(num_players=Count('player', distinct=True))
+        queryset = queryset.annotate(num_countries=Count('countries', distinct=True))
 
-            return queryset
+        order_by_param = self.request.GET.get('field')
+        order_dir_param = self.request.GET.get('order', 'asc')  
+        if order_dir_param == 'desc':
+            queryset = order_list(queryset, order_by_param, "-")
+        else:
+            queryset = order_list(queryset, order_by_param, "")
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_countries'] = self.model.objects.count()  # Total count of countries
+        return context
 
 
 class CountryDetailView(ListView):
@@ -120,12 +127,19 @@ class CountryDetailView(ListView):
         except EmptyPage:
             players = paginator_players.page(paginator_players.num_pages)
             
+            
+        breadcrumbs = [
+            {'url': f"/countries/", 'name': "Países"},
+            {'url': f"/{country.id}/", 'name': country.name}
+        ]
+
         context = {
             'country': country,
             'leagues': leagues,
             'top_league': top_league,
             'country_flag': country_flag,
             'players': players,
+            'breadcrumbs': breadcrumbs,
             'top_players': top_players,
             'teams': teams,
             'top_team': top_team,

@@ -1,5 +1,8 @@
+from dis import code_info
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, View
+
+from countries.models import Country
 from .models import League, LeagueColorForm
 from teams.models import Team  
 from league_team.models import LeaguesTeam  
@@ -36,7 +39,12 @@ class LeagueInfoView(View):
     template_name = 'leagues/league_detail.html'  
 
     def get(self, request, *args, **kwargs):
+        
         pk = kwargs.get('pk')  
+        country_pk = kwargs.get('country_pk')  
+        if country_pk:
+            country = get_object_or_404(Country, pk=country_pk)  
+            
         league = get_object_or_404(League, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
         teams = [leagues_team.id_team for leagues_team in leagues_teams]
@@ -64,10 +72,25 @@ class LeagueInfoView(View):
         except EmptyPage:
             related_teams = paginator.page(paginator.num_pages)
         
-        breadcrumbs = [
-            {'url': f"/leagues/", 'name': "Ligas"},
-            {'url': f"/{league.id}/", 'name': league.name}
-        ]
+        breadcrumbs = []
+        
+
+        if country_pk:
+            breadcrumbs+=[
+                {'url': f"/countries/", 'name': "Países"},
+                {'url': f"/countries/country/{country_pk}", 'name': country.name},
+                {'url': f"", 'name': league.name}
+            ]
+        else:
+            breadcrumbs += [
+                {'url': f"/leagues/", 'name': "Ligas"},
+                {'url': f"", 'name': league.name}
+            ]
+            
+        
+
+        
+        
         
         image_name = f"{league.slug}{league.id}.png"
         image_url = f"/media/images/leagues/{image_name}"  
@@ -80,6 +103,9 @@ class LeagueInfoView(View):
             'image_url': image_url,
             'form': form
         }
+        
+        if country_pk:
+            context['country_pk'] = country_pk
         
         
         return render(request, self.template_name, context )

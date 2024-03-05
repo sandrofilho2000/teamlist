@@ -25,7 +25,7 @@
       {% if top_league %}
       <div class="flex flex-col items-center py-5 px-4">
         <img class=" h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.png" alt="{{top_league.name}}"/>
-        <a href="{% url 'league_detail' pk=top_league.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center">{{top_league.name}}</a>
+        <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center">{{top_league.name}}</a>
         {% if "-" in top_league.balance %}
             <span class="text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
         {% else %}
@@ -44,7 +44,7 @@
       {% if top_team %}
       <div class="flex flex-col items-center py-5 px-4">
           <img class=" h-24 mb-3" src="/media/images/teams/{{top_team.slug}}{{top_team.id}}.png" alt="{{top_team.name}}"/>
-          <a href="{% url 'team_detail' pk=top_team.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center"> {{top_team.name}}</a>
+          <a href="{% url 'country_team_detail' country_pk=country.pk pk=top_team.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center"> {{top_team.name}}</a>
           <span class="text-lg text-green-700 font-bold">{{top_team.total_market_value|passToFloat }}</span>
       </div>
       {% else %}
@@ -192,7 +192,7 @@
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                 <!-- League name -->
-                <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
+                <a href="{% url 'country_league_detail' country_pk=country.pk pk=league.pk %}" class="flex items-center justify-start gap-1">
                   <img src="{{ league.country_img }}" />
                   <span class="hover:underline font-bold"> {{ league.name }} </span>
                 </a>
@@ -260,7 +260,7 @@
         </thead>
         <tbody>
           <!-- Teams list -->
-          {% if leagues %}
+          {% if teams %}
           {% for team in teams %}
           <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
             <!-- Team data -->
@@ -269,7 +269,7 @@
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
               <!-- Team name -->
-              <a href="{% url 'team_detail' pk=team.pk %}" class="font-bold hover:underline">{{ team.name }}</a>
+              <a href="{% url 'country_team_detail' country_pk=country.pk pk=team.pk %}" class="font-bold hover:underline">{{ team.name }}</a>
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
               <!-- Average market value -->

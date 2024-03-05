@@ -72,9 +72,14 @@
               <img src="{{ team.small_img }}" />
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <a href="{% url 'team_detail' pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+              {% if country_pk %}
+                <a href="{% url 'country_league_team_detail' country_pk=country_pk league_pk=league.pk pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+              {% else %}
+                <a href="{% url 'league_team_detail' league_pk=league.pk pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+              {% endif %}
                 <span class="hover:underline">{{ team.name }}</span>
               </a>
+
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               <span>{{ team.average_market_value|passToFloat }}</span>

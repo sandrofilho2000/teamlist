@@ -1,4 +1,6 @@
-<!-- component -->
+{% load custom_filters %}
+
+{% if breadcrumbs %}
 <div class="w-max text-left">
     <nav aria-label="breadcrumb">
       <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 px-4">
@@ -9,12 +11,13 @@
                 class="font-medium text-blue-gray-900 transition-colors hover:opacity-80 {% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %}  {% endif %}"
                 href="{{ breadcrumb.url }}"
                 >
-                    {{ breadcrumb.name }}
+                    {{ breadcrumb.name|enshort_name }}
                 </a>
             </li>
             {% if not forloop.last %}&nbsp;&rsaquo;&nbsp;{% endif %}
         {% endfor %}
     </nav>
   </div>
-  
+  {% endif %}
+
   

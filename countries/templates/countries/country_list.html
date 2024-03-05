@@ -13,7 +13,7 @@
 
   {% include 'icons/flag.html' %}
   <h2 class="background-color rounded-md">
-    Países <small>({{ page_obj|length }})</small> 
+    Países
   </h2>
 </div>
 
@@ -62,7 +62,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">
               <!-- Country flag and name -->
               <img src="{{ country.flag }}" class="inline-block"/>
-              <a href="{% url 'country_detail' pk=country.pk %}">
+              <a href="{% url 'countries_detail' pk=country.pk %}">
                 <span class="hover:underline">{{ country.name }}</span>
               </a>
             </td>

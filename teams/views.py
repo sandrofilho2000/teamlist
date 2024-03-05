@@ -1,3 +1,5 @@
+from countries.models import Country
+from countries.views import country
 from .models import Team, TeamColorForm
 from leagues.models import League
 from league_team.models import LeaguesTeam  
@@ -41,6 +43,15 @@ class TeamInfoView(View):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  
+        league_pk = kwargs.get('league_pk')  
+        country_pk = kwargs.get('country_pk')  
+        
+        if league_pk:
+            league = get_object_or_404(League, pk=league_pk) 
+        
+        if country_pk:
+            country = get_object_or_404(Country, pk=country_pk) 
+        
         team = get_object_or_404(Team, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
         leagues = [leagues_team.id_team for leagues_team in leagues_teams]
@@ -75,10 +86,41 @@ class TeamInfoView(View):
         image_name = f"{team.slug}{team.id}.png"
         image_url = f"/media/images/teams/{image_name}"  
         
-
+        breadcrumbs = []
+        
+        if league_pk or country_pk:
+            if country_pk:
+                breadcrumbs += [
+                    {'url': f"/countries/", 'name': "Países"},
+                    {'url': f"/countries/country/{country.id}", 'name': country.name}
+                ]
+                
+            if league_pk:
+                if country_pk:
+                    breadcrumbs += [
+                        {'url': f"/countries/country/{country.id}/leagues/{league.id}", 'name': league.name}
+                    ]
+                else:
+                    breadcrumbs += [
+                        {'url': f"/leagues/", 'name': "Ligas"},
+                        {'url': f"/leagues/league/{league.id}", 'name': league.name}
+                    ]
+                
+            breadcrumbs += [
+                {'url': f"", 'name': team.name}
+            ]
+                
+        else:
+             breadcrumbs += [
+                {'url': f"/teams/", 'name': 'Equipes'},
+                {'url': f"", 'name': team.name}
+            ]
+                
+        
         context = {
             'team': team,
             'related_leagues': related_leagues,
+            'breadcrumbs': breadcrumbs,
             'players': players,
             'paginator': paginator,
             'image_url': image_url,

@@ -38,8 +38,8 @@ def passToFloat(value = 0):
 @register.filter(name='enshort_name')
 def enshort_name(value):
     
-    if len(value) > 27 :
-        return value[:27] + "..."
+    if len(value) > 23 :
+        return value[:23] + "..."
     
     else:
         return value

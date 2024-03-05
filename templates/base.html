@@ -23,6 +23,8 @@
 
   <!-- Main content -->
   <main class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto pb-8">
+    {% include 'atomic/organisms/breadcrumb.html' %}
+
     {% block content %}{% endblock content %}
     <a href="https://www.sandrofilho.dev/" target="_blank" class="feito_por absolute bottom-2 left-1/2 gap-1 transform translate-x-[-50%] flex items-center">
       <img src="/media/images/system/sandro_filho_dev.png" />
