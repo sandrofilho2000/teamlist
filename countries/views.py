@@ -85,23 +85,15 @@ class CountryDetailView(ListView):
         players = Player.objects.filter(id_country_id=pk).order_by(order_player)
         top_players = Player.objects.filter(id_team__id_country_id=pk).order_by("-value_market")[:3]
         
-
-        
-
-
         
         form = CountryColorForm(instance=Country)
-        
-
-        
-
-                
+                   
         image_name = f"{country.slug}{country.id}.png"
         country_flag = f"/media/images/countries/{image_name}"  
         
         page = request.GET.get('page')
 
-        paginator_leagues = Paginator(leagues, 1) 
+        paginator_leagues = Paginator(leagues, 10) 
         paginator_teams = Paginator(teams, 10) 
         paginator_players = Paginator(players, 10) 
 
@@ -194,3 +186,4 @@ def country(request, iso_code):
     context = {}
     context['country'] = model
     return render(request, 'countries/country_detail.html', context)
+
