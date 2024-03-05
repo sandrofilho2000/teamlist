@@ -42,8 +42,7 @@ class LeagueInfoView(View):
         
         pk = kwargs.get('pk')  
         country_pk = kwargs.get('country_pk')  
-        if country_pk:
-            country = get_object_or_404(Country, pk=country_pk)  
+            
             
         league = get_object_or_404(League, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
@@ -52,6 +51,7 @@ class LeagueInfoView(View):
         form = LeagueColorForm(instance=league)
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')
+        country = Country.objects.filter(pk=league.id_country_id).first()  
         
         if order_dir_param == "desc":
             order_dir_param = "-"
@@ -60,7 +60,7 @@ class LeagueInfoView(View):
         
         order = order_dir_param + order_by_param
         related_teams = Team.objects.filter(pk__in=teams).order_by(order) 
-                
+        related_teams_count = len(related_teams)
         paginator = Paginator(related_teams, 20) 
         page = request.GET.get('page')
 
@@ -98,7 +98,9 @@ class LeagueInfoView(View):
         context = {
             'league': league,
             'related_teams': related_teams ,
+            'related_teams_count': related_teams_count,
             'paginator': paginator,
+            'country': country,
             'breadcrumbs': breadcrumbs,
             'image_url': image_url,
             'form': form

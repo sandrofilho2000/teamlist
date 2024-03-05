@@ -6,7 +6,7 @@ from league_team.models import LeaguesTeam
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+from django.db.models import Count, Sum
 from players.models import Player
 
 def order_list(list=[], key="", order=""):
@@ -68,7 +68,11 @@ class TeamInfoView(View):
         order = order_dir_param + order_by_param
         related_leagues = Team.objects.filter(pk__in=leagues)
         players = Player.objects.filter(id_team_id=pk).order_by(order)
+        
+        team_players_value = players.aggregate(total_value=Sum('value_market'))['total_value']
 
+            
+        country = Country.objects.filter(pk=team.id_country_id).first()  
                 
         paginator = Paginator(players, 20) 
         page = request.GET.get('page')
@@ -122,6 +126,8 @@ class TeamInfoView(View):
             'related_leagues': related_leagues,
             'breadcrumbs': breadcrumbs,
             'players': players,
+            'team_players_value': team_players_value,
+            'country': country,
             'paginator': paginator,
             'image_url': image_url,
             'form': form

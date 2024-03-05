@@ -6,7 +6,7 @@
       <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 px-4">
         {% for breadcrumb in breadcrumbs %}
         {% cycle '' 'opacity-60' as row_class silent %}
-            <li class="flex cursor-pointer items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:opacity-80 first-of-type:opacity-60">
+            <li class="flex cursor-pointer mb-[-3px] items-center font-sans text-sm font-normal leading-normal text-blue-gray-900 antialiased transition-colors duration-300 hover:opacity-80 first-of-type:opacity-60">
                 <a
                 class="font-medium text-blue-gray-900 transition-colors hover:opacity-80 {% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %}  {% endif %}"
                 href="{{ breadcrumb.url }}"

@@ -130,7 +130,7 @@ class CountryDetailView(ListView):
             
         breadcrumbs = [
             {'url': f"/countries/", 'name': "Países"},
-            {'url': f"/{country.id}/", 'name': country.name}
+            {'url': f"", 'name': country.name}
         ]
 
         context = {

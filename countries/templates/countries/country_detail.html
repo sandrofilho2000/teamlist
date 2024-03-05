@@ -11,14 +11,14 @@
 
 {% include 'color_palette.html' with background_color=country.background_color text_color=country.text_color %}
 
-<div class="flex items-center m-auto justify-center mb-4">
-  <img src="{{ country_flag }}" class="inline-block justify-start country_flag"/>
-  <h2 class="inline-block sm:px-2 lg:px-4 text-2xl">
-    {{ country.name }} 
+<div class="inline-block m-auto m-auto mb-4 bg-white border border-gray-200 rounded-md shadow pr-1 m-auto relative left-1/2 -translate-x-1/2 pl-10">
+  <img width="36" height="16" src="{{ country_flag }}" class="inline-block country_flag absolute top-1/2 transform -translate-y-[50%] left-2"/>
+  <h2 class="inline-block sm:px-2 lg:px-4 text-2xl font-semibold">
+    {{ country.name | upper }} 
   </h2>
 </div>
 
-<div class="highlights mb-6 mt-8 flex justify-start gap-6 px-8">
+<div class="highlights mb-6 mt-9 flex justify-start gap-6 px-8">
   <div class='w-[20%]'>
     <p class="text-xs text-left font-sm block w-auto color-text absolute transform translate-y-[-100%]">PRINCIPAL LIGA</p>
     <div class="highlight_card h-full w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">

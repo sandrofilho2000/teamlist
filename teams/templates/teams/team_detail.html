@@ -12,13 +12,45 @@
 {% include 'color_palette.html' with background_color=team.background_color text_color=team.text_color %}
 
 <!-- Main content section -->
-<div class="w-[280px] m-auto">
-  <div class="flex items-center justify-center gap-1">
-    <img src="{{ team.country_img }}" />
-    <small class="text-center block"> {{ team.country_name }} </small>
+<div class="flex justify-center">
+  <div class="inline-block p-3 bg-white border border-gray-200 rounded-md shadow">
+    <img width="80" src="{{ image_url }}" class="m-auto block team_main_img" />
+    <h2 class="text-center text-md font-bold">{{ team.name | upper }}</h2>
   </div>
-  <h2 class="text-center">{{ team.name }}</h2>
-  <img src="{{ image_url }}" class="m-auto block team_main_img" />
+</div>
+
+<div class="flex justify-center gap-2 my-5">
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
+      <span class="text-sm">
+        PAÍS:
+      </span>
+      <img width="26" height="16" src="/media/images/countries/{{ country.slug }}{{ country.id }}.png" class="inline-block h-[16px]" />
+      <a href{% url "country_detail" pk=country.pk %} class="inline-block text-sm font-bold ">
+        {{ country.name | upper }} 
+      </a>  
+    </div>
+  </div>
+
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
+      <span class="text-sm">
+        VALOR DO ELENCO:
+      </span>
+      <span class="text-green-700 font-bold text-sm">  {{ team_players_value | passToFloat}}  </span>
+
+    </div>
+  </div>
+
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
+      <span class="text-sm">
+        VALOR DE MERCADO: 
+      </span>
+      <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
+    </div>
+  </div>
+
 </div>
 
 <!-- Table container -->
@@ -114,7 +146,9 @@
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
-              <span>{{ player.country_name }}</span>
+              <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
+                {{ player.country_name }}
+              </a>
             </td>
             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
               <span>{{ player.value_market|passToFloat }}</span>
