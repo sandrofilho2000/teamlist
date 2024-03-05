@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block page_title %}{% endblock page_title %}</title>
+  <link rel="shortcut icon" href="{% static 'media/images/system/favicon.ico'%}" type="image/x-icon">
   <!-- Include links -->
   {% include 'atomic/cells/links.html' %}
 </head>
@@ -21,11 +22,17 @@
   {% include 'atomic/organisms/aside.html' %}
 
   <!-- Main content -->
-  <main class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto">
+  <main class="grid-el absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] bg-[#fafafb] overflow-auto pb-8">
     {% block content %}{% endblock content %}
+    <a href="https://www.sandrofilho.dev/" target="_blank" class="feito_por absolute bottom-2 left-1/2 gap-1 transform translate-x-[-50%] flex items-center">
+      <img src="/media/images/system/sandro_filho_dev.png" />
+      <span class="text-sm">
+        Feito por <strong>Sandro Filho DEV</strong> 
+      </span>
+    </a>
   </main>
-
   <!-- Include scripts -->
   {% include 'atomic/cells/scripts.html' %}
+
 </body>
 </html>

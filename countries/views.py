@@ -39,29 +39,42 @@ class CountryDetailView(ListView):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  
-        
-        order_by_param_league = self.request.GET.get('field', 'name')
-        order_dir_param_league = self.request.GET.get('order', '')
-        order_league = order_dir_param_league + order_by_param_league
+        country = get_object_or_404(Country, pk=pk) 
+
+        order_by_param_league = self.request.GET.get('field_league', 'name')
+        order_dir_param_league = self.request.GET.get('order_league', '')
         
         if order_dir_param_league == "desc":
             order_dir_param_league = "-"
         else :
             order_dir_param_league = ""
-
+            
+        order_league = order_dir_param_league + order_by_param_league
+        leagues = League.objects.filter(id_country_id=pk).order_by(order_league)
+        top_league = League.objects.filter(id_country_id=pk).order_by("balance").first()
         
-        order_by_param_team = self.request.GET.get('field', '-average_market_value')
-        order_dir_param_team = self.request.GET.get('order', '')
-        order_team = order_dir_param_team + order_by_param_team
+        
+        
+        
+        
+        order_by_param_team = self.request.GET.get('field_team', '-average_market_value')
+        order_dir_param_team = self.request.GET.get('order_team', '')
         
         if order_dir_param_team == "desc":
             order_dir_param_team = "-"
         else :
             order_dir_param_team = ""
             
+        order_team = order_dir_param_team + order_by_param_team
+        teams = Team.objects.filter(id_country_id=pk).order_by(order_team)
+        top_team = Team.objects.filter(id_country_id=pk).order_by("-average_market_value").first()
             
-        order_by_param_player = self.request.GET.get('field', '-value_market')
-        order_dir_param_player = self.request.GET.get('order', '')
+            
+            
+            
+            
+        order_by_param_player = self.request.GET.get('field_player', '-value_market')
+        order_dir_param_player = self.request.GET.get('order_player', '')
         order_player = order_dir_param_player + order_by_param_player
         
         if order_dir_param_player == "desc":
@@ -69,16 +82,12 @@ class CountryDetailView(ListView):
         else :
             order_dir_param_player = ""
 
-
-        country = get_object_or_404(Country, pk=pk) 
-        leagues = League.objects.filter(id_country_id=pk).order_by(order_league)
-        top_league = League.objects.filter(id_country_id=pk).order_by("balance").first()
-        
-        teams = Team.objects.filter(id_country_id=pk).order_by(order_team)
-        top_team = Team.objects.filter(id_country_id=pk).order_by("-average_market_value").first()
-        
         players = Player.objects.filter(id_country_id=pk).order_by(order_player)
         top_players = Player.objects.filter(id_team__id_country_id=pk).order_by("-value_market")[:3]
+        
+
+        
+
 
         
         form = CountryColorForm(instance=Country)
@@ -92,17 +101,17 @@ class CountryDetailView(ListView):
         
         page = request.GET.get('page')
 
-        paginator = Paginator(leagues, 10) 
+        paginator_leagues = Paginator(leagues, 10) 
         paginator_teams = Paginator(teams, 10) 
         paginator_players = Paginator(players, 10) 
 
         
         try:
-            leagues = paginator.page(page)
+            leagues = paginator_leagues.page(page)
         except PageNotAnInteger:
-            leagues = paginator.page(1)
+            leagues = paginator_leagues.page(1)
         except EmptyPage:
-            leagues = paginator.page(paginator.num_pages)
+            leagues = paginator_leagues.page(paginator_leagues.num_pages)
             
         
         try:
@@ -128,7 +137,7 @@ class CountryDetailView(ListView):
             'top_players': top_players,
             'teams': teams,
             'top_team': top_team,
-            'paginator': paginator,
+            'paginator_leagues': paginator_leagues,
             'paginator_teams': paginator_teams,
             'paginator_players': paginator_players,
             'form': form
