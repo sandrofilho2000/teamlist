@@ -75,13 +75,13 @@ class CountryDetailView(ListView):
             
         order_by_param_player = self.request.GET.get('field_player', '-value_market')
         order_dir_param_player = self.request.GET.get('order_player', '')
-        order_player = order_dir_param_player + order_by_param_player
         
         if order_dir_param_player == "desc":
             order_dir_param_player = "-"
         else :
             order_dir_param_player = ""
 
+        order_player = order_dir_param_player + order_by_param_player
         players = Player.objects.filter(id_country_id=pk).order_by(order_player)
         top_players = Player.objects.filter(id_team__id_country_id=pk).order_by("-value_market")[:3]
         
@@ -101,7 +101,7 @@ class CountryDetailView(ListView):
         
         page = request.GET.get('page')
 
-        paginator_leagues = Paginator(leagues, 10) 
+        paginator_leagues = Paginator(leagues, 1) 
         paginator_teams = Paginator(teams, 10) 
         paginator_players = Paginator(players, 10) 
 

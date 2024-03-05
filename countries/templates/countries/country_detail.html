@@ -26,7 +26,11 @@
       <div class="flex flex-col items-center py-5 px-4">
         <img class=" h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.png" alt="{{top_league.name}}"/>
         <a href="{% url 'league_detail' pk=top_league.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center">{{top_league.name}}</a>
-        <span class="text-lg text-green-700 font-bold">{{top_league.balance|passToFloat}}</span>
+        {% if "-" in top_league.balance %}
+            <span class="text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
+        {% else %}
+            <span class="text-lg text-green-700 font-bold">{{ top_league.balance|passToFloat }}</span>      
+        {% endif %}
       </div>
       {% else %}
       <p class="text-xs text-center font-sm block w-auto p-1 color-text">SEM DADOS</p>
@@ -273,7 +277,7 @@
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
               <!-- Total market value -->
-              <span>{{ team.total_market_value|passToFloat }}</span>
+              <span class="text-green-700 font-bold">{{ team.total_market_value|passToFloat }}</span>
             </td>
             <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
               <!-- Number of leagues -->
@@ -389,6 +393,33 @@
 </div>
 
 <script>
+  const setInputUrl = (page, tab) =>{        
+
+    let params = new URLSearchParams(document.location.search);
+    var new_url = ""
+
+    if(tab == "leagues"){
+      field = params.get("field_league") ? "&field_league=" + params.get("field_league") : ""
+      order = params.get("order_league") ? "&order_league=" + params.get("order_league") : ""
+      new_url = `?tab=${tab}${field}${order}&page=${page}`
+    }
+    else if(tab == "teams"){
+      field = params.get("field_team") ? "&field_team=" + params.get("field_team") : ""
+      order = params.get("order_team") ? "&order_team=" + params.get("order_team") : ""
+      new_url = `?tab=${tab}${field}${order}&page=${page}`
+    }
+    else if(tab == "players"){
+      field = params.get("field_player") ? "&field_player=" + params.get("field_player") : ""
+      order = params.get("order_player") ? "&order_player=" + params.get("order_player") : ""
+      new_url = `?tab=${tab}${field}${order}&page=${page}`
+    }else{
+      new_url = `?page=${page}`
+    }
+
+    console.log(new_url, tab)
+    return new_url
+  }
+
   document.querySelectorAll(".tab").forEach(item=>{
 
     item.addEventListener("click", (e)=>{
@@ -403,6 +434,26 @@
         }
       })
 
+      document.querySelectorAll(".pagination.mt-4").forEach(item=>{
+        if(item.className.includes(tab_table)){
+          item.classList.remove("hidden")
+        }else{
+          item.classList.add("hidden")
+        }
+
+        item.querySelectorAll("a").forEach(a => {
+          href = a.href.split("&page=")
+          if(href.length){
+            tab = a.closest("[tab]").getAttribute("tab")
+            a.setAttribute("href", "?tab=" + tab + "&page=" + href[1])
+          }
+        })
+
+        let input = item.querySelector("input")
+        input.setAttribute("url", setInputUrl(input.value, tab_table))
+
+      })
+
       document.querySelectorAll(`.tab:not([table='${tab_table}'])`).forEach(item=>{
         item.classList.remove("font-bold")
       })
@@ -410,7 +461,38 @@
     })
 
   })
+
+  window.addEventListener("DOMContentLoaded", ()=>{
+    document.querySelectorAll(".pagination.mt-4 input").forEach(paginationInput=>{
+      tab = paginationInput.closest("[tab]").getAttribute("tab")
+      paginationInput.setAttribute("url", setInputUrl(paginationInput.value, tab))
+
+      paginationInput.addEventListener("keyup", (e)=>{
+        tab = e.target.closest("[tab]").getAttribute("tab")
+        value = e.target.value;
+        e.target.setAttribute("url", setInputUrl(value, tab))
+        url = e.target.getAttribute("url")
+        console.log(e.target.closest("[tab]"))
+
+        if(value > 99){
+          paginationInput.classList.add("w-[25px]")
+        }else{
+          paginationInput.classList.add("w-[15px]")
+        }
+
+        if (e.key === 'Enter') {
+          window.location.href = url; // Redirect the user to the new URL
+        }
+      })
+
+      
+    })
+  })
+
 </script>
 <!-- Include pagination -->
-{% include './paginator_leagues.html' %}
+{% include './paginator_leagues.html' with url=request.build_absolute_uri related_items=leagues %}
+{% include './paginator_teams.html' with url=request.build_absolute_uri related_items=teams %}
+{% include './paginator_players.html' with url=request.build_absolute_uri related_items=players %}
+
 {% endblock detail_content %}
