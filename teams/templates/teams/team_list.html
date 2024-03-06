@@ -10,42 +10,49 @@
 
 <!-- Main content section -->
 
-<div class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1 justify-center my-[14px]">
+<div class="block sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/ball.html' %}
   <h2 class="background-color rounded-md">
-    Equipes
+    EQUIPES
   </h2>
 </div>
 
 <!-- Table container -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="overflow-hidden rounded-md shadow">
-      <!-- Teams list table -->
-      <table class="min-w-full">
-        <thead class="bg-white border-b">
-          <tr>
+    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:-inset-px
+    dark:before:absolute
+    dark:bg-zinc-900
+    "> 
+      <table class="min-w-full rounded-md">
+        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+          <tr class="">
             <!-- Table headers -->
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">#</th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">#</th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for team name -->
               <a href="{% url 'team_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for average market value -->
               <a href="{% url 'team_list' %}?field=average_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-right">
               <!-- Column header for total market value -->
               <a href="{% url 'team_list' %}?field=total_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-right">
               <!-- Column header for number of leagues -->
               <a href="{% url 'team_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -56,24 +63,24 @@
         <tbody>
           <!-- Teams list -->
           {% for team in page_obj %}
-          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
+          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
             <!-- Team data -->
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td class="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA]">
               <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
+            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap">
               <!-- Team name -->
               <a href="{% url 'team_detail' pk=team.pk %}" class="flex items-center justify-start gap-1 hover:underline">{{ team.name }}</a>
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
+            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap">
               <!-- Average market value -->
               <span>{{ team.average_market_value|passToFloat }}</span>
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
+            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap text-right">
               <!-- Total market value -->
               <span>{{ team.total_market_value|passToFloat }}</span>
             </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
+            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap text-right">
               <!-- Number of leagues -->
               <span>{{ team.num_leagues }}</span>
             </td>

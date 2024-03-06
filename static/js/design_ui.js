@@ -35,7 +35,7 @@ async function get_colors_by_img() {
 
 
 function apply_colors(background_color = false, text_color = false) {
-    if (background_color) {
+/*     if (background_color) {
         $(".background-color").css("background-color", background_color).css("fill", background_color)
         $(".edit_component").css("border-color", background_color)
         $(".edit_component *").css("color", background_color)
@@ -43,9 +43,9 @@ function apply_colors(background_color = false, text_color = false) {
         $("aside span").css("color", background_color)
         $("aside svg").css("fill", background_color)
         $("#id_background_color").val(background_color)
-    }
+    } */
 
-    if (text_color) {
+/*     if (text_color) {
         $("body > nav *:not(small)").css("color", text_color)
         $("body > nav .line").css("background-color", text_color)
         $("body > nav input").css("border-bottom-color", text_color)
@@ -58,7 +58,7 @@ function apply_colors(background_color = false, text_color = false) {
         $("#id_text_color").val(text_color)
         $("nav path, nav svg").css("fill", text_color).css("color", text_color)
 
-    }
+    } */
 
 }
 

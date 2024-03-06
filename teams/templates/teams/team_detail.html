@@ -9,33 +9,58 @@
 
 {% block detail_content %}
 
-{% include 'color_palette.html' with background_color=team.background_color text_color=team.text_color %}
+{% include 'atomic/organisms/color_palette.html' with background_color=team.background_color text_color=team.text_color %}
 
 <!-- Main content section -->
 <div class="flex justify-center">
-  <div class="inline-block p-3 bg-white border border-gray-200 rounded-md shadow">
-    <img width="80" src="{{ image_url }}" class="m-auto block team_main_img" />
-    <h2 class="text-center text-md font-bold">{{ team.name | upper }}</h2>
+  <div class="inline-block p-3 bg-white rounded-md   
+  dark:bg-zinc-900 forced-colors:outline rounded-lg   
+  dark:before:rounded-xl 
+  dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+  dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+  dark:before:pointer-events-none
+  dark:before:absolute
+  
+  ">
+  <img width="80" src="{{ image_url }}" class="m-auto block team_main_img" />
+  <h2 class="text-center dark:text-white text-md font-medium">{{ team.name | upper }}</h2>
   </div>
 </div>
 
 <div class="flex justify-center gap-2 my-5">
   <div class="highlight_card">
-    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
-      <span class="text-sm">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    
+    ">
+      <span class="text-sm dark:text-[#A1A1AA]">
         PAÍS:
       </span>
-      <img width="26" height="16" src="/media/images/countries/{{ country.slug }}{{ country.id }}.png" class="inline-block h-[16px]" />
-      <a href{% url "country_detail" pk=country.pk %} class="inline-block text-sm font-bold ">
-        {{ country.name | upper }} 
+      <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.png" class="inline-block h-[16px]" />
+      <a href={% url "country_detail" pk=related_country.pk %} class="inline-block text-sm font-medium dark:text-white">
+        {{ related_country.name | upper }} 
       </a>  
     </div>
   </div>
 
   <div class="highlight_card">
-    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
-      <span class="text-sm">
-        VALOR DO ELENCO:
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    
+    ">
+    <span class="text-sm dark:text-[#A1A1AA]">
+      VALOR DO ELENCO:
       </span>
       <span class="text-green-700 font-bold text-sm">  {{ team_players_value | passToFloat}}  </span>
 
@@ -43,26 +68,40 @@
   </div>
 
   <div class="highlight_card">
-    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex border border-gray-200 rounded-sm gap-2 items-center shadow px-2 py-1">
-      <span class="text-sm">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    ">
+      <span class="text-sm dark:text-[#A1A1AA]">
         VALOR DE MERCADO: 
       </span>
       <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
     </div>
   </div>
-
 </div>
 
 <!-- Table container -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="overflow-hidden">
-      <table class="min-w-full">
-        <thead class="bg-white border-b">
+    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:-inset-px
+    dark:before:absolute
+    dark:bg-zinc-900
+    "> 
+      <table class="min-w-full rounded-md">
+        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
           <tr>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm px-2 py-4 text-left"
             >
               <a
               href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
@@ -74,7 +113,7 @@
 
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+              class="text-sm px-2 py-4 text-center"
             >
               <a
                 href="{% url 'team_detail' pk=team.pk %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
@@ -85,7 +124,7 @@
             </th>
             <th
             scope="col"
-            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"s
+            class="text-sm px-2 py-4 text-left"s
           >
             <a
               href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
@@ -96,7 +135,7 @@
           </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm px-2 py-4 text-left"
             >
               <a href="{% url 'team_detail' pk=team.pk %}?field=birth{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Nascimento              
@@ -105,7 +144,7 @@
             </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm px-2 py-4 text-left"
             >
               <a href="{% url 'team_detail' pk=team.pk %}?field=country_name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 País de origem 
@@ -114,7 +153,7 @@
             </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
+              class="text-sm px-2 py-4 text-right"
             >
               <a href="{% url 'team_detail' pk=team.pk %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor de mercado 
@@ -123,34 +162,34 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-gray-900 dark:text-[#A1A1AA]">
           {% for player in players %}
-          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <td class="px-2 py-4 whitespace-nowrap text-sm">
               <span>{{ player.num }}</span>
             </td>
  
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 flex flex-col justify-left align-center">
+            <td class="px-2 py-4 whitespace-nowrap text-sm flex flex-col justify-left align-center">
               <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
                 <a href="#" class="gap-1 text-center hover:underline">
                   {{ player.name }}
                 </a>
             </td>
 
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td class="px-2 py-4 whitespace-nowrap text-sm">
               <span>{{ player.pos }}</span>
             </td>
 
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
                 <span class="hover:underline">{{ player.birth }}</span>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
               <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
               <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
                 {{ player.country_name }}
               </a>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap text-right">
               <span>{{ player.value_market|passToFloat }}</span>
             </td>
           </tr>

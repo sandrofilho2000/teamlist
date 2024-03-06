@@ -10,6 +10,8 @@ import concurrent.futures
 
 from slugify import slugify
 
+from utils.sql_commands import select_rows, insert_rows, update_rows
+
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_dir)
 
@@ -174,7 +176,7 @@ def get_players_a_letter():
     LEFT JOIN players_player ON teams_team.id = players_player.id_team_id
     WHERE teams_team.name LIKE 'a%' 
     GROUP BY teams_team.id, teams_team.name
-    HAVING COUNT(players_player.id) = 0""")
+    HAVING COUNT(players_player.id) < 12""")
 
 
         

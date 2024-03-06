@@ -2,13 +2,29 @@
 
 {% if paginator_players.num_pages > 1 %}
   <div tab="players" class="pagination pagination_players mt-4 sm:px-6 lg:px-8 {% if request.GET.tab != 'players' %} hidden {% endif %}">
-    <span class="text-sm text-gray-700 flex gap-1 pb-5 items-center step-links">
+    <span class="text-sm text-gray-700 dark:text-white  flex gap-1 pb-5 items-center step-links">
       {% if related_items.has_previous %}
-        <a href="{{ url|set_pagination_params }}page=1" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <a href="{{ url|set_pagination_params }}page=1" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
+          dark:before:rounded-xl 
+          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+          dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+          dark:before:pointer-events-none
+          dark:before:-inset-px
+          dark:before:absolute
+          dark:bg-zinc-900
+        ">
           <i class="fa fa-caret-left" aria-hidden="true"></i>
           <i class="fa fa-caret-left" aria-hidden="true"></i>
         </a>
-        <a href="{{ url|set_pagination_params }}page={{ related_items.previous_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm"><i class="fa fa-caret-left" aria-hidden="true"></i></a>
+        <a href="{{ url|set_pagination_params }}page={{ related_items.previous_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
+          dark:before:rounded-xl 
+          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+          dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+          dark:before:pointer-events-none
+          dark:before:-inset-px
+          dark:before:absolute
+          dark:bg-zinc-900
+        "><i class="fa fa-caret-left" aria-hidden="true"></i></a>
       {% endif %}
 
       <input class="font-bold text-center w-[15px] bg-transparent" max="{{ paginator_players.num_pages }}" id="paginationInputPlayers" min="1" type="number"  value="{{ related_items.number }}"/>
@@ -16,8 +32,24 @@
       <span class="font-bold">{{ paginator_players.num_pages }}</span>
 
       {% if related_items.has_next %}
-        <a href="{{ url|set_pagination_params }}page={{ related_items.next_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
-        <a href="{{ url|set_pagination_params }}page={{ paginator_players.num_pages }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm">
+        <a href="{{ url|set_pagination_params }}page={{ related_items.next_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
+          dark:before:rounded-xl 
+          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+          dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+          dark:before:pointer-events-none
+          dark:before:-inset-px
+          dark:before:absolute
+          dark:bg-zinc-900
+        "><i class="fa fa-caret-right" aria-hidden="true"></i></a>
+        <a href="{{ url|set_pagination_params }}page={{ paginator_players.num_pages }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
+          dark:before:rounded-xl 
+          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+          dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+          dark:before:pointer-events-none
+          dark:before:-inset-px
+          dark:before:absolute
+          dark:bg-zinc-900
+        ">
           <i class="fa fa-caret-right" aria-hidden="true"></i>
           <i class="fa fa-caret-right" aria-hidden="true"></i>
         </a>

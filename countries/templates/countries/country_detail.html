@@ -9,23 +9,29 @@
 
 {% block detail_content %}
 
-{% include 'color_palette.html' with background_color=country.background_color text_color=country.text_color %}
+{% include 'atomic/organisms/color_palette.html' with background_color=country.background_color text_color=country.text_color %}
 
-<div class="inline-block m-auto m-auto mb-4 bg-white border border-gray-200 rounded-md shadow pr-1 m-auto relative left-1/2 -translate-x-1/2 pl-10">
+<div class="inline-block m-auto m-auto mb-4 pr-1 m-auto relative left-1/2 -translate-x-1/2 pl-10">
   <img width="36" height="16" src="{{ country_flag }}" class="inline-block country_flag absolute top-1/2 transform -translate-y-[50%] left-2"/>
-  <h2 class="inline-block sm:px-2 lg:px-4 text-2xl font-semibold">
+  <h2 class="inline-block sm:px-2 lg:px-4 dark:text-white text-2xl font-regular">
     {{ country.name | upper }} 
   </h2>
 </div>
 
 <div class="highlights mb-6 mt-9 flex justify-start gap-6 px-8">
   <div class='w-[20%]'>
-    <p class="text-xs text-left font-sm block w-auto color-text absolute transform translate-y-[-100%]">PRINCIPAL LIGA</p>
-    <div class="highlight_card h-full w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <p class="text-xs text-left font-sm block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%]">PRINCIPAL LIGA</p>
+    <div class="highlight_card h-full w-full max-w-sm dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute">
+
       {% if top_league %}
       <div class="flex flex-col items-center py-5 px-4">
         <img class=" h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.png" alt="{{top_league.name}}"/>
-        <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center">{{top_league.name}}</a>
+        <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="dark:text-white mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center">{{top_league.name}}</a>
         {% if "-" in top_league.balance %}
             <span class="text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
         {% else %}
@@ -33,96 +39,111 @@
         {% endif %}
       </div>
       {% else %}
-      <p class="text-xs text-center font-sm block w-auto p-1 color-text">SEM DADOS</p>
+      <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
       {% endif %}
     </div>
   </div>
 
   <div class='w-[20%]'>
-    <p class="text-xs text-left font-sm block w-auto color-text absolute transform translate-y-[-100%]">TIME MAIS VALIOSO</p>
-    <div class="highlight_card h-full w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <p class="text-xs text-left font-sm block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%]">TIME MAIS VALIOSO</p>
+    <div class="highlight_card h-full w-full max-w-sm dark:bg-zinc-900 forced-colors:outline rounded-lg 
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    ">
       {% if top_team %}
       <div class="flex flex-col items-center py-5 px-4">
           <img class=" h-24 mb-3" src="/media/images/teams/{{top_team.slug}}{{top_team.id}}.png" alt="{{top_team.name}}"/>
-          <a href="{% url 'country_team_detail' country_pk=country.pk pk=top_team.pk %}" class="mb-1 text-xl font-medium text-gray-900 min-h-[60px] text-center"> {{top_team.name}}</a>
+          <a href="{% url 'country_team_detail' country_pk=country.pk pk=top_team.pk %}" class="mb-1 text-xl dark:text-white min-h-[60px] text-center"> {{top_team.name}}</a>
           <span class="text-lg text-green-700 font-bold">{{top_team.total_market_value|passToFloat }}</span>
       </div>
       {% else %}
-      <p class="text-xs text-center font-sm block w-auto p-1 color-text">SEM DADOS</p>
+      <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
       {% endif %}
     </div>
   </div>
 
+
+
   <div class="relative w-[60%]">
-    <p class="text-xs text-center block w-auto color-text absolute transform translate-y-[-100%]">TOP 3 JOGADORES QUE JOGAM NO PAÍS</p>
+    <p class="text-xs text-center block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%] ">TOP 3 JOGADORES QUE JOGAM NO PAÍS</p>
 
     <!-- Table for displaying league data -->
     <div class="overflow-auto shadow">
-      <table class="min-w-full h-full rounded-lg overflow-hidden">
-        <thead class="bg-white border-b">
-          <tr>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
-            >
-
-                Jogador
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"s
-            >
-                Posição
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-            >
-                País de origem 
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
-            >
-
-                Valor de mercado 
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-
-          {% if top_players %}
-          {% for player in top_players %}
-          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-            <td class="px-4 py-2 whitespace-nowrap text-sm font-medium text-gray-900 flex flex-col justify-left align-left">
-              <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px] m-auto block">
-                <a href="#" class="gap-1 text-center hover:underline">
-                  {{ player.name }}
-                </a>
-            </td>
-
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-              <span>{{ player.pos }}</span>
-            </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
-              <span>{{ player.country_name }}</span>
-            </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
-              <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
-            </td>
-          </tr>
-          {% endfor %}
-          {% else %}
-          <tr class="bg-white border-b">
-            <td>
-              <p class="text-xs text-left font-sm block w-auto p-1 color-text">SEM DADOS</p>
-            </td>
-          </tr>
-          {% endif %}
-          
-        </tbody>
-      </table>
+      <div class="px-3 rounded-lg overflow-hidden dark:bg-zinc-900 forced-colors:outline border-t-[1px] border-t-[#a1a1aa30]   
+      dark:before:rounded-xl 
+      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+      dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+      dark:before:pointer-events-none
+      dark:before:absolute">        
+        <table class="min-w-full h-full">
+          <thead class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr>
+              <th
+                scope="col"
+                class="px-2 py-2 text-sm font-medium text-gray-900 dark:text-[#A1A1AA] text-center"
+              >
+  
+                  Jogador
+              </th>
+              <th
+                scope="col"
+                class="px-2 py-2 text-sm font-medium text-gray-900 dark:text-[#A1A1AA] text-left"
+              >
+                  Posição
+              </th>
+              <th
+                scope="col"
+                class="px-2 py-2 text-sm font-medium text-gray-900 dark:text-[#A1A1AA] text-left"
+              >
+                  País de origem 
+              </th>
+              <th
+                scope="col"
+                class="px-2 py-2 text-sm font-medium text-gray-900 dark:text-[#A1A1AA] text-right"
+              >
+  
+                  Valor de mercado 
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+  
+            {% if top_players %}
+            {% for player in top_players %}
+            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA] flex flex-col justify-left align-left">
+                <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px] m-auto block">
+                  <a href="#" class="gap-1 text-center hover:underline">
+                    {{ player.name }}
+                  </a>
+              </td>
+  
+              <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA]">
+                <span>{{ player.pos }}</span>
+              </td>
+              <td class="text-sm text-gray-900 dark:text-[#A1A1AA] font-light px-2 py-2 whitespace-nowrap">
+                <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
+                <span>{{ player.country_name }}</span>
+              </td>
+              <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA] text-right">
+                <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
+              </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr class="bg-white dark:bg-zinc-900 dark:text-[#A1A1AA] border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td>
+                <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
+              </td>
+            </tr>
+            {% endif %}
+            
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -133,260 +154,271 @@
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 ">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 
-    <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs cursor-pointer pl-2 pr-3 py-1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
-      <div table="leagues" class="leagues_tab tab bg-white {% if request.GET.tab == 'leagues' or not request.GET.tab %} font-bold {% endif %}">LIGAS</div>
+    <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 shadow  bg-white dark:bg-zinc-900">
+      <div table="leagues" class="leagues_tab tab w-1/3 text-center {% if request.GET.tab == 'leagues' or not request.GET.tab %} font-bold {% endif %}">LIGAS</div>
       <span class="inline-block mx-2">|</span>
-      <div table="teams" class="teams_tab tab bg-white {% if request.GET.tab == 'teams' %} font-bold {% endif %}">EQUIPES</div>
+      <div table="teams" class="teams_tab tab w-1/3 text-center {% if request.GET.tab == 'teams' %} font-bold {% endif %}">EQUIPES</div>
       <span class="inline-block mx-2">|</span>
-      <div table="players" class="players_tab tab bg-white {% if request.GET.tab == 'players' %} font-bold {% endif %}">JOGADORES</div>
+      <div table="players" class="players_tab tab w-1/3 text-center {% if request.GET.tab == 'players' %} font-bold {% endif %}">JOGADORES</div>
     </div>
 
-    <div class="country_tables overflow-hidden relative z-10 shadow rounded-md rounded-tl-[0px]">
+    <div class="country_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
+      dark:bg-zinc-900       
+      dark:before:rounded-xl 
+      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+      dark:before:pointer-events-none
+      dark:before:absolute
+      dark:before:rounded-tl-xl 
+    ">
       <!-- Table for displaying league data -->
-      <table class="rounded-lg {% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %}leagues_table min-w-full">
-        <thead class="bg-white border-b">
-          <tr>
-            <!-- Table headers -->
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">#</th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-              <!-- Column header for league name -->
-              <a href="?tab=leagues&field_league=name{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">  
-                Liga 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-              <!-- Column header for expenses -->
-              <a href="?tab=leagues&field_league=outcomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                 
-                Despesas 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-              <!-- Column header for income -->
-              <a href="?tab=leagues&field_league=incomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                   
-                Renda 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-              <!-- Column header for balance -->
-              <a href="?tab=leagues&field_league=balance{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">     
-                 Saldo 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          
-          </tr>
-        </thead>
-        <tbody>
-          {% if leagues %}
-            <!-- Loop through league objects -->
-            {% for league in leagues %}
-            <!-- Alternating row colors -->
-            {% cycle 'bg-gray-100 border-b' 'bg-white border-b' as row_class silent %}
-            <tr class="{% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %} bg-white border-b {% endif %}">
-              <!-- League data -->
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <!-- League name -->
-                <a href="{% url 'country_league_detail' country_pk=country.pk pk=league.pk %}" class="flex items-center justify-start gap-1">
-                  <img src="{{ league.country_img }}" />
-                  <span class="hover:underline font-bold"> {{ league.name }} </span>
+      <div class="px-3">
+        <table class="{% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %} leagues_table min-w-full">
+          <thead class="dark:text-white text-gray-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr>
+              <!-- Table headers -->
+              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">#</th>
+              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                <!-- Column header for league name -->
+                <a href="?tab=leagues&field_league=name{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">  
+                  Liga 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <!-- Expenses -->
-                <span> {{ league.outcomes|passToFloat }} </span>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <!-- Income -->
-                <span>{{ league.incomes|passToFloat }}</span>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                <!-- Balance -->
-                {% if "-" in league.balance %}
-                    <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
-                {% else %}
-                    <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
-                {% endif %}
+              </th>
+              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                <!-- Column header for expenses -->
+                <a href="?tab=leagues&field_league=outcomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                 
+                  Despesas 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                <!-- Column header for income -->
+                <a href="?tab=leagues&field_league=incomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                   
+                  Renda 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+                <!-- Column header for balance -->
+                <a href="?tab=leagues&field_league=balance{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">     
+                   Saldo 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            
+            </tr>
+          </thead>
+          <tbody class="dark:text-[#A1A1AA]">
+            {% if leagues %}
+              <!-- Loop through league objects -->
+              {% for league in leagues %}
+              <!-- Alternating row colors -->
+              <tr class=" border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+                <!-- League data -->
+                <td class="px-6 py-4 whitespace-nowrap text-sm ">
+                  <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
+                </td>
+                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                  <!-- League name -->
+                  <a href="{% url 'country_league_detail' country_pk=country.pk pk=league.pk %}" class="flex items-center justify-start gap-1">
+                    <span class="hover:underline"> {{ league.name }} </span>
+                  </a>
+                </td>
+                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                  <!-- Expenses -->
+                  <span> {{ league.outcomes|passToFloat }} </span>
+                </td>
+                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                  <!-- Income -->
+                  <span>{{ league.incomes|passToFloat }}</span>
+                </td>
+                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                  <!-- Balance -->
+                  {% if "-" in league.balance %}
+                      <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                  {% else %}
+                      <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            {% else %}
+            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td>
+                <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
               </td>
             </tr>
-            {% endfor %}
-          {% else %}
-          <tr class="bg-white border-b">
-            <td>
-              <p class="text-xs text-left font-sm block w-auto p-1 color-text">SEM DADOS</p>
-            </td>
-          </tr>
-          {% endif %}
-        </tbody>
-      </table>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
 
 
       <!-- Table for displaying team data -->
-      <table class="rounded-lg {% if request.GET.tab != 'teams' %} hidden {% endif %} teams_table min-w-full">
-        <thead class="bg-white border-b">
-          <tr>
-            <!-- Table headers -->
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">#</th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
-              <!-- Column header for team name -->
-              <a href="?tab=teams&field_team=name{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
-                Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-left">
-              <!-- Column header for average market value -->
-              <a href="?tab=teams&field_team=average_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
-                Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
-              <!-- Column header for total market value -->
-              <a href="?tab=teams&field_team=total_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
-                Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 text-right">
-              <!-- Column header for number of leagues -->
-              <a href="?tab=teams">
-                Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Teams list -->
-          {% if teams %}
-          {% for team in teams %}
-          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-            <!-- Team data -->
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-              <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
-              <!-- Team name -->
-              <a href="{% url 'country_team_detail' country_pk=country.pk pk=team.pk %}" class="font-bold hover:underline">{{ team.name }}</a>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap">
-              <!-- Average market value -->
-              <span>{{ team.average_market_value|passToFloat }}</span>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
-              <!-- Total market value -->
-              <span class="text-green-700 font-bold">{{ team.total_market_value|passToFloat }}</span>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 font-light whitespace-nowrap text-right">
-              <!-- Number of leagues -->
-              <span>{{ team.num_leagues }}</span>
-            </td>
-          </tr>
-          {% endfor %}
-          {% else %}
-          <tr class="bg-white border-b">
-            <td>
-              <p class="text-xs text-left font-sm block w-auto p-1 color-text">SEM DADOS</p>
-            </td>
-          </tr>
-          {% endif %}
-        </tbody>
-      </table>
-
-      <!-- Table for displaying player data -->
-      <table class="rounded-lg {% if request.GET.tab != 'players' %} hidden {% endif %} players_table min-w-full">
-        <thead class="bg-white border-b">
-          <tr>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-            >
-                #
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-            >
-            <a href="?tab=players&field_player=name{% if request.GET.order_player == 'desc' %}&order_player=asc{% else %}&order_player=desc{% endif %}">
-
-                Jogador
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th
-            scope="col"
-            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"s
-          >
-          <a href="?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
-            Posição
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </a>
-          </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-            >
-            <a href="?tab=players&field_player=birth{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
-              Nascimento              
-                 <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-            >
-            </th>
-            <th
-              scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
-            >
-            <a href="?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
-
-                Valor de mercado 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% if players %}
-            {% for player in players %}
-            <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] block" />
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <a href="#" class="gap-1 text-center hover:underline">
-                  {{ player.name }}
+      <div class="px-3">
+        <table class="{% if request.GET.tab != 'teams' %} hidden {% endif %} teams_table min-w-full">
+          <thead class="dark:text-white">
+            <tr>
+              <!-- Table headers -->
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">#</th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                <!-- Column header for team name -->
+                <a href="?tab=teams&field_team=name{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
+                  Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
+              </th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                <!-- Column header for average market value -->
+                <a href="?tab=teams&field_team=average_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
+                  Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-right">
+                <!-- Column header for total market value -->
+                <a href="?tab=teams&field_team=total_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
+                  Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-right">
+                <!-- Column header for number of leagues -->
+                <a href="?tab=teams">
+                  Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            <!-- Teams list -->
+            {% if teams %}
+            {% for team in teams %}
+            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <!-- Team data -->
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
               </td>
-
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                <span>{{ player.pos }}</span>
+              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                <!-- Team name -->
+                <a href="{% url 'country_team_detail' country_pk=country.pk pk=team.pk %}" class="hover:underline">{{ team.name }}</a>
               </td>
-
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  <span class="hover:underline">{{ player.birth }}</span>
+              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                <!-- Average market value -->
+                <span>{{ team.average_market_value|passToFloat }}</span>
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
-                <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
+              <td class="px-6 py-4 text-sm font-light whitespace-nowrap text-right">
+                <!-- Total market value -->
+                <span class="text-green-700 font-bold">{{ team.total_market_value|passToFloat }}</span>
+              </td>
+              <td class="px-6 py-4 text-sm font-light whitespace-nowrap text-right">
+                <!-- Number of leagues -->
+                <span>{{ team.num_leagues }}</span>
               </td>
             </tr>
             {% endfor %}
-          {% else %}
-          <tr class="bg-white border-b">
-            <td>
-              <p class="text-xs text-left font-sm block w-auto p-1 color-text">SEM DADOS</p>
-            </td>
-          </tr>
-          {% endif %}
-        </tbody>
-      
-      </table>
+            {% else %}
+            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td>
+                <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table for displaying player data -->
+      <div class="px-3">
+        <table class="{% if request.GET.tab != 'players' %} hidden {% endif %} players_table min-w-full">
+          <thead class="dark:text-white text-gray-900">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm font-medium px-6 py-4 text-left"
+              >
+                  #
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium px-6 py-4 text-left"
+              >
+              <a href="?tab=players&field_player=name{% if request.GET.order_player == 'desc' %}&order_player=asc{% else %}&order_player=desc{% endif %}">
+  
+                  Jogador
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+              scope="col"
+              class="text-sm font-medium px-6 py-4 text-left"s
+            >
+            <a href="?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+              Posição
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
+              </a>
+            </th>
+              <th
+                scope="col"
+                class="text-sm font-medium px-6 py-4 text-left"
+              >
+              <a href="?tab=players&field_player=birth{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+                Nascimento              
+                   <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium px-6 py-4 text-left"
+              >
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium px-6 py-4 text-right"
+              >
+              <a href="?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+  
+                  Valor de mercado 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+  
+          <tbody class="dark:text-[#A1A1AA] text-gray-900">
+            {% if players %}
+              {% for player in players %}
+              <tr class="bg-gray-100 border-b bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] dark:text-[#A1A1AA] border-b-solid border-b-[1px]">
+                <td class="px-6 py-4 whitespace-nowrap text-sm ">
+                  <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] block" />
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm  ">
+                  <a href="#" class="gap-1 text-center hover:underline">
+                    {{ player.name }}
+                  </a>
+                </td>
+  
+                <td class="px-6 py-4 whitespace-nowrap text-sm  ">
+                  <span>{{ player.pos }}</span>
+                </td>
+  
+                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap">
+                    <span class="hover:underline">{{ player.birth }}</span>
+                </td>
+                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap">
+                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap text-right">
+                  <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
+                </td>
+              </tr>
+              {% endfor %}
+            {% else %}
+            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td>
+                <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        
+        </table>
+      </div>
 
     </div>
   </div>

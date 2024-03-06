@@ -49,17 +49,15 @@ class TeamInfoView(View):
         if league_pk:
             league = get_object_or_404(League, pk=league_pk) 
         
-        if country_pk:
-            country = get_object_or_404(Country, pk=country_pk) 
-        
+ 
         team = get_object_or_404(Team, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
         leagues = [leagues_team.id_team for leagues_team in leagues_teams]
         form = TeamColorForm(instance=team)
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')
-        league_id = self.request.GET.get('league')
-        
+        related_country = Country.objects.filter(pk=team.id_country_id).first()  
+
         if order_dir_param == "desc":
             order_dir_param = "-"
         else :
@@ -127,7 +125,7 @@ class TeamInfoView(View):
             'breadcrumbs': breadcrumbs,
             'players': players,
             'team_players_value': team_players_value,
-            'country': country,
+            'related_country': related_country,
             'paginator': paginator,
             'image_url': image_url,
             'form': form

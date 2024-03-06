@@ -51,7 +51,7 @@ class LeagueInfoView(View):
         form = LeagueColorForm(instance=league)
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')
-        country = Country.objects.filter(pk=league.id_country_id).first()  
+        related_country = Country.objects.filter(pk=league.id_country_id).first()  
         
         if order_dir_param == "desc":
             order_dir_param = "-"
@@ -78,7 +78,7 @@ class LeagueInfoView(View):
         if country_pk:
             breadcrumbs+=[
                 {'url': f"/countries/", 'name': "Países"},
-                {'url': f"/countries/country/{country_pk}", 'name': country.name},
+                {'url': f"/countries/country/{country_pk}", 'name': related_country.name},
                 {'url': f"", 'name': league.name}
             ]
         else:
@@ -100,7 +100,7 @@ class LeagueInfoView(View):
             'related_teams': related_teams ,
             'related_teams_count': related_teams_count,
             'paginator': paginator,
-            'country': country,
+            'related_country': related_country,
             'breadcrumbs': breadcrumbs,
             'image_url': image_url,
             'form': form
