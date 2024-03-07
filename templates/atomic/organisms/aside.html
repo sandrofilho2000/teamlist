@@ -3,7 +3,7 @@
     <ul class="absolute z-2 top-[50px]">
         <!-- Skeleton loading list items -->
             <li class="h-[56px] flex items-center">
-                <a href="{% url 'country_list' %}">
+                <a href="/">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
                         <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/home.html' %}
@@ -82,6 +82,18 @@
                         </div>
                         <span class='dark:text-[#A1A1AA]'>
                             Taças
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
+                            {% include 'icons/transfers.html' %}
+                        </div>
+                        <span class='dark:text-[#A1A1AA]'>
+                            Transferências
                         </span>
                     </div>
                 </a>

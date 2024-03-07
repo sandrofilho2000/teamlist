@@ -13,7 +13,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("search_items/<str:query>/", SearchItemsView.as_view(), name="search_items"),  
     path("", include("api.urls")),  # Include API URLs
-    path("", CountryListView.as_view(), name='country_list'),
+    path("", TeamListView.as_view(), name="team_list"),
 ]
 
 countries_patterns = [

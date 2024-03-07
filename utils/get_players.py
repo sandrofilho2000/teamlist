@@ -1,4 +1,3 @@
-from abc import update_abstractmethods
 import os
 import sys
 
@@ -6,15 +5,12 @@ root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 sys.path.append(root_dir)
 
 import traceback
-from turtle import update
-from numpy import save
 import requests
 import re
 from bs4 import BeautifulSoup
 import concurrent.futures
 
 from slugify import slugify
-from get_imgs import download_image
 from passToFloat import pass_to_float
 
 from sql_commands import insert_rows, select_rows, update_rows
@@ -51,7 +47,7 @@ def get_player_img(url):
     
     
 
-def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="", country_name = ""):
+def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="", country_name = "", team_name=""):
     global teams_link_error, players_link_error
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -76,6 +72,7 @@ def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="
                             player["name"] = tr_table.find("td", "hauptlink").text.strip()
                             
                             if(player["name"] not in players):
+
                                 player["link"] = tr_table.find("a").get("href")
                                 player["img"] = get_player_img("https://www.transfermarkt.com.br"+player["link"])
                                 player["pos"] = tr_table.find_all('tr')[1].text.strip()
@@ -115,6 +112,9 @@ def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="
                         
                             print("An error occurred:", e)
                             traceback.print_exc()
+            
+                    print(f"Jogadores do { team_name } adicionados\n\n")
+
             except Exception as e:
                 # Handling the exception
                 print("An error occurred:", e)
@@ -153,7 +153,7 @@ def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="
 
 
 def get_players_by_letter(letter):
-    teams = select_rows("id, link, name, id_country_id, country_img, country_name", f"teams_team WHERE trophies_link is NULL and name like '{letter}%'")
+    teams = select_rows("id, link, name, id_country_id, country_img, country_name", f"teams_team")
     
     try:
         for team in teams:
@@ -167,14 +167,12 @@ def get_players_by_letter(letter):
                 country_flag = team[4]
                 country_name = team[5]
                 
-                print(f"Adicionando jogadores do { name } ")
                 players = []
                 
                 for player in players_sql:
                     players.append(player[0])
                     
-                get_players(link, id, players, id_country_id,country_flag, country_name)
-                print(f"Jogadores do { name } adicionados\n\n")
+                get_players(link, id, players, id_country_id,country_flag, country_name, name)
     except:
         print("Error")
         
@@ -182,32 +180,7 @@ def get_players_by_letter(letter):
        
 
 functions_to_run = [
-    (get_players_by_letter, "a"),
-    (get_players_by_letter, "b"),
-    (get_players_by_letter, "c"),
-    (get_players_by_letter, "d"),
-    (get_players_by_letter, "e"),
-    (get_players_by_letter, "f"),
-    (get_players_by_letter, "g"),
-    (get_players_by_letter, "h"),
-    (get_players_by_letter, "i"),
-    (get_players_by_letter, "j"),
-    (get_players_by_letter, "k"),
-    (get_players_by_letter, "l"),
-    (get_players_by_letter, "m"),
-    (get_players_by_letter, "n"),
-    (get_players_by_letter, "o"),
-    (get_players_by_letter, "p"),
-    (get_players_by_letter, "q"),
-    (get_players_by_letter, "r"),
-    (get_players_by_letter, "s"),
-    (get_players_by_letter, "t"),
-    (get_players_by_letter, "u"),
-    (get_players_by_letter, "v"),
-    (get_players_by_letter, "x"),
-    (get_players_by_letter, "w"),
-    (get_players_by_letter, "y"),
-    (get_players_by_letter, "z"),
+    (get_players_by_letter, "a")
 ]
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=27) as executor:
