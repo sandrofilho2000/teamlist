@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block page_title %}{% endblock page_title %}</title>
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  
   <!-- Include links -->
   {% include 'atomic/cells/links.html' %}
 </head>
@@ -22,7 +23,8 @@
   {% include 'atomic/organisms/aside.html' %}
 
   <!-- Main content -->
-  <main class="grid-el overflow-hidden absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] overflow-auto pb-8">
+  <main class="z-10 grid-el overflow-hidden absolute pt-[55px] pl-[10px] left-[70px] min-h-[100vh] overflow-auto pb-8">
+
     {% include 'atomic/organisms/breadcrumb.html' %}
 
     {% block content %}{% endblock content %}

@@ -202,5 +202,4 @@
 </div>
 
 <!-- Include pagination -->
-{% include 'atomic/organisms/detail_pagination.html' %}
-{% endblock detail_content %}
+{% include 'atomic/organisms/pagination.html' with url=request.build_absolute_uri related_items=players %}{% endblock detail_content %}

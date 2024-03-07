@@ -13,9 +13,27 @@ def create_connection():
         
       
     return conn  
-     
-     
-     
+
+def insert_rows(table, fields, values, show_query=False):
+    conn = create_connection()    
+    cur = conn.cursor()
+    
+ 
+    query = f"""
+    INSERT INTO {table}
+    {fields}
+    VALUES
+    {values}
+    """
+    
+    if show_query:
+        print(query)
+    
+    cur.execute(query)
+    conn.commit()
+    conn.close()
+    
+    
   
  
 def select_rows(fields = "*", table = ""):
@@ -29,7 +47,7 @@ def select_rows(fields = "*", table = ""):
     return rows
   
  
-def update_rows(table = "", set = "", where = ""):
+def update_rows(table = "", set = "", where = "", show_query = False):
     conn = create_connection()    
     cur = conn.cursor()
     
@@ -40,7 +58,9 @@ def update_rows(table = "", set = "", where = ""):
     WHERE {where}
     """
     
-    print(query)
+    if show_query:
+        print(query)
+    
     cur.execute(query)
     conn.commit()
     conn.close()

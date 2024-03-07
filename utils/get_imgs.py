@@ -11,7 +11,7 @@ from slugify import slugify
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_dir)
 
-from leagues.utils.sql_commands import *
+from sql_commands import *
 
 
 
@@ -20,8 +20,9 @@ from leagues.utils.sql_commands import *
     
     
     
-def download_image(img_url, save_name):
-    save_folder = r"C:\xampp\htdocs\Not legacy\Python\Futeapp\static\images\countries"
+def download_image(folder="", img_url="", save_name=""):
+    save_folder = r"C:\xampp\htdocs\Not legacy\Python\Futeapp\static\images\{FOLDER}"
+    save_folder.replace("{FOLDER}", folder)
     # Create the folder if it doesn't exist
     os.makedirs(save_folder, exist_ok=True)
 
@@ -41,11 +42,4 @@ def download_image(img_url, save_name):
         
 
 
-leagues = select_rows("id, slug, flag", "countries_country")
-
-
-for league in leagues:
-    file_name = f"{league[1]}{league[0]}.png"
-    img_url = league[-1]
-    download_image(img_url, file_name)
     

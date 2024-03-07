@@ -71,8 +71,8 @@
     <p class="text-xs text-center block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%] ">TOP 3 JOGADORES QUE JOGAM NO PAÍS</p>
 
     <!-- Table for displaying league data -->
-    <div class="overflow-auto shadow">
-      <div class="px-3 rounded-lg overflow-hidden dark:bg-zinc-900 forced-colors:outline border-t-[1px] border-t-[#a1a1aa30]   
+    <div class="overflow-auto shadow h-full">
+      <div class="px-3 rounded-lg h-full overflow-hidden dark:bg-zinc-900 forced-colors:outline border-t-[1px] border-t-[#a1a1aa30]   
       dark:before:rounded-xl 
       dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
       dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
@@ -387,7 +387,7 @@
               {% for player in players %}
               <tr class="bg-gray-100 border-b bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] dark:text-[#A1A1AA] border-b-solid border-b-[1px]">
                 <td class="px-6 py-4 whitespace-nowrap text-sm ">
-                  <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] block" />
+                  <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] min-w-[52px] min-h-[52px] block" />
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm  ">
                   <a href="#" class="gap-1 text-center hover:underline">
