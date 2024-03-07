@@ -9,52 +9,59 @@
 {% load custom_filters %}
 
 <!-- Main content section -->
-<div class="block sm:px-6 lg:px-8 text-2xl flex items-center gap-1 justify-center my-[14px]">
+<div class="block sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/league.html' %}
   <h2 class="background-color rounded-md">
-    Ligas
+    LIGAS
   </h2>
 </div>
 
 <!-- Overflow container for horizontal scrolling -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="overflow-hidden">
-      <!-- Table for displaying league data -->
-      <table class="min-w-full">
-        <thead class="bg-white border-b">
+    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:-inset-px
+    dark:before:absolute
+    dark:bg-zinc-900
+    "> 
+      <table class="min-w-full rounded-md">
+        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
           <tr>
             <!-- Table headers -->
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">#</th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">#</th>
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for league name -->
               <a href="{% url 'league_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Liga 
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for expenses -->
               <a href="{% url 'league_list' %}?field=outcomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Despesas 
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for income -->
               <a href="{% url 'league_list' %}?field=incomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Renda 
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for balance -->
               <a href="{% url 'league_list' %}?field=balance{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Saldo 
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
             </th>
-            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
               <!-- Column header for number of teams -->
               <a href="{% url 'league_list' %}?field=num_teams{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Equipes 
@@ -63,32 +70,31 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-gray-900 dark:text-[#A1A1AA]">
           <!-- Loop through league objects -->
           {% for league in page_obj %}
           <!-- Alternating row colors -->
-          {% cycle 'bg-gray-100 border-b' 'bg-white border-b' as row_class silent %}
-          <tr class="{% if forloop.counter0|divisibleby:2 %}{{ row_class }}{% else %} bg-white border-b {% endif %}">
+          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
             <!-- League data -->
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <!-- League name -->
               <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
                 <img src="{{ league.country_img }}" />
                 <span class="hover:underline"> {{ league.name }} </span>
               </a>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <!-- Expenses -->
               <span> {{ league.outcomes|passToFloat }} </span>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <!-- Income -->
-              <span>{{ league.incomes|passToFloat }}</span>
+              <span class="text-green-700 font-bold">{{ league.incomes|passToFloat }}</span>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <!-- Balance -->
               {% if "-" in league.balance %}
                   <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
@@ -96,7 +102,7 @@
                   <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
               {% endif %}
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
               <!-- Number of teams -->
               {{ league.num_teams  }}
             </td>

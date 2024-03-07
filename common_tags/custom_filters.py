@@ -38,8 +38,8 @@ def passToFloat(value = 0):
 @register.filter(name='enshort_name')
 def enshort_name(value):
     
-    if len(value) > 27 :
-        return value[:27] + "..."
+    if len(value) > 23 :
+        return value[:23] + "..."
     
     else:
         return value
@@ -77,8 +77,8 @@ def set_pagination_params(url = False):
     return new_url
 
 
-@register.filter(name='set_pagination_params')
-def set_pagination_params(request, tab = False):
+@register.filter(name='set_country_pagination_params')
+def set_country_pagination_params(request, tab = False):
     params = request.GET.dict()
     
     if not params['tab']:

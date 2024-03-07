@@ -1,8 +1,49 @@
 {% if user.is_authenticated and user.is_staff %}
-    <a href="/admin/teams/team/{{team.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[2px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/pencil.html' %}
-    </a>
-    <div title="Editar cores" class="edit_component open_palette fixed cursor-pointer rounded-md right-2 bottom-14 h-10 w-10 border-[2px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-        {% include 'icons/palette.html' %}
-    </div>
+    {% if country and not league and not team%}
+        <a href="/admin/countries/country/{{country.pk}}/change/" title="Editar país" target="_BLANK" class="edit_component fixed rounded-md right-2 z-20 bottom-2 h-10 w-10 grid place-items-center text-2xl
+        dark:before:rounded-xl 
+        dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+        dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+        dark:before:pointer-events-none
+        dark:before:-inset-px
+        dark:before:absolute
+        dark:text-zinc-900
+        dark:bg-white
+        ">
+            {% include 'icons/pencil.html' %}
+        </a>
+    {% endif %}
+
+    {% if league and not country and not team%}
+        <a href="/admin/leagues/league/{{league.pk}}/change/" title="Editar liga" target="_BLANK" class="edit_component fixed rounded-md right-2 z-20 bottom-2 h-10 w-10 grid place-items-center text-2xl
+        dark:before:rounded-xl 
+        dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+        dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+        dark:before:pointer-events-none
+        dark:before:-inset-px
+        dark:before:absolute
+        dark:text-zinc-900
+        dark:bg-white
+        ">
+            {% include 'icons/pencil.html' %}
+        </a>
+    {% endif %}
+
+    {% if team and not league and not country%}
+        <a href="/admin/teams/team/{{team.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 z-20 bottom-2 h-10 w-10 grid place-items-center text-2xl
+        dark:before:rounded-xl 
+        dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+        dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+        dark:before:pointer-events-none
+        dark:before:-inset-px
+        dark:before:absolute
+        dark:text-zinc-900
+        dark:bg-white
+        ">
+            {% include 'icons/pencil.html' %}
+        </a>
+    {% endif %}
+
+
+
 {% endif %}

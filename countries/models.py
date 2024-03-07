@@ -16,7 +16,7 @@ class Country(models.Model):
         verbose_name="Bandeira", max_length=255, null=False, blank=False
     )
     
-    background_color = ColorField(verbose_name="Cor de ColorFieldundo (vazio para automático)", null=True)  
+    background_color = ColorField(verbose_name="Cor de fundo (vazio para automático)", null=True)  
     text_color = ColorField(verbose_name="Cor do texto (vazio para automático)", null=True)   
 
     class Meta:

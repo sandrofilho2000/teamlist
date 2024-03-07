@@ -10,14 +10,6 @@
 <!-- Main content block -->
 {% block content %}
     {% include "atomic/organisms/edit_page.html" %}
-    {% if user.is_authenticated and user.is_staff %}
-        <a href="/admin/teams/team/{{team.pk}}/change/" title="Editar time" target="_BLANK" class="edit_component fixed rounded-md right-2 bottom-2 h-10 w-10 border-[2px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-            {% include 'icons/pencil.html' %}
-        </a>
-        <div title="Editar cores" class="edit_component open_palette fixed cursor-pointer rounded-md right-2 bottom-14 h-10 w-10 border-[2px] border-solid bg-[#06AA48] grid place-items-center text-2xl text-white">
-            {% include 'icons/palette.html' %}
-        </div>
-    {% endif %}
 
     {% block detail_content %}
 

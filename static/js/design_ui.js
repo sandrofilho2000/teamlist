@@ -35,18 +35,17 @@ async function get_colors_by_img() {
 
 
 function apply_colors(background_color = false, text_color = false) {
-    if (background_color) {
+/*     if (background_color) {
         $(".background-color").css("background-color", background_color).css("fill", background_color)
         $(".edit_component").css("border-color", background_color)
         $(".edit_component *").css("color", background_color)
         $(".edit_component *").css("fill", background_color)
         $("aside span").css("color", background_color)
         $("aside svg").css("fill", background_color)
-        $("nav path.fill-white").css("fill", background_color)
         $("#id_background_color").val(background_color)
-    }
+    } */
 
-    if (text_color) {
+/*     if (text_color) {
         $("body > nav *:not(small)").css("color", text_color)
         $("body > nav .line").css("background-color", text_color)
         $("body > nav input").css("border-bottom-color", text_color)
@@ -57,7 +56,9 @@ function apply_colors(background_color = false, text_color = false) {
         $(".edit_component").css("background-color", text_color)
         $("aside ul").css("background-color", text_color)
         $("#id_text_color").val(text_color)
-    }
+        $("nav path, nav svg").css("fill", text_color).css("color", text_color)
+
+    } */
 
 }
 
@@ -86,14 +87,16 @@ $(document).ready(async function () {
         background_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors(new_color, "")
-            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
+            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("pointer-events-none")
         })
 
         var text_color = document.querySelector("input#new_text_color")
         text_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors("", new_color)
-            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
+            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("pointer-events-none")
         })
 
 
@@ -104,7 +107,9 @@ $(document).ready(async function () {
             apply_colors(old_background_color, old_text_color)
             background_color.value = old_background_color
             text_color.value = old_text_color
-            $(".update_color_form button").addClass("opacity-40", "pointer-events-none")
+            $(".update_color_form button").addClass("pointer-events-none")
+            $(".update_color_form button").addClass("opacity-40")
+
         })
 
 
@@ -114,7 +119,8 @@ $(document).ready(async function () {
             background_color.value = background_color_from_img
             text_color.value = text_color_from_img
 
-            $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
+            $(".update_color_form button").removeClass("opacity-40")
+            $(".update_color_form button").removeClass("pointer-events-none")
         })
 
 
@@ -129,9 +135,12 @@ $(document).ready(async function () {
             apply_colors(txt_color, bg_color)
 
             if (txt_color !== old_text_color) {
-                $(".update_color_form button").addClass("opacity-40", "pointer-events-none")
+                $(".update_color_form button").addClass("pointer-events-none")
+                $(".update_color_form button").addClass("opacity-40")
+
             } else {
-                $(".update_color_form button").removeClass("opacity-40", "pointer-events-none")
+                $(".update_color_form button").removeClass("opacity-40")
+                $(".update_color_form button").removeClass("pointer-events-none")
             }
         })
 

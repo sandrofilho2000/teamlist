@@ -1,10 +1,12 @@
+from countries.models import Country
+from countries.views import country
 from .models import Team, TeamColorForm
 from leagues.models import League
 from league_team.models import LeaguesTeam  
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+from django.db.models import Count, Sum
 from players.models import Player
 
 def order_list(list=[], key="", order=""):
@@ -41,14 +43,21 @@ class TeamInfoView(View):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')  
+        league_pk = kwargs.get('league_pk')  
+        country_pk = kwargs.get('country_pk')  
+        
+        if league_pk:
+            league = get_object_or_404(League, pk=league_pk) 
+        
+ 
         team = get_object_or_404(Team, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
         leagues = [leagues_team.id_team for leagues_team in leagues_teams]
         form = TeamColorForm(instance=team)
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')
-        league_id = self.request.GET.get('league')
-        
+        related_country = Country.objects.filter(pk=team.id_country_id).first()  
+
         if order_dir_param == "desc":
             order_dir_param = "-"
         else :
@@ -57,7 +66,11 @@ class TeamInfoView(View):
         order = order_dir_param + order_by_param
         related_leagues = Team.objects.filter(pk__in=leagues)
         players = Player.objects.filter(id_team_id=pk).order_by(order)
+        
+        team_players_value = players.aggregate(total_value=Sum('value_market'))['total_value']
 
+            
+        country = Country.objects.filter(pk=team.id_country_id).first()  
                 
         paginator = Paginator(players, 20) 
         page = request.GET.get('page')
@@ -75,11 +88,44 @@ class TeamInfoView(View):
         image_name = f"{team.slug}{team.id}.png"
         image_url = f"/media/images/teams/{image_name}"  
         
-
+        breadcrumbs = []
+        
+        if league_pk or country_pk:
+            if country_pk:
+                breadcrumbs += [
+                    {'url': f"/countries/", 'name': "Países"},
+                    {'url': f"/countries/country/{country.id}", 'name': country.name}
+                ]
+                
+            if league_pk:
+                if country_pk:
+                    breadcrumbs += [
+                        {'url': f"/countries/country/{country.id}/leagues/{league.id}", 'name': league.name}
+                    ]
+                else:
+                    breadcrumbs += [
+                        {'url': f"/leagues/", 'name': "Ligas"},
+                        {'url': f"/leagues/league/{league.id}", 'name': league.name}
+                    ]
+                
+            breadcrumbs += [
+                {'url': f"", 'name': team.name}
+            ]
+                
+        else:
+             breadcrumbs += [
+                {'url': f"/teams/", 'name': 'Equipes'},
+                {'url': f"", 'name': team.name}
+            ]
+                
+        
         context = {
             'team': team,
             'related_leagues': related_leagues,
+            'breadcrumbs': breadcrumbs,
             'players': players,
+            'team_players_value': team_players_value,
+            'related_country': related_country,
             'paginator': paginator,
             'image_url': image_url,
             'form': form

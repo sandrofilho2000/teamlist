@@ -1,15 +1,14 @@
 <!-- skeleton_loading.html -->
-<aside class="border-l-solid border-l-[10px] border-l-white h-screen fixed shadow-[1px_0px_35px_1px_#00000024] z-10 overflow-x-hidden">
-
+<aside class="border-l-solid border-l-[10px] dark:bg-[#18181b]  dark:border-l-[#18181b]  bg-light white:border-l-white border-l-white h-screen fixed shadow-[1px_0px_35px_1px_#00000024] z-10 overflow-x-hidden">
     <ul class="absolute z-2 top-[50px]">
         <!-- Skeleton loading list items -->
             <li class="h-[56px] flex items-center">
-                <a href="{% url 'country_list' %}">
+                <a href="/">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/home.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Home
                         </span>
                     </div>
@@ -18,10 +17,10 @@
             <li class="h-[56px] flex items-center">
                 <a href="{% url 'league_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/league.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Ligas
                         </span>
                     </div>
@@ -30,10 +29,10 @@
             <li class="h-[56px] flex items-center">
                 <a href="{% url 'team_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/ball.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Equipes
                         </span>
                     </div>
@@ -42,22 +41,22 @@
             <li class="h-[56px] flex items-center">
                 <a href="{% url 'team_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/player.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Jogadores
                         </span>
                     </div>
                 </a>
             </li>
             <li class="h-[56px] flex items-center">
-                <a href="{% url 'team_list' %}">
+                <a href="{% url 'country_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/flag.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Países
                         </span>
                     </div>
@@ -66,10 +65,10 @@
             <li class="h-[56px] flex items-center">
                 <a href="{% url 'team_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/stadium.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Estádios
                         </span>
                     </div>
@@ -78,11 +77,23 @@
             <li class="h-[56px] flex items-center">
                 <a href="{% url 'team_list' %}">
                     <div role="status" class="max-w-sm flex items-center justify-center gap-3">
-                        <div class="min-w-[50px] flex justify-center text-[#363636] text-[30px] ">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
                             {% include 'icons/trophy.html' %}
                         </div>
-                        <span>
+                        <span class='dark:text-[#A1A1AA]'>
                             Taças
+                        </span>
+                    </div>
+                </a>
+            </li>
+            <li class="h-[56px] flex items-center">
+                <a href="{% url 'team_list' %}">
+                    <div role="status" class="max-w-sm flex items-center justify-center gap-3">
+                        <div class="min-w-[50px] flex justify-center dark:text-white text-slate-900 text-[30px] ">
+                            {% include 'icons/transfers.html' %}
+                        </div>
+                        <span class='dark:text-[#A1A1AA]'>
+                            Transferências
                         </span>
                     </div>
                 </a>

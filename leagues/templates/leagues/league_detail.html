@@ -9,34 +9,116 @@
 
 {% block detail_content %}
 
-{% include 'color_palette.html' with background_color=league.background_color text_color=league.text_color %}
+{% include 'atomic/organisms/color_palette.html' with background_color=league.background_color text_color=league.text_color %}
 
 <!-- Main content section -->
-<div class="w-[280px] m-auto">
-  <div class="flex items-center justify-center gap-1">
-    <img src="{{ league.country_img }}" />
-    <small class="text-center block"> {{ league.country_name }} </small>
+
+
+<div class="flex justify-center">
+  <div class="inline-block p-3 bg-white rounded-md   
+  dark:bg-zinc-900 forced-colors:outline rounded-lg   
+  dark:before:rounded-xl 
+  dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+  dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+  dark:before:pointer-events-none
+  dark:before:absolute
+  
+  ">
+  <img width="80" src="{{ image_url }}" class="m-auto block league_main_img" />
+  <h2 class="text-center dark:text-white text-md font-medium">{{ league.name | upper }}</h2>
   </div>
-  <h2 class="text-center">{{ league.name }}</h2>
-  <img src="{{ image_url }}" class="m-auto block league_main_img" />
 </div>
+
+
+<div class="flex justify-center gap-2 my-5">
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    
+    ">
+      <span class="text-sm dark:text-[#A1A1AA]">
+        PAÍS:
+      </span>
+      <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.png" class="inline-block h-[16px]" />
+      <a href={% url "country_detail" pk=related_country.pk %} class="inline-block text-sm font-medium dark:text-white">
+        {{ related_country.name | upper }} 
+      </a>  
+    </div>
+  </div>
+
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    
+    ">
+    <span class="text-sm dark:text-[#A1A1AA]">
+      SALDO: 
+    </span>
+    {% if "-" in league.balance %}
+      <span class="text-red-700 font-bold text-sm"> {{ league.balance | passToFloat }} </span>
+    {% else %}
+        <span class="text-green-700 font-bold text-sm"> {{ league.balance | passToFloat }} </span>
+    {% endif %}
+
+    </div>
+  </div>
+
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:absolute
+    ">
+      <span class="text-sm dark:text-[#A1A1AA]">
+        Nº DE EQUIPES: 
+      </span>
+      <span class="text-green-700 font-bold text-sm"> {{ related_teams_count }} </span>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
 
 <!-- Table container -->
 <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="overflow-hidden">
-      <table class="min-w-full">
-        <thead class="bg-white border-b">
+  <div class="py-2 inline-block min-w-full sm:px-2 lg:px-8">
+    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+    dark:before:rounded-xl 
+    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
+    dark:before:pointer-events-none
+    dark:before:-inset-px
+    dark:before:absolute
+    dark:bg-zinc-900
+    "> 
+      <table class="min-w-full rounded-md">
+        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
           <tr>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm font-medium px-2 py-4 text-left"
             >
               #
             </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm font-medium px-2 py-4 text-left"
             >
               <a
                 href="{% url 'league_detail' pk=league.pk  %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
@@ -47,7 +129,7 @@
             </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              class="text-sm font-medium px-2 py-4 text-left"
             >
               <a href="{% url 'league_detail' pk=league.pk %}?field=average_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor médio de mercado               
@@ -56,7 +138,7 @@
             </th>
             <th
               scope="col"
-              class="text-sm font-medium text-gray-900 px-6 py-4 text-right"
+              class="text-sm font-medium px-2 py-4 text-right"
             >
               <a href="{% url 'league_detail' pk=league.pk %}?field=total_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor de mercado total 
@@ -65,21 +147,26 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-gray-900 dark:text-[#A1A1AA]">
           {% for team in related_teams %}
-          <tr class="{% cycle 'bg-gray-100 border-b' 'bg-white border-b' %}">
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <td class="px-2 py-4 whitespace-nowrap text-sm font-medium">
               <img src="{{ team.small_img }}" />
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <a href="{% url 'team_detail' pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
+              {% if country_pk %}
+                <a href="{% url 'country_league_team_detail' country_pk=country_pk league_pk=league.pk pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+              {% else %}
+                <a href="{% url 'league_team_detail' league_pk=league.pk pk=team.pk %}?league={{league.pk}}" class="flex items-center justify-start gap-1">
+              {% endif %}
                 <span class="hover:underline">{{ team.name }}</span>
               </a>
+
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
               <span>{{ team.average_market_value|passToFloat }}</span>
             </td>
-            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap text-right">
+            <td class="text-sm font-light px-2 py-4 whitespace-nowrap text-right">
               <span>{{ team.total_market_value|passToFloat }}</span>
             </td>
           </tr>
@@ -90,7 +177,7 @@
     </div>
   </div>
 
-  {% include 'pagination.html' with url=request.build_absolute_uri related_items=related_teams %}
+  {% include 'atomic/organisms/pagination.html' with url=request.build_absolute_uri related_items=related_teams %}
   
 </div>
 

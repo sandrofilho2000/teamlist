@@ -113,7 +113,7 @@ $(".search_field input").keyup((e) => {
                             li.innerHTML = `
                                 <a class="flex gap-2 w-full" href="#">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img width="28" height="28" src="${item.img}" />
+                                        <img class="w-[32px] h-[32px] rounded-full object-cover" src="${item.img}" />
                                     </span>
                                     <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                 </a>
