@@ -1,5 +1,6 @@
 from countries.models import Country
 from countries.views import country
+from stadiums.models import Stadium
 from .models import Team, TeamColorForm
 from leagues.models import League
 from league_team.models import LeaguesTeam  
@@ -57,6 +58,7 @@ class TeamInfoView(View):
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')
         related_country = Country.objects.filter(pk=team.id_country_id).first()  
+        trophies = team.team_trophy.all()  
 
         if order_dir_param == "desc":
             order_dir_param = "-"
@@ -71,6 +73,7 @@ class TeamInfoView(View):
 
             
         country = Country.objects.filter(pk=team.id_country_id).first()  
+        stadium = Stadium.objects.filter(pk=team.id_stadium_id).first()  
                 
         paginator = Paginator(players, 20) 
         page = request.GET.get('page')
@@ -117,13 +120,17 @@ class TeamInfoView(View):
                 {'url': f"/teams/", 'name': 'Equipes'},
                 {'url': f"", 'name': team.name}
             ]
-                
-        
+            
+        for trophy in trophies:
+            print(trophy)
+            
         context = {
             'team': team,
             'related_leagues': related_leagues,
             'breadcrumbs': breadcrumbs,
             'players': players,
+            'trophies': trophies,
+            'stadium': stadium,
             'team_players_value': team_players_value,
             'related_country': related_country,
             'paginator': paginator,

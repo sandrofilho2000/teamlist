@@ -82,121 +82,198 @@
       <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
     </div>
   </div>
-</div>
 
-<!-- Table container -->
-<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+  <div class="highlight_card">
+    <div class="highlight_card h-full w-full max-w-sm justify-center bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
+    dark:bg-zinc-900 forced-colors:outline rounded-lg   
     dark:before:rounded-xl 
     dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
     dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
     dark:before:pointer-events-none
-    dark:before:-inset-px
     dark:before:absolute
-    dark:bg-zinc-900
-    "> 
-      <table class="min-w-full rounded-md">
-        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
-          <tr>
-            <th
-              scope="col"
-              class="text-sm px-2 py-4 text-left"
-            >
-              <a
-              href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
-            >
-            Numº
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </a>
-            </th>
+    ">
+      <span class="text-sm dark:text-[#A1A1AA]">
+        ESTÁDIO: 
+      </span>
+      <span class="text-green-700 font-bold text-sm"> {{ stadium.name }} </span>
+    </div>
+  </div>
+</div>
 
-            <th
-              scope="col"
-              class="text-sm px-2 py-4 text-center"
-            >
-              <a
-                href="{% url 'team_detail' pk=team.pk %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+<!-- Table container -->
+<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 ">
+  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+
+    <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 shadow  bg-white dark:bg-zinc-900">
+      <div table="players" class="players_tab tab w-1/3 text-center {% if request.GET.tab == 'players' %} font-bold {% endif %}">JOGADORES</div>
+      <span class="inline-block mx-2">|</span>
+      <div table="trophies" class="trophies_tab tab w-1/3 text-center {% if request.GET.tab == 'trophies' or not request.GET.tab %} font-bold {% endif %}">TROFÉUS</div>
+    </div>
+
+    <div class="teams_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
+      dark:bg-zinc-900       
+      dark:before:rounded-xl 
+      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+      dark:before:pointer-events-none
+      dark:before:absolute
+      dark:before:rounded-tl-xl 
+    ">
+      <!-- Table for displaying league data -->
+      <div class="px-3"> 
+        <table class="hidden min-w-full rounded-md">
+          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm px-2 py-4 text-left"
               >
-                Jogador
+                <a
+                href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+              >
+              Numº
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
-            </th>
-            <th
-            scope="col"
-            class="text-sm px-2 py-4 text-left"s
-          >
-            <a
-              href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
-            >
-              Posição
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </a>
-          </th>
-            <th
-              scope="col"
-              class="text-sm px-2 py-4 text-left"
-            >
-              <a href="{% url 'team_detail' pk=team.pk %}?field=birth{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Nascimento              
-                 <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th
-              scope="col"
-              class="text-sm px-2 py-4 text-left"
-            >
-              <a href="{% url 'team_detail' pk=team.pk %}?field=country_name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                País de origem 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th
-              scope="col"
-              class="text-sm px-2 py-4 text-right"
-            >
-              <a href="{% url 'team_detail' pk=team.pk %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Valor de mercado 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-900 dark:text-[#A1A1AA]">
-          {% for player in players %}
-          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-            <td class="px-2 py-4 whitespace-nowrap text-sm">
-              <span>{{ player.num }}</span>
-            </td>
- 
-            <td class="px-2 py-4 whitespace-nowrap text-sm flex flex-col justify-left align-center">
-              <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
-                <a href="#" class="gap-1 text-center hover:underline">
-                  {{ player.name }}
+              </th>
+
+              <th
+                scope="col"
+                class="text-sm px-2 py-4 text-center"
+              >
+                <a
+                  href="{% url 'team_detail' pk=team.pk %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+                >
+                  Jogador
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
-            </td>
-
-            <td class="px-2 py-4 whitespace-nowrap text-sm">
-              <span>{{ player.pos }}</span>
-            </td>
-
-            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
-                <span class="hover:underline">{{ player.birth }}</span>
-            </td>
-            <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
-              <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
-              <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
-                {{ player.country_name }}
+              </th>
+              <th
+              scope="col"
+              class="text-sm px-2 py-4 text-left"s
+            >
+              <a
+                href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+              >
+                Posição
+                <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
-            </td>
-            <td class="text-sm font-light px-2 py-4 whitespace-nowrap text-right">
-              <span>{{ player.value_market|passToFloat }}</span>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
+            </th>
+              <th
+                scope="col"
+                class="text-sm px-2 py-4 text-left"
+              >
+                <a href="{% url 'team_detail' pk=team.pk %}?field=birth{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Nascimento              
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="text-sm px-2 py-4 text-left"
+              >
+                <a href="{% url 'team_detail' pk=team.pk %}?field=country_name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  País de origem 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="text-sm px-2 py-4 text-right"
+              >
+                <a href="{% url 'team_detail' pk=team.pk %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Valor de mercado 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            {% for player in players %}
+            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <td class="px-2 py-4 whitespace-nowrap text-sm">
+                <span>{{ player.num }}</span>
+              </td>
+  
+              <td class="px-2 py-4 whitespace-nowrap text-sm flex flex-col justify-left align-center">
+                <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
+                  <a href="#" class="gap-1 text-center hover:underline">
+                    {{ player.name }}
+                  </a>
+              </td>
+
+              <td class="px-2 py-4 whitespace-nowrap text-sm">
+                <span>{{ player.pos }}</span>
+              </td>
+
+              <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
+                  <span class="hover:underline">{{ player.birth }}</span>
+              </td>
+              <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
+                <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
+                <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
+                  {{ player.country_name }}
+                </a>
+              </td>
+              <td class="text-sm font-light px-2 py-4 whitespace-nowrap text-right">
+                <span>{{ player.value_market|passToFloat }}</span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        
+        </table>
+      </div>
       
-      </table>
+        <!-- Table for displaying trophies data -->
+        <div class="px-3">
+          <table class="{% if request.GET.tab != 'teams' %}  {% endif %} teams_table min-w-full">
+            <thead class="dark:text-white">
+              <tr>
+                <!-- Table headers -->
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">#</th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                  <!-- Column header for team name -->
+                  <a href="?tab=teams&field_team=name{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
+                    Título <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                  <!-- Column header for average market value -->
+                  <a href="?tab=teams&field_team=average_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
+                    Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+              <!-- Teams list -->
+              {% if trophies %}
+              {% for trophy in trophies %}
+              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+                <!-- Team data -->
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
+                </td>
+                <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                  <!-- Team name -->
+                  <a href="#" class="hover:underline">{{ trophy.id_trophy.name }}</a>
+                </td>
+                <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                  <!-- Average market value -->
+                  <span>{{ trophy.season }}</span>
+                </td>
+              </tr>
+              {% endfor %}
+              {% else %}
+              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+                <td>
+                  <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
     </div>
   </div>
 </div>
