@@ -36,12 +36,13 @@ def insert_rows(table, fields, values, show_query=False):
     
   
  
-def select_rows(fields = "*", table = ""):
+def select_rows(fields = "*", table = "", show_query = False):
     conn = create_connection()    
     cur = conn.cursor()
     query = f"SELECT {fields} FROM {table}"
+    if show_query:
+        print(query)
     cur.execute(query)
-
     rows = cur.fetchall()
     conn.close()
     return rows
@@ -51,7 +52,9 @@ def update_rows(table = "", set = "", where = "", show_query = False):
     conn = create_connection()    
     cur = conn.cursor()
     
- 
+    table = table.lower().replace("table", "")
+    set = set.lower().replace("set", "")
+    where = where.replace("where", "").replace("WHERE", "")
     query = f"""
     UPDATE {table}
     SET {set}

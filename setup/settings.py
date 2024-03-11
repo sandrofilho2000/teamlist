@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     "search_items.apps.SearchItemsConfig",
     "players.apps.PlayersConfig",
     "stadiums.apps.StadiumsConfig",
+    "trophies.apps.TrophiesConfig",
+    "team_trophy.apps.TeamTrophyConfig",
     "rest_framework",
     "debug_toolbar",
     "colorfield"

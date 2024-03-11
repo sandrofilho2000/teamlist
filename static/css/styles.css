@@ -102,7 +102,6 @@ table ::-webkit-scrollbar {
 html, body {
   overflow-x: hidden;
   min-width: 100vw;
-  opacity: 0;
 }
 
 body.menu-active aside {

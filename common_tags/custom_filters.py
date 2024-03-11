@@ -74,6 +74,7 @@ def set_pagination_params(url = False):
         else:
             new_url = f"?{params[-1]}&"
      
+    print("NEW URL: ", new_url)
     return new_url
 
 

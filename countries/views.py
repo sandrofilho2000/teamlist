@@ -58,7 +58,7 @@ class CountryDetailView(ListView):
             
         order_league = order_dir_param_league + order_by_param_league
         leagues = League.objects.filter(id_country_id=pk).order_by(order_league)
-        top_league = League.objects.filter(id_country_id=pk).order_by("balance").first()
+        top_league = League.objects.filter(id_country_id=pk).order_by("incomes").first()
         
         
         

@@ -127,4 +127,5 @@ class LeagueInfoView(View):
             'form': form,
             # Other context variables...
         }
+        
         return render(request, self.template_name, context)

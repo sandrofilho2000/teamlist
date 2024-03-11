@@ -10,18 +10,17 @@ from bs4 import BeautifulSoup
 import concurrent.futures
 from slugify import slugify
 
-from sql_commands import select_rows, update_rows
+from sql_commands import insert_rows, select_rows, update_rows
 
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_dir)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+}
 
+def get_stadium(url, team_name = "", stadium_name = ""):
+    global teams_link_error, players_link_error, headers
 
-def get_stadium(url, stadium_id = 0, name = ""):
-    global teams_link_error, players_link_error
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-    }
-        
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -43,17 +42,11 @@ def get_stadium(url, stadium_id = 0, name = ""):
         oficial_site = ""
         tickets_link = ""
         phone = ""
-        team_name = ""
         
         try:
             
             table = soup.find_all("table", "profilheader")[0]
             trs = table.find_all("tr")
-            
-            div_name = soup.find("div", "data-header__headline-container").find("h1").text().strip()
-            
-            if div_name.find("h1"):
-                team_name = div_name
             
             for tr in trs:
                 if "Capacidade total:" in tr.find('th'):
@@ -136,68 +129,91 @@ def get_stadium(url, stadium_id = 0, name = ""):
             "team_name": team_name,
         }
         
-        update_rows("stadiums_stadium", f"""
-                    crowd_capacity = "{crowd_capacity}",
-                    seats = "{seats}",
-                    staterooms = "{staterooms}",
-                    build_year = "{build_year}",
-                    build_value = "{build_value}",
-                    grass_heat = "{grass_heat}",
-                    grass_type = "{grass_type}",
-                    grass_size = "{grass_size}",
-                    address = "{address}",
-                    country_name = "{country_name}",
-                    tickets_link = "{tickets_link}",
-                    has_track = "{has_track}",
-                    imgs = "{imgs}",
-                    oficial_site = "{oficial_site}",
-                    tickets_link = "{tickets_link}",
-                    phone = "{phone}",
-                    team_name = "{team_name}"
-                    """, f"id = {stadium_id}")
         
-        print(f"Estádio {name} atualizado\n")
+        insert_rows("stadiums_stadium", """
+                        (
+                        name,
+                        crowd_capacity,
+                        seats,
+                        link,
+                        staterooms,
+                        build_year,
+                        build_value,
+                        grass_heat,
+                        grass_type,
+                        grass_size,
+                        address,
+                        country_name,
+                        tickets_link,
+                        has_track,
+                        imgs,
+                        oficial_site,
+                        tickets_link,
+                        phone,
+                        team_name)""",
+                        
+                        f"""(
+                            "{stadium_name}",
+                            "{crowd_capacity}",
+                            "{seats}",
+                            "{url}",
+                            "{staterooms}",
+                            "{build_year}",
+                            "{build_value}",
+                            "{grass_heat}",
+                            "{grass_type}",
+                            "{grass_size}",
+                            "{address}",
+                            "{country_name}",
+                            "{tickets_link}",
+                            "{has_track}",
+                            "{imgs}",
+                            "{oficial_site}",
+                            "{tickets_link}",
+                            "{phone}",
+                            "{team_name}"
+                        )
+                        
+                        """)
+        
+        
+        print(f"Estádio {stadium_name} adicionado\n")
         
     
 def get_stadiums(letter):
-    stadiums = select_rows("id, link, name", f"stadiums_stadium")
-    if stadiums:
-        try:
-            for stadium in stadiums:
-                get_stadium(stadium[1], stadium[0], stadium[2])
-        except Exception as e:
-            print(str(e))
+    teams = select_rows("id, link, name", f"teams_team where id_stadium_id is null and name like '{letter}%'")
+    for team in teams:
+        if teams:
+            team_id = team[0]
+            link = team[1].replace(".br//", ".br/")
+            team_name = team[2]
+            response = requests.get(link, headers=headers)
+            soup = BeautifulSoup(response.content, "html.parser")
+            div = soup.find("div", "data-header__details")
+            lis = div.find_all("li", "data-header__label")
+            
+            stadium_link = ""
+            for li in lis:
+                if 'Estádio:' in li.text.strip():
+                    if li.find("a"):
+                        stadium_link = li.find("a").get("href")
+                        stadium_name = li.find("a").text.strip()
+                    
+            if stadium_link:
+                stadium_link = "https://www.transfermarkt.com.br"+stadium_link
+                get_stadium(stadium_link, team_name, stadium_name)
+                                
+            else:
+                update_rows("teams_team", f"id_stadium_id = ''", "id = '{max_id}'")
 
-        
 
-functions_to_run = [
-    (get_stadiums, "a"),
-    (get_stadiums, "b"),
-    (get_stadiums, "c"),
-    (get_stadiums, "d"),
-    (get_stadiums, "e"),
-    (get_stadiums, "f"),
-    (get_stadiums, "g"),
-    (get_stadiums, "h"),
-    (get_stadiums, "i"),
-    (get_stadiums, "j"),
-    (get_stadiums, "k"),
-    (get_stadiums, "l"),
-    (get_stadiums, "m"),
-    (get_stadiums, "n"),
-    (get_stadiums, "o"),
-    (get_stadiums, "p"),
-    (get_stadiums, "q"),
-    (get_stadiums, "r"),
-    (get_stadiums, "s"),
-    (get_stadiums, "t"),
-    (get_stadiums, "u"),
-    (get_stadiums, "v"),
-    (get_stadiums, "x"),
-    (get_stadiums, "w"),
-    (get_stadiums, "y"),
-    (get_stadiums, "z"),
-]
+functions_to_run = []               
+                
+import string
+for letter in string.ascii_lowercase:
+    # Add tuple with get_players function and current letter as parameter to the list
+    functions_to_run.append((get_stadiums, letter))
+
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=27) as executor:
     # Submit each function to the executor
