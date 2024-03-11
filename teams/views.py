@@ -70,10 +70,11 @@ class TeamInfoView(View):
             players = paginator_players.page(paginator_players.num_pages)
             
         
-        order_by_param_trophy = self.request.GET.get('field_trophy', 'id')
+        order_by_param_trophy = self.request.GET.get('field_trophy', 'season')
+        
         if order_by_param_trophy:
-            order_by_param_trophy = f"id_trophy__{order_by_param_trophy}"
-
+            if order_by_param_trophy == 'name':
+                order_by_param_trophy = f"id_trophy__{order_by_param_trophy}"
 
         order_dir_param_trophy = self.request.GET.get('order_trophy', 'asc')
         if order_dir_param_trophy == "desc":
