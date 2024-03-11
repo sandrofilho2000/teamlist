@@ -9,3 +9,4 @@ from django.shortcuts import render, get_object_or_404
 class TrophyAdmin(admin.ModelAdmin):
     list_display = ['name']# Adjusted list_display
     search_fields = ['name']  # Adjusted search_fields
+    name = "Trophies"

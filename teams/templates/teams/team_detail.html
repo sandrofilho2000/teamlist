@@ -105,12 +105,12 @@
   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 
     <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 shadow  bg-white dark:bg-zinc-900">
-      <div table="players" class="players_tab tab w-1/3 text-center {% if request.GET.tab == 'players' %} font-bold {% endif %}">JOGADORES</div>
+      <div table="players" class="players_tab tab w-1/3 text-center {% if request.GET.tab == 'players' or not request.GET.tab %} font-bold {% endif %}">JOGADORES</div>
       <span class="inline-block mx-2">|</span>
-      <div table="trophies" class="trophies_tab tab w-1/3 text-center {% if request.GET.tab == 'trophies' or not request.GET.tab %} font-bold {% endif %}">TROFÉUS</div>
+      <div table="trophies" class="trophies_tab tab w-1/3 text-center {% if request.GET.tab == 'trophies' %} font-bold {% endif %}">TROFÉUS</div>
     </div>
 
-    <div class="teams_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
+    <div class="team_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
       dark:bg-zinc-900       
       dark:before:rounded-xl 
       dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
@@ -120,7 +120,7 @@
     ">
       <!-- Table for displaying league data -->
       <div class="px-3"> 
-        <table class="hidden min-w-full rounded-md">
+        <table class="{% if request.GET.tab == 'players' or not request.GET.tab %}{% else %} hidden {% endif %} players_table min-w-full">
           <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
             <tr>
               <th
@@ -128,7 +128,7 @@
                 class="text-sm px-2 py-4 text-left"
               >
                 <a
-                href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+                href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=number{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
               >
               Numº
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -140,7 +140,7 @@
                 class="text-sm px-2 py-4 text-center"
               >
                 <a
-                  href="{% url 'team_detail' pk=team.pk %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+                  href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=name{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
                 >
                   Jogador
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -151,7 +151,7 @@
               class="text-sm px-2 py-4 text-left"s
             >
               <a
-                href="{% url 'team_detail' pk=team.pk %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+                href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
               >
                 Posição
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -161,7 +161,7 @@
                 scope="col"
                 class="text-sm px-2 py-4 text-left"
               >
-                <a href="{% url 'team_detail' pk=team.pk %}?field=birth{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=birth{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Nascimento              
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
@@ -170,7 +170,7 @@
                 scope="col"
                 class="text-sm px-2 py-4 text-left"
               >
-                <a href="{% url 'team_detail' pk=team.pk %}?field=country_name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=country_name{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   País de origem 
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
@@ -179,7 +179,7 @@
                 scope="col"
                 class="text-sm px-2 py-4 text-right"
               >
-                <a href="{% url 'team_detail' pk=team.pk %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Valor de mercado 
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
@@ -223,60 +223,154 @@
         </table>
       </div>
       
-        <!-- Table for displaying trophies data -->
-        <div class="px-3">
-          <table class="{% if request.GET.tab != 'teams' %}  {% endif %} teams_table min-w-full">
-            <thead class="dark:text-white">
-              <tr>
-                <!-- Table headers -->
-                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">#</th>
-                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
-                  <!-- Column header for team name -->
-                  <a href="?tab=teams&field_team=name{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
-                    Título <i class="fa fa-caret-down" aria-hidden="true"></i>
-                  </a>
-                </th>
-                <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
-                  <!-- Column header for average market value -->
-                  <a href="?tab=teams&field_team=average_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
-                    Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
-                  </a>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="text-gray-900 dark:text-[#A1A1AA]">
-              <!-- Teams list -->
-              {% if trophies %}
+      <!-- Table for displaying trophies data -->
+      <div class="px-3">
+        <table class="{% if request.GET.tab != 'trophies' %} hidden {% endif %} trophies_table min-w-full">
+          <thead class="dark:text-white">
+            <tr>
+              <!-- Table headers -->
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">#</th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                <!-- Column header for team name -->
+                <a href="?tab=trophies&field_trophy=name{% if request.GET.order_trophy == 'asc' %}&order_trophy=desc{% else %}&order_trophy=asc{% endif %}">
+                  Título <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+                <!-- Column header for average market value -->
+                <a href="?tab=trophies&field_trophy=season{% if request.GET.order_trophy == 'asc' %}&order_trophy=desc{% else %}&order_trophy=asc{% endif %}">
+                  Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            <!-- Teams list -->
+            {% if trophies %}
               {% for trophy in trophies %}
-              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-                <!-- Team data -->
-                <td class="px-6 py-4 whitespace-nowrap text-sm">
-                  <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
-                </td>
-                <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
-                  <!-- Team name -->
-                  <a href="#" class="hover:underline">{{ trophy.id_trophy.name }}</a>
-                </td>
-                <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
-                  <!-- Average market value -->
-                  <span>{{ trophy.season }}</span>
-                </td>
-              </tr>
+                <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+                  <!-- Team data -->
+                  <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
+                  </td>
+                  <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                    <!-- Team name -->
+                    <a href="#" class="hover:underline">{{ trophy.id_trophy.name }}</a>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+                    <!-- Average market value -->
+                    <span>{{ trophy.season }}</span>
+                  </td>
+                </tr>
               {% endfor %}
-              {% else %}
+            {% else %}
               <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
                 <td>
                   <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
                 </td>
               </tr>
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>
 </div>
 
-<!-- Include pagination -->
-{% include 'atomic/organisms/pagination.html' with url=request.build_absolute_uri related_items=players %}{% endblock detail_content %}
+<script>
+  const setInputUrl = (page, tab) =>{        
+
+    let params = new URLSearchParams(document.location.search);
+    var new_url = ""
+
+    if(tab == "trophies"){
+      field = params.get("field_trophy") ? "&field_trophy=" + params.get("field_trophy") : ""
+      order = params.get("order_trophy") ? "&order_trophy=" + params.get("order_trophy") : ""
+      new_url = `?tab=${tab}${field}${order}&page=${page}`
+    }
+    else if(tab == "players"){
+      field = params.get("field_player") ? "&field_player=" + params.get("field_player") : ""
+      order = params.get("order_player") ? "&order_player=" + params.get("order_player") : ""
+      new_url = `?tab=${tab}${field}${order}&page=${page}`
+    }else{
+      new_url = `?page=${page}`
+    }
+
+    return new_url
+  }
+
+  document.querySelectorAll(".tab").forEach(item=>{
+
+    item.addEventListener("click", (e)=>{
+      e.target.classList.add("font-bold");
+      tab_table = e.currentTarget.getAttribute("table")
+
+      document.querySelectorAll(".team_tables table.min-w-full").forEach(table=>{
+        if(table.className.includes(tab_table)){
+          table.classList.remove("hidden")
+        }else{
+          table.classList.add("hidden")
+        }
+      })
+
+      document.querySelectorAll(".pagination.mt-4").forEach(item=>{
+        if(item.className.includes(tab_table)){
+          item.classList.remove("hidden")
+        }else{
+          item.classList.add("hidden")
+        }
+
+        item.querySelectorAll("a").forEach(a => {
+          href = a.href.split("&page=")
+          if(href.length){
+            tab = a.closest("[tab]").getAttribute("tab")
+            a.setAttribute("href", "?tab=" + tab + "&page=" + href[1])
+          }
+        })
+
+        let input = item.querySelector("input")
+        input.setAttribute("url", setInputUrl(input.value, tab_table))
+
+      })
+
+      document.querySelectorAll(`.tab:not([table='${tab_table}'])`).forEach(item=>{
+        item.classList.remove("font-bold")
+      })
+
+    })
+
+  })
+
+  window.addEventListener("DOMContentLoaded", ()=>{
+    document.querySelectorAll(".pagination.mt-4 input").forEach(paginationInput=>{
+      tab = paginationInput.closest("[tab]").getAttribute("tab")
+      paginationInput.setAttribute("url", setInputUrl(paginationInput.value, tab))
+
+      paginationInput.addEventListener("keyup", (e)=>{
+        tab = e.target.closest("[tab]").getAttribute("tab")
+        value = e.target.value;
+        e.target.setAttribute("url", setInputUrl(value, tab))
+        url = e.target.getAttribute("url")
+        console.log(e.target.closest("[tab]"))
+
+        if(value > 99){
+          paginationInput.classList.add("w-[25px]")
+        }else{
+          paginationInput.classList.add("w-[15px]")
+        }
+
+        if (e.key === 'Enter') {
+          window.location.href = url; // Redirect the user to the new URL
+        }
+      })
+
+      
+    })
+  })
+
+</script>
+    <!-- Include pagination -->
+    {% include './paginator_players.html' with url=request.build_absolute_uri related_items=players %}
+    {% include './paginator_trophies.html' with url=request.build_absolute_uri related_items=trophies %}
+{% endblock detail_content %}

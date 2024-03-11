@@ -13,3 +13,5 @@ class TeamTrophy(models.Model):
 
     class Meta:
         db_table = 'team_trophy'  # Specify the database table name
+        verbose_name_plural = "Teams and Trophies"
+        verbose_name = 'Team Trophies'
