@@ -7,8 +7,6 @@ $(".toggle-menu").click(() => {
     } else {
         localStorage.removeItem("isMenuOpen");
     }
-
-    $("aside, main").addClass("transition-primary");
 });
 
 
@@ -20,8 +18,8 @@ $(".search_field input").focus(() => {
 function slugify(str) {
     str = str.replace(/^\s+|\s+$/g, ''); // Remove espaços em branco do início e do final da string
     str = str.toLowerCase(); // Converte a string para minúsculas
-    const from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    const to   = "aaaaeeeeiiiioooouuuunc------"; // Substituições de caracteres especiais
+    const from = "àãáäâèéëêìíïîòóöõôùúüûñç·/_,:;";
+    const to   = "aaaaaeeeeiiiioooõouuuunc------"; // Substituições de caracteres especiais
     for (let i = 0, l = from.length; i < l; i++) {
       str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
     }
@@ -41,15 +39,17 @@ var typingTimer;
 $(".search_field input").keyup((e) => {
     $(".data_list_ul").html("");
     $(".data_list_ul").removeClass("active")
+    
 
     clearTimeout(typingTimer);
     if (e.target.value) {
         $(".datalist_skeleton.skeleton-loading").fadeIn();
+        $("html").addClass("overflow-hidden")
 
         typingTimer = setTimeout(() => {
             const query = slugify(e.target.value.trim())
             const apiUrl = `/search_items/${query}/`;
-
+            console.log(query)
             fetch(apiUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -62,88 +62,97 @@ $(".search_field input").keyup((e) => {
                     let { teams } =  data
                     let { players } =  data
                     let { countries } =  data
-                    console.log(data)
-                    if (leagues.length) {
-                        $(".leagues_data_list_ul").addClass("active")
-                        leagues.forEach((item) => {
-                            const li = document.createElement("li");
-                            li.setAttribute("title", item.name);
-                            li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/leagues/${item.id}/">
-                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img width="28" height="28" src="${item.img}" />
-                                    </span>
-                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                </a>
-                            `;
-                            $(".leagues_data_list_ul").append(li);
-
-                        });
+                    
+                    let data_length = leagues.length + teams.length + players.length + countries.length
+                    
+                    if(data_length){
+                        $(".search_recomendation").removeClass("hidden")
+                        if (leagues.length) {
+                            $(".leagues_data_list_ul").addClass("active")
+                            
+                            leagues.forEach((item) => {
+                                const li = document.createElement("li");
+                                li.setAttribute("title", item.name);
+                                li.innerHTML = `
+                                    <a class="flex gap-2 w-full" href="/leagues/${item.id}/">
+                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                            <img width="28" height="28" src="${item.img}" />
+                                        </span>
+                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                    </a>
+                                `;
+                                $(".leagues_data_list_ul").append(li);
+    
+                            });
+                        }else{
+                            $(".leagues_data_list_ul").removeClass("content")
+                            $(".leagues_data_list_ul").html("<small>Nenhuma liga encontrada</small>");
+                        }
+    
+                        if (teams.length) {
+                            $(".teams_data_list_ul").addClass("active")
+                            teams.forEach((item) => {
+                                const li = document.createElement("li");
+                                li.setAttribute("title", item.name);
+                                li.innerHTML = `
+                                    <a class="flex gap-2 w-full" href="/teams/${item.id}/">
+                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                            <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.png" />
+                                        </span>
+                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                    </a>
+                                `;
+                                $(".teams_data_list_ul").append(li);
+    
+                            });
+                        }else{
+                            $(".teams_data_list_ul").removeClass("content")
+                            $(".teams_data_list_ul").html("<small>Nenhum time encontrado</small>");
+                        }
+    
+                        if (players.length) {
+                            $(".players_data_list_ul").addClass("active")
+                            players.forEach((item) => {
+                                const li = document.createElement("li");
+                                li.setAttribute("title", item.name);
+                                li.innerHTML = `
+                                    <a class="flex gap-2 w-full" href="#">
+                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                            <img class="w-[32px] h-[32px] rounded-full object-cover" src="${item.img}" />
+                                        </span>
+                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                    </a>
+                                `;
+                                $(".players_data_list_ul").append(li);
+    
+                            });
+                        }else{
+                            $(".players_data_list_ul").removeClass("content")
+                            $(".players_data_list_ul").html("<small>Nenhum jogador encontrado</small>");
+                        }
+    
+                        if (countries.length) {
+                            $(".countries_data_list_ul").addClass("active")
+                            countries.forEach((item) => {
+                                const li = document.createElement("li");
+                                li.setAttribute("title", item.name);
+                                li.innerHTML = `
+                                    <a class="flex gap-2 w-full" href="/country/${item.id}">
+                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                            <img width="28" height="28" src="${item.img}" />
+                                        </span>
+                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                    </a>
+                                `;
+                                $(".countries_data_list_ul").append(li);
+    
+                            });
+                        }else{
+                            $(".countries_data_list_ul").removeClass("content")
+                            $(".countries_data_list_ul").html("<small>Nenhum país encontrado</small>");
+                        }
                     }else{
-                        $(".leagues_data_list_ul").removeClass("content")
-                        $(".leagues_data_list_ul").html("<small>Nenhuma liga encontrada</small>");
-                    }
-
-                    if (teams.length) {
-                        $(".teams_data_list_ul").addClass("active")
-                        teams.forEach((item) => {
-                            const li = document.createElement("li");
-                            li.setAttribute("title", item.name);
-                            li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/teams/${item.id}/">
-                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.png" />
-                                    </span>
-                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                </a>
-                            `;
-                            $(".teams_data_list_ul").append(li);
-
-                        });
-                    }else{
-                        $(".teams_data_list_ul").removeClass("content")
-                        $(".teams_data_list_ul").html("<small>Nenhum time encontrado</small>");
-                    }
-
-                    if (players.length) {
-                        $(".players_data_list_ul").addClass("active")
-                        players.forEach((item) => {
-                            const li = document.createElement("li");
-                            li.setAttribute("title", item.name);
-                            li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="#">
-                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img class="w-[32px] h-[32px] rounded-full object-cover" src="${item.img}" />
-                                    </span>
-                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                </a>
-                            `;
-                            $(".players_data_list_ul").append(li);
-
-                        });
-                    }else{
-                        $(".players_data_list_ul").removeClass("content")
-                        $(".players_data_list_ul").html("<small>Nenhum jogador encontrado</small>");
-                    }
-                    if (countries.length) {
-                        $(".countries_data_list_ul").addClass("active")
-                        countries.forEach((item) => {
-                            const li = document.createElement("li");
-                            li.setAttribute("title", item.name);
-                            li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/country/${item.id}">
-                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img width="28" height="28" src="${item.img}" />
-                                    </span>
-                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                </a>
-                            `;
-                            $(".countries_data_list_ul").append(li);
-
-                        });
-                    }else{
-                        $(".countries_data_list_ul").removeClass("content")
-                        $(".countries_data_list_ul").html("<small>Nenhum país encontrado</small>");
+                        $(".search_recomendation").addClass("hidden")
                     }
 
                 })
@@ -151,28 +160,42 @@ $(".search_field input").keyup((e) => {
                     console.error('There was a problem with the fetch operation:', error);
                 });
             $(".datalist_skeleton.skeleton-loading").fadeOut();
-        }, 2000);
+            $("html").addClass("overflow-hidden")
+        }, 1000);
     } else {
         $(".datalist_skeleton.skeleton-loading").fadeOut();
+        $("html").removeClass("overflow-hidden")
     }
 });
 
 // Function to hide search recommendation on body click
 $("body").click(() => {
     $(".search_recomendation").addClass("hidden");
+    $(".data_list").addClass("right-full");
+    $("html").removeClass("overflow-hidden")
 });
 
 // Function to prevent hiding search recommendation on leagues data list click
-$(".leagues_data_list").click((e) => {
+
+
+$(".search-icon").click((e) => {
     e.stopPropagation();
-    $(".search_recomendation").removeClass("hidden");
+    $(".data_list").toggleClass("right-full");
+    $("html").toggleClass("overflow-hidden")
 });
+
+$(".data_list, nav input").click((e) => {
+    e.stopPropagation();
+});
+
 
 // Initialize document
 $(document).ready(() => {
     $(".skeleton-loading").fadeOut();
-    if (localStorage.getItem("isMenuOpen")) {
-        $("body").addClass("menu-active");
+    if(window.innerWidth >= 1024){
+        if (localStorage.getItem("isMenuOpen")) {
+            $("body").addClass("menu-active");
+        }
     }
     $("html, body").css("opacity", "1");
 });

@@ -48,6 +48,7 @@ input::placeholder {
 
 *:not(table) ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
   position: absolute;
   left: -10px;
   margin-left: -10px;
@@ -108,6 +109,7 @@ html, body {
 
 body.menu-active aside {
   width: 250px;
+  left: 0;
 }
 
 body aside {
@@ -115,12 +117,81 @@ body aside {
 }
 
 body main {
-  min-width: calc(-80px + 100vw);
+  min-width: calc(-70px + 100vw);
 }
-body.menu-active main {
-  left: 250px;
-  min-width: calc(-100px + 100vw);
+
+@media (max-width: 1024px) {
+  aside {
+      left:-300px;
+      z-index: 1000
+  }
+
+  aside.menu-active {
+      left: 0
+  }
+
+  input::placeholder {
+    user-select: none;
+    color: #111;
+  }
+  
 }
+
+@media (max-width: 500px) {
+  aside {
+      left:-300px;
+      z-index: 1000
+  }
+
+  aside.menu-active {
+      left: 0;
+      width: 100vw
+  }
+}
+
+main {
+  position: absolute;
+  width: 100%;
+  padding: 10px 30px 40px;
+  box-sizing: border-box;
+  left: 70px;
+  top: 60px;
+  min-height: 100vh;
+  transition: .3s;
+  height: auto;
+  overflow-x: auto;
+  background-color: #08080a
+}
+
+@media (min-width: 1024px) {
+  main{
+    width: calc(100% - 70px)
+  }
+}
+
+
+main.menu-active {
+  min-width: calc(100vw - 300px);
+  left: 300px
+}
+
+main h1 {
+  font-size: 26px;
+  margin-top: 20px
+}
+
+@media (max-width: 991px) {
+  main {
+      left:0;
+      padding: 15px;
+      min-width: 100vw
+  }
+
+  main.menu-active {
+      min-width: calc(100vw - 300px)
+  }
+}
+
 
 
 .data_list_ul.active{
