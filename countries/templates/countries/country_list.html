@@ -15,10 +15,14 @@
   </h2>
 </div>
 
-<!-- Table container with overflow -->
-<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+<!-- Table container -->
+<div class="sm:mx-0.5">
+  <div class="max-w-[97vw] py-2 inline-block min-w-full min-w-full sm:px-6 lg:px-8">
+    <div class="
+    overflow-hidden relative z-10 rounded-md
+    rounded-xl 
+    bg-white 
+    forced-colors:outline px-3
     dark:before:rounded-xl 
     dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
     dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
@@ -26,84 +30,84 @@
     dark:before:-inset-px
     dark:before:absolute
     dark:bg-zinc-900
-    
     "> 
-      <table class="min-w-full rounded-md">
-        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-          <tr>
-            <!-- Table headers -->
-            <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for country -->
-                #
-            </th>
-            <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for country -->
-              <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                País <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for number of leagues -->
-              <a href="{% url 'country_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}ues' %}">
-                Número de ligas <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for number of teams -->
-              <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Número de times <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-2 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for number of players -->
-              <a href="{% url 'country_list' %}?field=num_players{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}ers' %}">
-                Número de jogadores <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Loop through countries -->
-          {% for country in page_obj %}
-          <!-- Apply row class -->
-          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-            <!-- Country data -->
-            <td class="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA]">
-              <!-- Country flag -->
-              <img src="/media/images/countries/{{ country.slug }}{{ country.id }}.png" class="inline-block"/>
 
-            </td>
-            <td class="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-[#A1A1AA]">
-              <!-- Country name -->
-              <a href="{% url 'countries_detail' pk=country.pk %}">
-                <span class="hover:underline">{{ country.name }}</span>
-              </a>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap">
-              <!-- Number of leagues -->
-              <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-leagues">
-                <span>{{ country.num_leagues }}</span>
-              </a>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap">
-              <!-- Number of teams -->
-              <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-teams">
-                <span>{{ country.num_teams }}</span>
-              </a>
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-900 dark:text-[#A1A1AA] font-light whitespace-nowrap">
-              <!-- Number of players -->
-              <a href="#" class="flex items-center justify-end gap-1 text-right" id="{{ country.slug }}-num-players">
-                <span>{{ country.num_players }}</span>
-              </a>
-            </td>            
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="overflow-auto pr-3"> 
+        <table class="min-w-[800px] md:min-w-full">
+          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+            <tr class="">
+              <!-- Table headers -->
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[50px]">#</th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left sticky dark:bg-zinc-900 left-[50px] z-10">
+                <!-- Column header for country -->
+                <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  País <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+                <!-- Column header for number of leagues -->
+                <a href="{% url 'country_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}ues' %}">
+                  Número de ligas <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+                <!-- Column header for number of teams -->
+                <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Número de times <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-right">
+                <!-- Column header for number of players -->
+                <a href="{% url 'country_list' %}?field=num_players{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}ers' %}">
+                  Número de jogadores <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            <!-- Loop through countries -->
+            {% for country in page_obj %}
+            <!-- Apply row class -->
+            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <!-- Country data -->
+              <td class="px-2 py-4 whitespace-nowrap text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[50px]">
+                <!-- Country flag -->
+                <img src="/media/images/countries/{{ country.slug }}{{ country.id }}.png" class="inline-block w-[30px] min-w-[30px]"/>
+
+              </td>
+              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap sticky dark:bg-zinc-900 left-[50px] z-10">
+                <!-- Country name -->
+                <a href="{% url 'countries_detail' pk=country.pk %}">
+                  <span class="hover:underline">{{ country.name }}</span>
+                </a>
+              </td>
+              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
+                <!-- Number of leagues -->
+                <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-leagues">
+                  <span>{{ country.num_leagues }}</span>
+                </a>
+              </td>
+              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
+                <!-- Number of teams -->
+                <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-teams">
+                  <span>{{ country.num_teams }}</span>
+                </a>
+              </td>
+              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-right">
+                <!-- Number of players -->
+                <a href="#" class="flex items-center justify-end gap-1 text-right" id="{{ country.slug }}-num-players">
+                  <span>{{ country.num_players }}</span>
+                </a>
+              </td>            
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
 
 <!-- Include pagination -->
 {% include 'atomic/organisms/list_pagination.html' %}

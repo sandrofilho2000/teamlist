@@ -78,7 +78,7 @@
                 <!-- Team name -->
                 <a href="{% url 'team_detail' pk=team.pk %}" class="flex items-center justify-start gap-1 hover:underline">{{ team.name }}</a>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap">
+              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
                 <!-- Average market value -->
                 <span>{{ team.average_market_value|passToFloat }}</span>
               </td>
