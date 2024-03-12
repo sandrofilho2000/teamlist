@@ -12,7 +12,9 @@
   box-shadow: var(--shadow-color) 0px 8px 24px;
 }
 
-
+html{
+  opacity: 0;
+}
 
 h1, h2, a{
   font-family: "Inter", sans-serif;

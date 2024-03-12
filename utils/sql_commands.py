@@ -53,7 +53,7 @@ def update_rows(table = "", set = "", where = "", show_query = False):
     cur = conn.cursor()
     
     table = table.lower().replace("table", "")
-    set = set.lower().replace("set", "")
+    set = set.replace("set", "")
     where = where.replace("where", "").replace("WHERE", "")
     query = f"""
     UPDATE {table}

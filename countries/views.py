@@ -158,12 +158,10 @@ class CountryDetailView(ListView):
         form = CountryColorForm(request.POST, instance=country)
         if form.is_valid():
             form.save()
-            return redirect('country_detail', pk=pk)  # Redirect to the same country detail page after updating color
-        # If form is not valid, re-render the country detail page with the form and country details
+            return redirect('country_detail', pk=pk)  
         context = {
             'country': country,
             'form': form,
-            # Other context variables...
         }
         return render(request, self.template_name, context)
 
@@ -188,16 +186,4 @@ class CountryListView(ListView):
 
 
 
-def map_view(request):
-    model = Country.objects.all()
-    context = {}
-    context['countries'] = model
-    return render(request, 'countries/country_list.html', context)
-
-
-def country(request, iso_code):
-    model = Country.objects.get(iso_a3=iso_code)
-    context = {}
-    context['country'] = model
-    return render(request, 'countries/country_detail.html', context)
 

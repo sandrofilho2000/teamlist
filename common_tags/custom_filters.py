@@ -35,6 +35,7 @@ def passToFloat(value = 0):
     except:
         return '-'
     
+    
 @register.filter(name='enshort_name')
 def enshort_name(value):
     
@@ -74,7 +75,6 @@ def set_pagination_params(url = False):
         else:
             new_url = f"?{params[-1]}&"
      
-    print("NEW URL: ", new_url)
     return new_url
 
 
@@ -102,3 +102,15 @@ def set_country_pagination_params(request, tab = False):
                 return 'hidden'
             
         return ""
+    
+    
+    
+    
+@register.filter(name='get_stadium_img')
+def get_stadium_img(src):
+    
+    if src:
+        src = src.split("%%")
+        return src[0]
+    else:
+        return "https://t4.ftcdn.net/jpg/04/17/36/11/360_F_417361125_RnrhT3Np0zB0UpeD7QlwuOoyghEGGjBX.jpg"

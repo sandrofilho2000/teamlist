@@ -1,7 +1,9 @@
 from django.conf import settings
 from countries.views import CountryListView, CountryDetailView
 from leagues.views import LeagueListView, LeagueInfoView
+from players.views import PlayerListView
 from search_items.views import SearchItemsView
+from stadiums.views import StadiumListView
 from teams.views import TeamListView, TeamInfoView
 from django.contrib import admin
 from django.urls import path, include
@@ -28,6 +30,14 @@ leagues_patterns = [
     path("leagues/", LeagueListView.as_view(), name="league_list"),
 ]
 
+stadiums_patterns = [
+    path("stadiums/", StadiumListView.as_view(), name="stadium_list"),
+]
+
+players_patterns = [
+    path("players/", PlayerListView.as_view(), name="player_list"),
+]
+
 teams_patterns = [
     path("countries/country/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
     path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_league_team_detail"), 
@@ -39,6 +49,8 @@ teams_patterns = [
 urlpatterns += countries_patterns
 urlpatterns += leagues_patterns
 urlpatterns += teams_patterns
+urlpatterns += stadiums_patterns
+urlpatterns += players_patterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

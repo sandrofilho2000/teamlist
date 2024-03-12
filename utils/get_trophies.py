@@ -106,7 +106,6 @@ def get_trophy_count(letter):
 
 
     
-get_trophy_count("Grêmio FBPA")
     
     
 functions_to_run = []               

@@ -18,6 +18,7 @@ class Team(models.Model):
     text_color = ColorField(verbose_name="Cor do texto (vazio para automático)", null=True)       
     id_stadium = models.ForeignKey(Stadium, verbose_name =("stadiums_stadium"), on_delete=models.SET_NULL, null=True, blank=True)
     id_country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True)
+    
     def __int__(self):
         return self.pk
     

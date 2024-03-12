@@ -69,6 +69,13 @@ class TeamInfoView(View):
         except EmptyPage:
             players = paginator_players.page(paginator_players.num_pages)
             
+            
+            
+            
+            
+            
+            
+            
         
         order_by_param_trophy = self.request.GET.get('field_trophy', 'season')
         

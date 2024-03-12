@@ -118,7 +118,7 @@
       dark:before:absolute
       dark:before:rounded-tl-xl 
     ">
-      <!-- Table for displaying league data -->
+      <!-- Table for displaying players data -->
       <div class="px-3"> 
         <table class="{% if request.GET.tab == 'players' or not request.GET.tab %}{% else %} hidden {% endif %} players_table min-w-full">
           <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
@@ -161,7 +161,7 @@
                 scope="col"
                 class="text-sm px-2 py-4 text-left"
               >
-                <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=birth{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+                <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=birthdate{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Nascimento              
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
@@ -205,7 +205,7 @@
               </td>
 
               <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
-                  <span class="hover:underline">{{ player.birth }}</span>
+                  <span class="hover:underline">{{ player.birthdate }}</span>
               </td>
               <td class="text-sm font-light px-2 py-4 whitespace-nowrap">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
@@ -213,7 +213,7 @@
                   {{ player.country_name }}
                 </a>
               </td>
-              <td class="text-sm font-light px-2 py-4 whitespace-nowrap text-right">
+              <td class="text-sm font-bold text-green-700 px-2 py-4 whitespace-nowrap text-right">
                 <span>{{ player.value_market|passToFloat }}</span>
               </td>
             </tr>

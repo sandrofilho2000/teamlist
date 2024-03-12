@@ -80,10 +80,10 @@ def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="
                                 player["id_country_id"] = id_country_id
                                 player["slug"] = slugify(player["name"])
                                 player["num"] = tr.find_all("td", "zentriert")[0].text.strip()
-                                player["birth"] = tr.find_all("td", "zentriert")[1].text.strip()
+                                player["birthdate"] = tr.find_all("td", "zentriert")[1].text.strip()
                                 player["value_market"] = pass_to_float(tr.find("td", "rechts").text.strip())
                                 
-                                insert_rows("players_player", "(name, slug, img, link, pos, id_country_id, id_team_id, num, birth, country_flag, country_name, value_market)", f"""
+                                insert_rows("players_player", "(name, slug, img, link, pos, id_country_id, id_team_id, num, birthdate, country_flag, country_name, value_market)", f"""
                                 (
                                     "{player['name']}",
                                     "{player['slug']}",
@@ -93,7 +93,7 @@ def get_players(link, team_id = 0, players=[], id_country_id = 0, country_flag="
                                     "{player['id_country_id']}",
                                     "{player['id_team_id']}",
                                     "{player['num']}",
-                                    "{player['birth']}",
+                                    "{player['birthdate']}",
                                     "{country_flag}",
                                     "{country_name}",
                                     "{player['value_market']}"
