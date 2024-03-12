@@ -194,32 +194,32 @@ main h1 {
 
 
 
-.data_list_ul.active{
+.datalist_ul.active{
   padding-top: 5px;
 }
 
-.data_list_ul small{
+.datalist_ul small{
   margin-left: 15px
 }
 
 
-.leagues_data_list_ul.active li:first-of-type::before{
+.leagues_datalist_ul.active li:first-of-type::before{
   content: "Ligas";
 }
 
-.teams_data_list_ul.active li:first-of-type::before{
+.teams_datalist_ul.active li:first-of-type::before{
   content: "Times";
 }
 
-.players_data_list_ul.active li:first-of-type::before{
+.players_datalist_ul.active li:first-of-type::before{
   content: "Jogadores";
 }
 
-.countries_data_list_ul.active li:first-of-type::before{
+.countries_datalist_ul.active li:first-of-type::before{
   content: "Países";
 }
 
-.data_list_ul.active li:first-of-type::before{
+.datalist_ul.active li:first-of-type::before{
   position: relative;
   top: 0px;
   font-size: 13px;
@@ -227,7 +227,7 @@ main h1 {
   color: black;
 }
 
-.data_list_ul a {
+.datalist_ul a {
   color: black;
 }
 

@@ -50,7 +50,7 @@ function apply_colors(background_color = false, text_color = false) {
         $("body > nav .line").css("background-color", text_color)
         $("body > nav input").css("border-bottom-color", text_color)
         $("body > nav").css("stroke", text_color)
-        $(".data_list_ul").css("border-color", background_color)
+        $(".datalist_ul").css("border-color", background_color)
         $("aside").css("background-color", text_color)
         $("aside").css("border-left-color", text_color)
         $(".edit_component").css("background-color", text_color)

@@ -1,12 +1,6 @@
 // Function to toggle menu
 $(".toggle-menu").click(() => {
     $("body").toggleClass("menu-active");
-
-    if ($("body").hasClass("menu-active")) {
-        localStorage.setItem("isMenuOpen", true);
-    } else {
-        localStorage.removeItem("isMenuOpen");
-    }
 });
 
 
@@ -37,8 +31,8 @@ function enshort_name(value) {
 // Function to handle keyup event on search input
 var typingTimer;
 $(".search_field input").keyup((e) => {
-    $(".data_list_ul").html("");
-    $(".data_list_ul").removeClass("active")
+    $(".datalist_ul").html("");
+    $(".datalist_ul").removeClass("active")
     
 
     clearTimeout(typingTimer);
@@ -68,7 +62,7 @@ $(".search_field input").keyup((e) => {
                     if(data_length){
                         $(".search_recomendation").removeClass("hidden")
                         if (leagues.length) {
-                            $(".leagues_data_list_ul").addClass("active")
+                            $(".leagues_datalist_ul").addClass("active")
                             
                             leagues.forEach((item) => {
                                 const li = document.createElement("li");
@@ -81,16 +75,16 @@ $(".search_field input").keyup((e) => {
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>
                                 `;
-                                $(".leagues_data_list_ul").append(li);
+                                $(".leagues_datalist_ul").append(li);
     
                             });
                         }else{
-                            $(".leagues_data_list_ul").removeClass("content")
-                            $(".leagues_data_list_ul").html("<small>Nenhuma liga encontrada</small>");
+                            $(".leagues_datalist_ul").removeClass("content")
+                            $(".leagues_datalist_ul").html("<small>Nenhuma liga encontrada</small>");
                         }
     
                         if (teams.length) {
-                            $(".teams_data_list_ul").addClass("active")
+                            $(".teams_datalist_ul").addClass("active")
                             teams.forEach((item) => {
                                 const li = document.createElement("li");
                                 li.setAttribute("title", item.name);
@@ -102,16 +96,16 @@ $(".search_field input").keyup((e) => {
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>
                                 `;
-                                $(".teams_data_list_ul").append(li);
+                                $(".teams_datalist_ul").append(li);
     
                             });
                         }else{
-                            $(".teams_data_list_ul").removeClass("content")
-                            $(".teams_data_list_ul").html("<small>Nenhum time encontrado</small>");
+                            $(".teams_datalist_ul").removeClass("content")
+                            $(".teams_datalist_ul").html("<small>Nenhum time encontrado</small>");
                         }
     
                         if (players.length) {
-                            $(".players_data_list_ul").addClass("active")
+                            $(".players_datalist_ul").addClass("active")
                             players.forEach((item) => {
                                 const li = document.createElement("li");
                                 li.setAttribute("title", item.name);
@@ -123,16 +117,16 @@ $(".search_field input").keyup((e) => {
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>
                                 `;
-                                $(".players_data_list_ul").append(li);
+                                $(".players_datalist_ul").append(li);
     
                             });
                         }else{
-                            $(".players_data_list_ul").removeClass("content")
-                            $(".players_data_list_ul").html("<small>Nenhum jogador encontrado</small>");
+                            $(".players_datalist_ul").removeClass("content")
+                            $(".players_datalist_ul").html("<small>Nenhum jogador encontrado</small>");
                         }
     
                         if (countries.length) {
-                            $(".countries_data_list_ul").addClass("active")
+                            $(".countries_datalist_ul").addClass("active")
                             countries.forEach((item) => {
                                 const li = document.createElement("li");
                                 li.setAttribute("title", item.name);
@@ -144,12 +138,12 @@ $(".search_field input").keyup((e) => {
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>
                                 `;
-                                $(".countries_data_list_ul").append(li);
+                                $(".countries_datalist_ul").append(li);
     
                             });
                         }else{
-                            $(".countries_data_list_ul").removeClass("content")
-                            $(".countries_data_list_ul").html("<small>Nenhum país encontrado</small>");
+                            $(".countries_datalist_ul").removeClass("content")
+                            $(".countries_datalist_ul").html("<small>Nenhum país encontrado</small>");
                         }
                     }else{
                         $(".search_recomendation").addClass("hidden")
@@ -171,7 +165,7 @@ $(".search_field input").keyup((e) => {
 // Function to hide search recommendation on body click
 $("body").click(() => {
     $(".search_recomendation").addClass("hidden");
-    $(".data_list").addClass("right-full");
+    $(".datalist_mobile").addClass("right-full");
     $("html").removeClass("overflow-hidden")
 });
 
@@ -180,11 +174,11 @@ $("body").click(() => {
 
 $(".search-icon").click((e) => {
     e.stopPropagation();
-    $(".data_list").toggleClass("right-full");
+    $(".datalist_mobile").toggleClass("right-full");
     $("html").toggleClass("overflow-hidden")
 });
 
-$(".data_list, nav input").click((e) => {
+$(".datalist, nav input").click((e) => {
     e.stopPropagation();
 });
 
@@ -192,11 +186,6 @@ $(".data_list, nav input").click((e) => {
 // Initialize document
 $(document).ready(() => {
     $(".skeleton-loading").fadeOut();
-    if(window.innerWidth >= 1024){
-        if (localStorage.getItem("isMenuOpen")) {
-            $("body").addClass("menu-active");
-        }
-    }
     $("html, body").css("opacity", "1");
 });
 
