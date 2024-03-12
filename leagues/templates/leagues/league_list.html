@@ -16,10 +16,13 @@
   </h2>
 </div>
 
-<!-- Overflow container for horizontal scrolling -->
-<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="rounded-xl bg-white forced-colors:outline px-3 overflow-hidden
+<div class="sm:mx-0.5">
+  <div class="max-w-[97vw] py-2 inline-block min-w-full min-w-full sm:px-6 lg:px-8">
+    <div class="
+    overflow-hidden relative z-10 rounded-md
+    rounded-xl 
+    bg-white 
+    forced-colors:outline px-3
     dark:before:rounded-xl 
     dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
     dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
@@ -28,88 +31,91 @@
     dark:before:absolute
     dark:bg-zinc-900
     "> 
-      <table class="min-w-full rounded-md">
-        <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-          <tr>
-            <!-- Table headers -->
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">#</th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for league name -->
-              <a href="{% url 'league_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Liga 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for expenses -->
-              <a href="{% url 'league_list' %}?field=outcomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Despesas 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for income -->
-              <a href="{% url 'league_list' %}?field=incomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Renda 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for balance -->
-              <a href="{% url 'league_list' %}?field=balance{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Saldo 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white text-left">
-              <!-- Column header for number of teams -->
-              <a href="{% url 'league_list' %}?field=num_teams{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
-                Equipes 
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-900 dark:text-[#A1A1AA]">
-          <!-- Loop through league objects -->
-          {% for league in page_obj %}
-          <!-- Alternating row colors -->
-          <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-            <!-- League data -->
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
-            </td>
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <!-- League name -->
-              <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
-                <img src="{{ league.country_img }}" />
-                <span class="hover:underline"> {{ league.name }} </span>
-              </a>
-            </td>
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <!-- Expenses -->
-              <span> {{ league.outcomes|passToFloat }} </span>
-            </td>
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <!-- Income -->
-              <span class="text-green-700 font-bold">{{ league.incomes|passToFloat }}</span>
-            </td>
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <!-- Balance -->
-              {% if "-" in league.balance %}
-                  <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
-              {% else %}
-                  <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
-              {% endif %}
-            </td>
-            <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
-              <!-- Number of teams -->
-              {{ league.num_teams  }}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+
+      <div class="overflow-auto pr-3"> 
+        <table class="min-w-[800px] md:min-w-full">
+          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+            <tr class="">
+              <!-- Table headers -->
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">#</th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+                <!-- Column header for league name -->
+                <a href="{% url 'league_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Liga 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+                <!-- Column header for expenses -->
+                <a href="{% url 'league_list' %}?field=outcomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Despesas 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+                <!-- Column header for income -->
+                <a href="{% url 'league_list' %}?field=incomes{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Renda 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+                <!-- Column header for balance -->
+                <a href="{% url 'league_list' %}?field=balance{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Saldo 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-right">
+                <!-- Column header for number of teams -->
+                <a href="{% url 'league_list' %}?field=num_teams{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  Equipes 
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            <!-- Loop through league objects -->
+            {% for league in page_obj %}
+            <!-- Alternating row colors -->
+            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <!-- League data -->
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
+                <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
+              </td>
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap dark:bg-zinc-900 sticky left-0 z-10 pl-3">
+                <!-- League name -->
+                <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
+                  <img src="{{ league.country_img }}" />
+                  <span class="hover:underline max-w-[125px] whitespace-normal"> {{ league.name }} </span>
+                </a>
+              </td>
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
+                <!-- Expenses -->
+                <span> {{ league.outcomes|passToFloat }} </span>
+              </td>
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
+                <!-- Income -->
+                <span class="text-green-700 font-bold">{{ league.incomes|passToFloat }}</span>
+              </td>
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap">
+                <!-- Balance -->
+                {% if "-" in league.balance %}
+                    <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                {% else %}
+                    <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
+                {% endif %}
+              </td>
+              <td class="px-2 py-4 text-sm font-light whitespace-nowrap text-right">
+                <!-- Number of teams -->
+                {{ league.num_teams  }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
