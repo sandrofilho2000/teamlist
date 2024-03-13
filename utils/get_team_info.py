@@ -86,7 +86,7 @@ def get_players(url, slug, team_id = 0):
             main = soup.find("main")
             team["img"] = div.find("img").get("src")
 
-            download_image(team["img"], f"{slug}{team_id}.png")
+            download_image(team["img"], f"{slug}{team_id}.webp")
 
             
             try:

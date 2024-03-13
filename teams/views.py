@@ -101,7 +101,7 @@ class TeamInfoView(View):
         except EmptyPage:
             trophies = paginator_trophies.page(paginator_trophies.num_pages)
 
-        image_name = f"{team.slug}{team.id}.png"
+        image_name = f"{team.slug}{team.id}.webp"
         image_url = f"/media/images/teams/{image_name}"
 
         breadcrumbs = []

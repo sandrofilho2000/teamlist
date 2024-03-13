@@ -95,7 +95,7 @@ class CountryDetailView(ListView):
         
         form = CountryColorForm(instance=Country)
                    
-        image_name = f"{country.slug}{country.id}.png"
+        image_name = f"{country.slug}{country.id}.webp"
         country_flag = f"/media/images/countries/{image_name}"  
         
         page = request.GET.get('page')

@@ -91,7 +91,7 @@ $(".search_field input").keyup((e) => {
                                 li.innerHTML = `
                                     <a class="flex gap-2 w-full" href="/teams/${item.id}/">
                                         <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.png" />
+                                            <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.webp" />
                                         </span>
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>

@@ -24,7 +24,7 @@ def get_most_common_colors(image_path):
         return rgb_colors
 
 # Example usage:
-image_path = r"C:\xampp\htdocs\Not legacy\Python\Futeapp\static\images\leagues\liga-de-expansion-mx-clausura157.png"
+image_path = r"C:\xampp\htdocs\Not legacy\Python\Futeapp\static\images\leagues\liga-de-expansion-mx-clausura157.webp"
 colors = get_most_common_colors(image_path)
 
 

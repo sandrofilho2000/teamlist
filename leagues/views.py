@@ -92,7 +92,7 @@ class LeagueInfoView(View):
         
         
         
-        image_name = f"{league.slug}{league.id}.png"
+        image_name = f"{league.slug}{league.id}.webp"
         image_url = f"/media/images/leagues/{image_name}"  
         
         context = {
