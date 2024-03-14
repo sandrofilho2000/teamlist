@@ -1,9 +1,5 @@
-from turtle import color
-from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from collections import Counter
-import os
 
 from countries.models import Country
 
@@ -53,8 +49,6 @@ def getDesignUi(request):
     img_name = request.query_params.get('img_name')
     colors = get_most_common_colors(folder, img_name)
     colors = remove_duplicate_colors(colors)
-
-    print(colors)
     
     if len(colors) >=5:
         background_color = colors[2]
