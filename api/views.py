@@ -2,7 +2,6 @@ from turtle import color
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from PIL import Image
 from collections import Counter
 import os
 
@@ -15,27 +14,9 @@ def rgb_to_hex(rgb):
 
 
 def get_most_common_colors(folder, image_filename):
-    # Open the image file
-    image_path = os.path.join("media", "images", folder, image_filename)
-    with Image.open(image_path) as img:
-        # Convert the image to RGB mode
-        img = img.convert("RGB")
-        # Resize the image to reduce processing time
-        img.thumbnail((200, 200))
 
-        # Get pixel colors
-        colors = list(img.getdata())
 
-        # Count the occurrence of each color
-        color_counter = Counter(colors)
-
-        # Get the four most common colors
-        most_common_colors = color_counter.most_common(10)
-
-        # Convert RGB colors to RGB format
-        rgb_colors = [rgb for rgb, _ in most_common_colors]
-
-        return rgb_colors
+    return ""
     
 
 def remove_duplicate_colors(colors):
