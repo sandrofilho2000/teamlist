@@ -24,7 +24,7 @@
   {% include 'atomic/organisms/aside.html' %}
 
   <!-- Main content -->
-  <main class="z-10 absolute min-h-[100vh] overflow-auto pb-8 transition-primary pt-0 {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
+  <main class="z-10 absolute min-h-[100vh] overflow-hidden pb-8 transition-primary pt-0 {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
 
     {% include 'atomic/organisms/breadcrumb.html' %}
 

@@ -1,5 +1,6 @@
 # custom_filters.py
 from django import template
+from datetime import datetime
 
 register = template.Library()
 
@@ -104,8 +105,6 @@ def set_country_pagination_params(request, tab = False):
         return ""
     
     
-    
-    
 @register.filter(name='get_stadium_img')
 def get_stadium_img(src):
     
@@ -114,3 +113,25 @@ def get_stadium_img(src):
         return src[0]
     else:
         return "https://t4.ftcdn.net/jpg/04/17/36/11/360_F_417361125_RnrhT3Np0zB0UpeD7QlwuOoyghEGGjBX.jpg"
+    
+    
+    
+@register.filter(name='format_date_with_age')
+def format_date_with_age(date_str):
+    date_str = str(date_str).strip()
+
+    if "/" in date_str:
+        try:
+            date = datetime.strptime(date_str, '%d/%m/%Y')
+        except ValueError as e:
+            print(f"Error parsing date: {e} {date_str}")
+            return date_str
+        
+        today = datetime.today()
+        age = today.year - date.year - ((today.month, today.day) < (date.month, date.day))
+        
+        formatted_date = f"{date_str} ({age})"
+        
+        return formatted_date
+    else:
+        return "-"

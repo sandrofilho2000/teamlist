@@ -178,37 +178,7 @@ input::placeholder {
   color: white;
 }
 
-*:not(table) ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  position: absolute;
-  left: -10px;
-  margin-left: -10px;
-}
 
-table ::-webkit-scrollbar {
-  width: 5px;
-  display: none;
-}
-
-/* Track */
-*:not(table) ::-webkit-scrollbar-track {
-  background: #fff;
-  margin-left: -10px;
-}
-
-/* Handle */
-*:not(table) ::-webkit-scrollbar-thumb {
-  margin-left: -10px;
-  background: #a3a3a3;
-  width: 5px;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-*:not(table) ::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
-}
 
 .transition-primary {
   transition: all 0.3s ease 0s;

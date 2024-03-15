@@ -150,7 +150,7 @@
               </td>
 
               <td class="table_td">
-                  <span class="hover:underline">{{ player.birthdate }}</span>
+                  <span class="hover:underline">{{ player.birthdate | format_date_with_age }}</span>
               </td>
               <td class="table_td">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
@@ -211,7 +211,7 @@
             {% else %}
               <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
                 <td>
-                  <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
+                  <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
                 </td>
               </tr>
             {% endif %}

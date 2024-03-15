@@ -60,9 +60,9 @@
     <p class="text-xs text-center block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%] ">TOP 3 JOGADORES QUE JOGAM NO PAÍS</p>
 
     <!-- Table for displaying league data -->
-    <div class="overflow-auto shadow h-full">
-      <div class="table_wrapper rounded-lg">        
-        <table class="min-w-full h-full">
+    <div class="table_wrapper">
+      <div class="overflow-auto shadow h-full">
+        <table class="min-w-[600px] w-full h-full">
           <thead class="table_thead">
             <tr>
               <th
@@ -76,13 +76,19 @@
                 scope="col"
                 class="mini_table_th md:text-sm"
               >
-                  Posição
+                  Nascimento
               </th>
               <th
                 scope="col"
                 class="mini_table_th md:text-sm text-center"
               >
                   País de origem 
+              </th>
+              <th
+                scope="col"
+                class="mini_table_th md:text-sm text-center"
+              >
+                  Time atual
               </th>
               <th
                 scope="col"
@@ -106,11 +112,16 @@
               </td>
   
               <td class="mini_table_td w-[70px]">
-                <span>{{ player.pos }}</span>
+                <span>{{ player.birthdate | format_date_with_age }}</span>
               </td>
               <td class="mini_table_td text-center">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
                 <span>{{ player.country_name }}</span>
+              </td>
+              <td class="mini_table_td text-center">
+                <img src="{{ player.id_team.small_img }}" width="20" title="{{ player.id_team.name }}" class="inline-block"/>
+                {{ player.id_team.name }}
+              </a>
               </td>
               <td class="mini_table_td text-right">
                 <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
@@ -129,6 +140,7 @@
         </table>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -322,14 +334,23 @@
                 </a>
               </th>
               <th
-              scope="col"
-              class="table_th"
-            >
-            <a href="?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
-              Posição
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-              </a>
-            </th>
+                scope="col"
+                class="table_th"
+              >
+              <a href="?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+                Posição
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              <th
+                scope="col"
+                class="table_th"
+              >
+              <a href="?tab=players&field_player=id_team__name{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
+                Time atual
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
               <th
                 scope="col"
                 class="table_th"
@@ -368,9 +389,14 @@
                 <td class="table_td">
                   <span>{{ player.pos }}</span>
                 </td>
-  
                 <td class="table_td">
-                    <span class="hover:underline">{{ player.birthdate }}</span>
+                  <a href="{% url "team_detail" pk=player.id_team_id %}" class="hover:underline flex items-center gap-1">
+                    <img src="{{ player.id_team.small_img }}" width="20" title="{{ player.id_team.name }}" class="inline-block"/>
+                    {{ player.id_team.name }}
+                  </a>
+                </td>
+                <td class="table_td">
+                    <span class="hover:underline">{{ player.birthdate | format_date_with_age }}</span>
                 </td>
                 <td class="table_td text-right">
                   <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
