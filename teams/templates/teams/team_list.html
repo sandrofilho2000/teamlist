@@ -45,7 +45,7 @@
                   Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for number of leagues -->
                 <a href="{% url 'team_list' %}?field=num_leagues{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -73,7 +73,7 @@
                 <!-- Total market value -->
                 <span>{{ team.total_market_value|passToFloat }}</span>
               </td>
-              <td class="table_td text-right">
+              <td class="table_td">
                 <!-- Number of leagues -->
                 <span>{{ team.num_leagues }}</span>
               </td>

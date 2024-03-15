@@ -1,0 +1,56 @@
+{% extends "atomic/pages/list.html" %}
+
+<!-- Page title for countries list page -->
+{% block list_page_title %}
+  Jogadores | Teams List
+{% endblock list_page_title %}
+
+{% block list_content %}
+{% load custom_filters %}
+
+<div class="block sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+  {% include 'icons/trophy.html' %}
+  <h2 class="background-color rounded-md">
+    Jogadores
+  </h2>
+</div>
+
+<div class="sm:mx-0.5">
+  <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="table_wrapper rounded-md"> 
+      <div class="overflow-auto pr-3"> 
+        <table class="min-w-[800px] md:min-w-full">
+          <thead class="table_thead">
+            <tr class="">
+                <!-- Table headers -->
+              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
+                <a
+                  href="{% url 'trophy_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
+                >
+                  Título
+                  <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+              </th>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+            {% for trophy in page_obj %}
+            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+              <td class="table_td flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+                <img width="52" height="52" src="{{ trophy.id_trophy.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
+                  <a href="{% url "trophy_detail" pk=trophy.pk %}" class="gap-1 text-center hover:underline">
+                    {{ trophy.id_trophy.name }}
+                  </a>
+              </td>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include pagination -->
+{% include 'atomic/organisms/list_pagination.html' %}
+{% endblock list_content %}

@@ -122,7 +122,7 @@
               </th>
               <th
                 scope="col"
-                class="table_th text-right"
+                class="table_th"
               >
                 <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Valor de mercado 
@@ -158,7 +158,7 @@
                   {{ player.country_name }}
                 </a>
               </td>
-              <td class="text-sm font-bold text-green-700 px-2 py-4 whitespace-nowrap text-right">
+              <td class="table_td">
                 <span>{{ player.value_market|passToFloat }}</span>
               </td>
             </tr>
@@ -181,7 +181,7 @@
                   Título <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for average market value -->
                 <a href="?tab=trophies&field_trophy=season{% if request.GET.order_trophy == 'asc' %}&order_trophy=desc{% else %}&order_trophy=asc{% endif %}">
                   Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -200,9 +200,9 @@
                   </td>
                   <td class="table_td">
                     <!-- Team name -->
-                    <a href="#" class="hover:underline">{{ trophy.id_trophy.name }}</a>
+                      <a href="{% url "team_trophy_detail" pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
                   </td>
-                  <td class="table_td text-right">
+                  <td class="table_td">
                     <!-- Average market value -->
                     <span>{{ trophy.season }}</span>
                   </td>

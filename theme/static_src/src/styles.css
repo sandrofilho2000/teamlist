@@ -70,6 +70,7 @@
           text-left
           px-2
           py-4
+          last-of-type:text-right
   }
 
   .table_td {
@@ -81,6 +82,7 @@
       py-4
       whitespace-nowrap
       text-[#A1A1AA]
+      last-of-type:text-right
   }
 
   .mini_table_th {
@@ -318,6 +320,10 @@ main h1 {
 
 .countries_datalist_ul.active li:first-of-type::before{
   content: "Países";
+}
+
+.trophies_datalist_ul.active li:first-of-type::before{
+  content: "Taças";
 }
 
 .datalist_ul.active li:first-of-type::before{

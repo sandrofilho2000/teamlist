@@ -92,7 +92,7 @@
               </th>
               <th
                 scope="col"
-                class="mini_table_th md:text-sm text-right"
+                class="mini_table_th md:text-sm"
               >
   
                   Valor de mercado 
@@ -123,7 +123,7 @@
                 {{ player.id_team.name }}
               </a>
               </td>
-              <td class="mini_table_td text-right">
+              <td class="mini_table_td">
                 <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
               </td>
             </tr>
@@ -186,7 +186,7 @@
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for balance -->
                 <a href="?tab=leagues&field_league=balance{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">     
                    Saldo 
@@ -220,7 +220,7 @@
                   <!-- Income -->
                   <span>{{ league.incomes|passToFloat }}</span>
                 </td>
-                <td class="table_td text-right">
+                <td class="table_td">
                   <!-- Balance -->
                   {% if "-" in league.balance %}
                       <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
@@ -261,13 +261,13 @@
                   Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for total market value -->
                 <a href="?tab=teams&field_team=total_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
                   Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for number of leagues -->
                 <a href="?tab=teams">
                   Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -292,11 +292,11 @@
                 <!-- Average market value -->
                 <span>{{ team.average_market_value|passToFloat }}</span>
               </td>
-              <td class="table_td text-right">
+              <td class="table_td">
                 <!-- Total market value -->
                 <span class="text-green-700 font-bold">{{ team.total_market_value|passToFloat }}</span>
               </td>
-              <td class="table_td text-right">
+              <td class="table_td">
                 <!-- Number of leagues -->
                 <span>{{ team.num_leagues }}</span>
               </td>
@@ -362,7 +362,7 @@
               </th>
               <th
                 scope="col"
-                class="table_th text-right"
+                class="table_th"
               >
               <a href="?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
   
@@ -398,7 +398,7 @@
                 <td class="table_td">
                     <span class="hover:underline">{{ player.birthdate | format_date_with_age }}</span>
                 </td>
-                <td class="table_td text-right">
+                <td class="table_td">
                   <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
                 </td>
               </tr>
