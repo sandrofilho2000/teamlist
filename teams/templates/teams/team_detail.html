@@ -13,115 +13,64 @@
 
 <!-- Main content section -->
 <div class="flex justify-center">
-  <div class="inline-block p-3 bg-white rounded-md   
-  dark:bg-zinc-900 forced-colors:outline rounded-lg   
-  dark:before:rounded-xl 
-  dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-  dark:before:pointer-events-none
-  dark:before:absolute
-  
-  ">
+  <div class="card">
   <img width="80" src="{{ image_url }}" class="m-auto block team_main_img" />
-  <h2 class="text-center dark:text-white text-md font-medium">{{ team.name | upper }}</h2>
+  <h2 class="text-center dark:text-white text-base font-medium">{{ team.name | upper }}</h2>
   </div>
 </div>
 
-<div class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-2 my-5 my-2 mx-auto min-w-full sm:px-6 lg:px-8">
-  <div class="highlight_card">
-    <div class="highlight_card h-full w-full justify-between bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
-    dark:bg-zinc-900 forced-colors:outline rounded-lg   
-    dark:before:rounded-xl 
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:pointer-events-none
-    dark:before:absolute
-    
-    
-    ">
-      <span class="text-xs md:text-sm lg:text-md dark:text-[#A1A1AA]">
-        PAÍS:
-      </span>
-      <a href={% url "country_detail" pk=related_country.pk %} class="inline-block text-xs md:text-sm lg:text-md font-medium dark:text-white">
-        <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.webp" class="inline-block h-[16px]" />
-        {{ related_country.name | upper }} 
-      </a>  
-    </div>
+<div class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-2 my-6 mx-auto min-w-full sm:px-6 lg:px-8">
+  <div class="detail_card">
+    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+      PAÍSES:
+    </span>
+    <a href={% url "country_detail" pk=related_country.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium dark:text-white">
+      <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.webp" class="inline-block h-[16px]" />
+      {{ related_country.name | upper }} 
+    </a>  
   </div>
 
-  <div class="highlight_card">
-    <div class="highlight_card h-full w-full justify-between bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
-    shadow px-2 py-1
-    dark:bg-zinc-900 forced-colors:outline rounded-lg   
-    dark:before:rounded-xl 
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:pointer-events-none
-    dark:before:absolute ">
-    <span class="text-xs md:text-sm lg:text-md dark:text-[#A1A1AA]">
+  <div class="detail_card">
+    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
       VALOR DO ELENCO:
-      </span>
-      <span class="text-green-700 font-bold text-sm">  {{ team_players_value | passToFloat}}  </span>
-
-    </div>
+    </span>
+    <span class="text-green-700 font-bold text-sm">  {{ team_players_value | passToFloat}}  </span>
   </div>
 
-  <div class="highlight_card">
-    <div class="highlight_card h-full w-full justify-between bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
-    dark:bg-zinc-900 forced-colors:outline rounded-lg   
-    dark:before:rounded-xl 
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:pointer-events-none
-    dark:before:absolute
-    
-    ">
-      <span class="text-xs md:text-sm lg:text-md dark:text-[#A1A1AA]">
-        VALOR DE MERCADO: 
-      </span>
-      <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
-    </div>
+  <div class="detail_card">
+    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+      VALOR DE MERCADO: 
+    </span>
+    <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
   </div>
 
-  <div class="highlight_card">
-    <div class="highlight_card h-full w-full justify-between bg-white flex rounded-sm gap-2 items-center shadow px-2 py-1
-    dark:bg-zinc-900 forced-colors:outline rounded-lg   
-    dark:before:rounded-xl 
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:pointer-events-none
-    dark:before:absolute
-    
-    ">
-      <span class="text-xs md:text-sm lg:text-md dark:text-[#A1A1AA]">
-        ESTÁDIO: 
-      </span>
-      <span class="text-green-700 font-bold text-sm"> {{ stadium.name }} </span>
-    </div>
+  <div class="detail_card">
+    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+      ESTÁDIO: 
+    </span>
+    <span class="text-green-700 font-bold text-sm"> {{ stadium.name }} </span>
   </div>
 </div>
 
 <!-- Table container -->
 <div class="sm:mx-0.5">
-  <div class="max-w-[97vw] py-2 inline-block min-w-full min-w-full sm:px-6 lg:px-8">
+  <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
 
-    <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 shadow  bg-white dark:bg-zinc-900">
+    <div class="table_tabs flex justify-evenly gap-1 relative z-20 bottom-[-1px] w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1  bg-white dark:bg-zinc-900">
       <div table="players" class="players_tab tab text-center {% if request.GET.tab == 'players' or not request.GET.tab %} font-bold {% endif %}">JOGADORES</div>
       <span class="inline-block mx-2">|</span>
       <div table="trophies" class="trophies_tab tab text-center {% if request.GET.tab == 'trophies' %} font-bold {% endif %}">TROFÉUS</div>
     </div>
 
-    <div class="team_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
-      dark:bg-zinc-900       
-      dark:before:rounded-xl 
-      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-      dark:before:pointer-events-none
-      dark:before:absolute
-      dark:before:rounded-tl-xl 
-    ">
+    <div class="team_tables table_wrapper">
       <!-- Table for displaying players data -->
-      <div class="overflow-auto px-3"> 
+      <div class="overflow-auto pr-3"> 
         <table class="{% if request.GET.tab == 'players' or not request.GET.tab %}{% else %} hidden {% endif %} players_table min-w-[800px] md:min-w-full">
-          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+          <thead class="thead">
             <tr>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+                class="table_th text-left"
               >
                 <a
                 href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=number{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
@@ -133,7 +82,7 @@
 
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-2 py-4 text-center"
+                class="table_th text-center"
               >
                 <a
                   href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=name{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
@@ -144,7 +93,7 @@
               </th>
               <th
               scope="col"
-              class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+              class="table_th text-left"
             >
               <a
                 href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}"
@@ -155,7 +104,7 @@
             </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+                class="table_th text-left"
               >
                 <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=birthdate{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Nascimento              
@@ -164,7 +113,7 @@
               </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+                class="table_th text-left"
               >
                 <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=country_name{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   País de origem 
@@ -173,7 +122,7 @@
               </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-2 py-4 text-right"
+                class="table_th text-right"
               >
                 <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                   Valor de mercado 
@@ -182,28 +131,28 @@
               </th>
             </tr>
           </thead>
-          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+          <tbody>
             {% for player in players %}
-            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-              <td class="px-2 py-4 whitespace-nowrap text-sm">
+            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+              <td class="table_td">
                 <span>{{ player.num }}</span>
               </td>
   
-              <td class="px-2 py-4 whitespace-nowrap text-xs md:text-sm lg:text-md flex flex-col justify-left align-center">
+              <td class="table_td flex flex-col justify-left align-center">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[38px] h-[38px] md:w-[52px] md:h-[52px] m-auto block" />
-                  <a href="#" class="block max-w-[80px] m-auto text-center hover:underline whitespace-normal">
+                  <a href="#" class="block lg:max-w-[160px] max-w-[80px] m-auto text-center hover:underline whitespace-normal">
                     {{ player.name }}
                   </a>
               </td>
 
-              <td class="px-2 py-4 whitespace-nowrap text-xs md:text-sm lg:text-md">
+              <td class="table_td">
                 <span>{{ player.pos }}</span>
               </td>
 
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap">
+              <td class="table_td">
                   <span class="hover:underline">{{ player.birthdate }}</span>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap">
+              <td class="table_td">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
                 <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
                   {{ player.country_name }}
@@ -222,17 +171,17 @@
       <!-- Table for displaying trophies data -->
       <div class="overflow-auto px-3">
         <table class="{% if request.GET.tab != 'trophies' %} hidden {% endif %} trophies_table min-w-[800px] md:min-w-full">
-          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+          <thead class="border-b-white  border-b-[#a1a1aa30]  border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
             <tr>
               <!-- Table headers -->
-              <th scope="col" class="px-6 py-4 text-xs md:text-sm lg:text-md font-medium text-left">#</th>
-              <th scope="col" class="px-6 py-4 text-xs md:text-sm lg:text-md font-medium text-left">
+              <th scope="col" class="table_th text-left"></th>
+              <th scope="col" class="table_th text-left">
                 <!-- Column header for team name -->
                 <a href="?tab=trophies&field_trophy=name{% if request.GET.order_trophy == 'asc' %}&order_trophy=desc{% else %}&order_trophy=asc{% endif %}">
                   Título <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="px-6 py-4 text-xs md:text-sm lg:text-md font-medium text-left">
+              <th scope="col" class="table_th text-right">
                 <!-- Column header for average market value -->
                 <a href="?tab=trophies&field_trophy=season{% if request.GET.order_trophy == 'asc' %}&order_trophy=desc{% else %}&order_trophy=asc{% endif %}">
                   Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -240,27 +189,27 @@
               </th>
             </tr>
           </thead>
-          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+          <tbody>
             <!-- Teams list -->
             {% if trophies %}
               {% for trophy in trophies %}
-                <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+                <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
                   <!-- Team data -->
-                  <td class="px-6 py-4 text-xs md:text-sm lg:text-md font-light whitespace-nowrap">
+                  <td class="table_td">
                     <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
                   </td>
-                  <td class="px-6 py-4 text-xs md:text-sm lg:text-md font-light whitespace-nowrap">
+                  <td class="table_td">
                     <!-- Team name -->
                     <a href="#" class="hover:underline">{{ trophy.id_trophy.name }}</a>
                   </td>
-                  <td class="px-6 py-4 text-xs md:text-sm lg:text-md font-light whitespace-nowrap">
+                  <td class="table_td text-right">
                     <!-- Average market value -->
                     <span>{{ trophy.season }}</span>
                   </td>
                 </tr>
               {% endfor %}
             {% else %}
-              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
                 <td>
                   <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
                 </td>
@@ -296,7 +245,6 @@
   }
 
   document.querySelectorAll(".tab").forEach(item=>{
-
     item.addEventListener("click", (e)=>{
       e.target.classList.add("font-bold");
       tab_table = e.currentTarget.getAttribute("table")

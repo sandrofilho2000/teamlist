@@ -52,7 +52,7 @@ urlpatterns += teams_patterns
 urlpatterns += stadiums_patterns
 urlpatterns += players_patterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+urlpatterns += path("__reload__/", include("django_browser_reload.urls")),
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += path("__debug__/", include("debug_toolbar.urls")),

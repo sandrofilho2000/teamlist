@@ -1,4 +1,5 @@
 {% load static %}
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block page_title %}{% endblock page_title %}</title>
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-  
+  {% tailwind_css %}
   <!-- Include links -->
   {% include 'atomic/cells/links.html' %}
 </head>
@@ -30,7 +31,7 @@
     {% block content %}{% endblock content %}
     <a href="https://www.sandrofilho.dev/" target="_blank" class="feito_por absolute bottom-2 left-1/2 gap-1 transform translate-x-[-50%] flex items-center">
       <img src="/media/images/system/sandro_filho_dev.webp" class="dark:brightness-0 dark:invert"/>
-      <span class="text-sm dark:text-[#A1A1AA] ">
+      <span class="text-sm dark:text-[#A1A1AA] whitespace-nowrap">
         Feito por <strong>Sandro Filho DEV</strong> 
       </span>
     </a>
