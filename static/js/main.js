@@ -56,99 +56,116 @@ $(".search_field input").keyup((e) => {
                     let { teams } =  data
                     let { players } =  data
                     let { countries } =  data
+                    let { trophies } =  data
                     
-                    let data_length = leagues.length + teams.length + players.length + countries.length
+                    let data_length = leagues.length + teams.length + players.length + countries.length + trophies.length
                     
-                    if(data_length){
-                        $(".search_recomendation").removeClass("hidden")
-                        if (leagues.length) {
-                            $(".leagues_datalist_ul").addClass("active")
-                            
-                            leagues.forEach((item) => {
-                                const li = document.createElement("li");
-                                li.setAttribute("title", item.name);
-                                li.innerHTML = `
-                                    <a class="flex gap-2 w-full" href="/leagues/league/${item.id}/">
-                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img width="28" height="28" src="${item.img}" />
-                                        </span>
-                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                    </a>
-                                `;
-                                $(".leagues_datalist_ul").append(li);
-    
-                            });
-                        }else{
-                            $(".leagues_datalist_ul").removeClass("content")
-                            $(".leagues_datalist_ul").html("<small>Nenhuma liga encontrada</small>");
-                        }
-    
-                        if (teams.length) {
-                            $(".teams_datalist_ul").addClass("active")
-                            teams.forEach((item) => {
-                                const li = document.createElement("li");
-                                li.setAttribute("title", item.name);
-                                li.innerHTML = `
-                                    <a class="flex gap-2 w-full" href="/teams/team/${item.id}/">
-                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.webp" />
-                                        </span>
-                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                    </a>
-                                `;
-                                $(".teams_datalist_ul").append(li);
-    
-                            });
-                        }else{
-                            $(".teams_datalist_ul").removeClass("content")
-                            $(".teams_datalist_ul").html("<small>Nenhum time encontrado</small>");
-                        }
-    
-                        if (players.length) {
-                            $(".players_datalist_ul").addClass("active")
-                            players.forEach((item) => {
-                                const li = document.createElement("li");
-                                li.setAttribute("title", item.name);
-                                li.innerHTML = `
-                                    <a class="flex gap-2 w-full items-center" href="/players/player/${item.id}">
-                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img height="36" width="36" class="max-w-9 max-h-9 w-9 h-9 rounded-full object-cover" style="max-height: 36px" src="${item.img}" />
-                                        </span
-                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                    </a>
-                                `;
-                                $(".players_datalist_ul").append(li);
-    
-                            });
-                        }else{
-                            $(".players_datalist_ul").removeClass("content")
-                            $(".players_datalist_ul").html("<small>Nenhum jogador encontrado</small>");
-                        }
-    
-                        if (countries.length) {
-                            $(".countries_datalist_ul").addClass("active")
-                            countries.forEach((item) => {
-                                const li = document.createElement("li");
-                                li.setAttribute("title", item.name);
-                                li.innerHTML = `
-                                    <a class="flex gap-2 w-full" href="/country/${item.id}">
-                                        <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img width="28" height="28" src="${item.img}" />
-                                        </span>
-                                        <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
-                                    </a>
-                                `;
-                                $(".countries_datalist_ul").append(li);
-    
-                            });
-                        }else{
-                            $(".countries_datalist_ul").removeClass("content")
-                            $(".countries_datalist_ul").html("<small>Nenhum país encontrado</small>");
-                        }
+                    $(".search_recomendation").removeClass("hidden")
+                    if (leagues.length) {
+                        $(".leagues_datalist_ul").addClass("active")
+                        
+                        leagues.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full" href="/leagues/league/${item.id}/">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                        <img width="28" height="28" src="${item.img}" />
+                                    </span>
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".leagues_datalist_ul").append(li);
+
+                        });
                     }else{
-                        $(".search_recomendation").addClass("hidden")
+                        $(".leagues_datalist_ul").removeClass("content")
+                        $(".leagues_datalist_ul").html("<small>Nenhuma liga encontrada</small>");
                     }
 
+                    if (teams.length) {
+                        $(".teams_datalist_ul").addClass("active")
+                        teams.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full" href="/teams/team/${item.id}/">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                        <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.webp" />
+                                    </span>
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".teams_datalist_ul").append(li);
+
+                        });
+                    }else{
+                        $(".teams_datalist_ul").removeClass("content")
+                        $(".teams_datalist_ul").html("<small>Nenhum time encontrado</small>");
+                    }
+
+                    if (players.length) {
+                        $(".players_datalist_ul").addClass("active")
+                        players.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full items-center" href="/players/player/${item.id}">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                        <img height="36" width="36" class="max-w-9 max-h-9 w-9 h-9 rounded-full object-cover" style="max-height: 36px" src="${item.img}" />
+                                    </span
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".players_datalist_ul").append(li);
+
+                        });
+                    }else{
+                        $(".players_datalist_ul").removeClass("content")
+                        $(".players_datalist_ul").html("<small>Nenhum jogador encontrado</small>");
+                    }
+
+                    if (countries.length) {
+                        $(".countries_datalist_ul").addClass("active")
+                        countries.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full" href="/countries/country/${item.id}">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                        <img width="28" height="28" src="${item.img}" />
+                                    </span>
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".countries_datalist_ul").append(li);
+
+                        });
+                    }else{
+                        $(".countries_datalist_ul").removeClass("content")
+                        $(".countries_datalist_ul").html("<small>Nenhum país encontrado</small>");
+                    }
+
+                    if (trophies.length) {
+                        $(".trophies_datalist_ul").addClass("active")
+                        trophies.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full" href="/trophies/trophy/${item.id}">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                        <img height="28" src="${item.img}" style="max-height: 36px"  />
+                                    </span>
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".trophies_datalist_ul").append(li);
+
+                        });
+                    }else{
+                        $(".trophies_datalist_ul").removeClass("content")
+                        $(".trophies_datalist_ul").html("<small>Nenhuma taça encontrada</small>");
+                    }
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);

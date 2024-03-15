@@ -54,7 +54,7 @@
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for number of teams -->
                 <a href="{% url 'league_list' %}?field=num_teams{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Equipes 
@@ -95,7 +95,7 @@
                     <span class="text-green-700 font-bold"> {{ league.balance | passToFloat }} </span>
                 {% endif %}
               </td>
-              <td class="table_td text-right">
+              <td class="table_td">
                 <!-- Number of teams -->
                 {{ league.num_teams  }}
               </td>

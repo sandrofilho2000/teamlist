@@ -42,7 +42,7 @@
                   Número de times <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th text-right">
+              <th scope="col" class="table_th">
                 <!-- Column header for number of players -->
                 <a href="{% url 'country_list' %}?field=num_players{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}ers' %}">
                   Número de jogadores <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -61,25 +61,25 @@
                 <img src="/media/images/countries/{{ country.slug }}{{ country.id }}.webp" class="inline-block w-[30px] min-w-[30px]"/>
 
               </td>
-              <td class="text-xs md:text-sm lg:text-base font-light px-2 py-4 whitespace-nowrap sticky dark:bg-zinc-900 left-[50px] z-10">
+              <td class="table_td sticky dark:bg-zinc-900 left-[50px] z-10">
                 <!-- Country name -->
                 <a href="{% url 'countries_detail' pk=country.pk %}">
                   <span class="hover:underline">{{ country.name }}</span>
                 </a>
               </td>
-              <td class="text-xs md:text-sm lg:text-base font-light px-2 py-4 whitespace-nowrap text-left">
+              <td class="table_td text-left">
                 <!-- Number of leagues -->
                 <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-leagues">
                   <span>{{ country.num_leagues }}</span>
                 </a>
               </td>
-              <td class="text-xs md:text-sm lg:text-base font-light px-2 py-4 whitespace-nowrap text-left">
+              <td class="table_td text-left">
                 <!-- Number of teams -->
                 <a href="#" class="flex items-center justify-start gap-1" id="{{ country.slug }}-num-teams">
                   <span>{{ country.num_teams }}</span>
                 </a>
               </td>
-              <td class="text-xs md:text-sm lg:text-base font-light px-2 py-4 whitespace-nowrap text-right">
+              <td class="table_td">
                 <!-- Number of players -->
                 <a href="#" class="flex items-center justify-end gap-1 text-right" id="{{ country.slug }}-num-players">
                   <span>{{ country.num_players }}</span>

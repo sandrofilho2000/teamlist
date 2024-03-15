@@ -1,7 +1,5 @@
-from dis import code_info
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, View
-
 from countries.models import Country
 from .models import League, LeagueColorForm
 from teams.models import Team  
@@ -47,7 +45,6 @@ class LeagueInfoView(View):
         league = get_object_or_404(League, pk=pk) 
         leagues_teams = LeaguesTeam.objects.filter(id_league=pk)
         teams = [leagues_team.id_team for leagues_team in leagues_teams]
-        teams = teams + teams
         form = LeagueColorForm(instance=league)
         order_by_param = self.request.GET.get('field', 'id')
         order_dir_param = self.request.GET.get('order', 'asc')

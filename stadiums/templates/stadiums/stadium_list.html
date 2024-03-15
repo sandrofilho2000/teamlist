@@ -50,7 +50,7 @@
                   Camarotes <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="table_th whitespace-nowrap text-right">
+              <th scope="col" class="table_th whitespace-nowrap ">
                 <!-- Column header for stadium -->
                 <a href="{% url 'stadium_list' %}?field=build_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Valor de construção <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -96,7 +96,7 @@
                   {% endif %}
                 </span>
               </td>  
-              <td class="table_td sticky dark:bg-zinc-900 left-[60px] z-10 text-right">
+              <td class="table_td sticky dark:bg-zinc-900 left-[60px] z-10 ">
                 <span>
                   {{ stadium.build_value | passToFloat }}
                 </span>

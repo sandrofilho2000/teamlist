@@ -91,7 +91,7 @@
             </th>
             <th
               scope="col"
-              class="table_th text-right"
+              class="table_th"
             >
               <a href="{% url 'league_detail' pk=league.pk %}?field=total_market_value{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                 Valor de mercado total 
@@ -119,7 +119,7 @@
             <td class="table_td">
               <span>{{ team.average_market_value|passToFloat }}</span>
             </td>
-            <td class="table_td text-right">
+            <td class="table_td">
               <span>{{ team.total_market_value|passToFloat }}</span>
             </td>
           </tr>
