@@ -1,7 +1,7 @@
 from django.conf import settings
 from countries.views import CountryListView, CountryDetailView
 from leagues.views import LeagueListView, LeagueInfoView
-from players.views import PlayerListView
+from players.views import PlayerInfoView, PlayerListView
 from search_items.views import SearchItemsView
 from stadiums.views import StadiumListView
 from teams.views import TeamListView, TeamInfoView
@@ -36,13 +36,14 @@ stadiums_patterns = [
 
 players_patterns = [
     path("players/", PlayerListView.as_view(), name="player_list"),
+    path("players/player/<int:pk>", PlayerInfoView.as_view(), name="player_detail"),
 ]
 
 teams_patterns = [
     path("countries/country/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
     path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_league_team_detail"), 
     path("leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="league_team_detail"), 
-    path("teams/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
+    path("teams/team/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
     path("teams/", TeamListView.as_view(), name="team_list"),
 ]
 
