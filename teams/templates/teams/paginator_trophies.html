@@ -4,51 +4,20 @@
   <div tab="trophies" class="pagination pagination_trophies mt-4 sm:px-6 lg:px-8 {% if request.GET.tab != 'trophies' %} hidden {% endif %}">
     <span class="text-sm text-gray-700 dark:text-white  flex gap-1 pb-5 items-center step-links">
       {% if related_items.has_previous %}
-        <a href="{{ url|set_pagination_params }}page=1" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
-          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-          dark:before:pointer-events-none
-          dark:before:-inset-px
-          dark:before:absolute
-          dark:bg-zinc-900
-        
-        ">
+        <a href="{{ url|set_pagination_params }}page=1" class="pagination_a">
           <i class="fa fa-caret-left" aria-hidden="true"></i>
           <i class="fa fa-caret-left" aria-hidden="true"></i>
         </a>
-        <a href="{{ url|set_pagination_params }}page={{ related_items.previous_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
-          
-          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-          dark:before:pointer-events-none
-          dark:before:-inset-px
-          dark:before:absolute
-          dark:bg-zinc-900
-        
-        "><i class="fa fa-caret-left" aria-hidden="true"></i></a>
+        <a href="{{ url|set_pagination_params }}page={{ related_items.previous_page_number }}" class="pagination_a"><i class="fa fa-caret-left" aria-hidden="true"></i></a>
       {% endif %}
 
-      <input class="font-bold text-center w-[15px] bg-transparent" max="{{ paginator_trophies.num_pages }}" id="paginationInputPlayers" min="1" type="number"  value="{{ related_items.number }}"/>
+      <input class="pagination_input" max="{{ paginator_trophies.num_pages }}" id="paginationInputPlayers" min="1" type="number"  value="{{ related_items.number }}"/>
       /
       <span class="font-bold">{{ paginator_trophies.num_pages }}</span>
 
       {% if related_items.has_next %}
-        <a href="{{ url|set_pagination_params }}page={{ related_items.next_page_number }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
-          
-          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-          dark:before:pointer-events-none
-          dark:before:-inset-px
-          dark:before:absolute
-          dark:bg-zinc-900
-        
-        "><i class="fa fa-caret-right" aria-hidden="true"></i></a>
-        <a href="{{ url|set_pagination_params }}page={{ paginator_trophies.num_pages }}" class="h-6 w-6 bg-white flex items-center justify-center rounded-sm      
-          
-          dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-          dark:before:pointer-events-none
-          dark:before:-inset-px
-          dark:before:absolute
-          dark:bg-zinc-900
-        
-        ">
+        <a href="{{ url|set_pagination_params }}page={{ related_items.next_page_number }}" class="pagination_a"><i class="fa fa-caret-right" aria-hidden="true"></i></a>
+        <a href="{{ url|set_pagination_params }}page={{ paginator_trophies.num_pages }}" class="pagination_a">
           <i class="fa fa-caret-right" aria-hidden="true"></i>
           <i class="fa fa-caret-right" aria-hidden="true"></i>
         </a>

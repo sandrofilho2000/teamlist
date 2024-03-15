@@ -49,8 +49,13 @@ INSTALLED_APPS = [
     "team_trophy.apps.TeamTrophyConfig",
     "rest_framework",
     "debug_toolbar",
+    "tailwind",
+    "django_browser_reload",
+    "theme", 
     "colorfield"
 ]
+
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -61,6 +66,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "setup.urls"
@@ -145,7 +151,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
+    
+    "127.0.0.1"
+    
 ]
+
+
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"

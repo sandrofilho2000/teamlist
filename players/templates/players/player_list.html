@@ -16,27 +16,14 @@
 </div>
 
 <div class="sm:mx-0.5">
-  <div class="max-w-[97vw] py-2 inline-block min-w-full min-w-full sm:px-6 lg:px-8">
-    <div class="
-    overflow-hidden relative z-10 rounded-md
-    rounded-xl 
-    bg-white 
-    forced-colors:outline px-3
-    dark:before:rounded-xl 
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
-    dark:before:pointer-events-none
-    dark:before:-inset-px
-    dark:before:absolute
-    dark:bg-zinc-900
-    "> 
-
+  <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="table_wrapper rounded-md"> 
       <div class="overflow-auto pr-3"> 
         <table class="min-w-[800px] md:min-w-full">
-          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+          <thead class="table_thead">
             <tr class="">
                 <!-- Table headers -->
-              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
+              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
                 <a
                   href="{% url 'player_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
                 >
@@ -44,7 +31,7 @@
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="text-xs md:text-sm lg:text-md px-2 py-4 text-left">
+              <th scope="col" class="table_th">
                 <a
                   href="{% url 'player_list' %}?field=pos{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
                 >
@@ -54,7 +41,7 @@
               </th>
               <th
                   scope="col"
-                  class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+                  class="table_th"
                 >
                   <a href="{% url 'player_list' %}?field=birthdate{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                     Nascimento              
@@ -63,7 +50,7 @@
               </th>
               <th
                   scope="col"
-                  class="text-xs md:text-sm lg:text-md px-2 py-4 text-left"
+                  class="table_th"
                 >
                   <a href="{% url 'player_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                     País de origem 
@@ -72,7 +59,7 @@
               </th>
               <th
                   scope="col"
-                  class="text-sm px-2 py-4 text-right"
+                  class="table_th text-right"
                 >
                   <a href="{% url 'player_list' %}?field=value_market{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                     Valor de mercado 
@@ -83,28 +70,28 @@
           </thead>
           <tbody class="text-gray-900 dark:text-[#A1A1AA]">
             {% for player in page_obj %}
-            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-              <td class="px-2 py-4 whitespace-normal max-w-[120px] text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+              <td class="table_td flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
                   <a href="#" class="gap-1 text-center hover:underline">
                     {{ player.name }}
                   </a>
               </td>
 
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
+              <td class="table_td">
                 <span>{{ player.pos }}</span>
               </td>
 
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
+              <td class="table_td">
                   <span class="hover:underline">{{ player.birthdate }}</span>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-left">
+              <td class="table_td">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
                 <a href="{% url "country_detail" pk=player.id_country_id %}" class="hover:underline">
                   {{ player.country_name }}
                 </a>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-2 py-4 whitespace-nowrap text-right">
+              <td class="text-xs md:text-sm lg:text-base font-light px-2 py-4 whitespace-nowrap text-right">
                 <span>{{ player.value_market|passToFloat }}</span>
               </td>
             </tr>

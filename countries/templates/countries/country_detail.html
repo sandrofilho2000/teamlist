@@ -11,59 +11,48 @@
 
 {% include 'atomic/organisms/color_palette.html' with background_color=country.background_color text_color=country.text_color %}
 
-<div class="inline-block m-auto m-auto mb-4 pr-1 m-auto relative left-1/2 -translate-x-1/2 pl-10">
+<div class="inline-block m-auto mb-4 pr-1 relative left-1/2 -translate-x-1/2 pl-10">
   <img width="36" height="16" src="{{ country_flag }}" class="inline-block country_flag absolute top-1/2 transform -translate-y-[50%] left-2"/>
   <h2 class="inline-block px-4 dark:text-white text-2xl font-regular">
     {{ country.name | upper }} 
   </h2>
 </div>
 
-<div class="highlights mb-6 mt-9 flex justify-start gap-6 lg:gap-6 sm:px-6 lg:px-8 flex-col lg:flex-row">
+<div class="highlights mb-6 mt-9 flex justify-start gap-10 lg:gap-8 sm:px-6 lg:px-8 flex-col lg:flex-row">
   <div class="flex w-full lg:w-1/2 gap-4 lg:gap-6">
     <div class='w-full lg:w-1/2'>
       <p class="text-xs text-left font-sm block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%]">PRINCIPAL LIGA</p>
-      <div class="highlight_card h-full w-full max-w-sm dark:bg-zinc-900 forced-colors:outline rounded-lg   
-      dark:before:rounded-xl 
-      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-      dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
-      dark:before:pointer-events-none
-      dark:before:absolute">
+
   
         {% if top_league %}
-        <div class="flex flex-col items-center py-5 px-4">
+        <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
           <img class="h-16 lg:h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.webp" alt="{{top_league.name}}"/>
-          <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="dark:text-white mb-1 text-md lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
+          <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="dark:text-white mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
           {% if "-" in top_league.balance %}
-              <span class="text-md lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
+              <span class="text-base lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
           {% else %}
-              <span class="text-md lg:text-lg text-green-700 font-bold">{{ top_league.balance|passToFloat }}</span>      
+              <span class="text-base lg:text-lg text-green-700 font-bold">{{ top_league.balance|passToFloat }}</span>      
           {% endif %}
         </div>
         {% else %}
-        <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
-        {% endif %}
-      </div>
+        <div class="card h-full ">
+          <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
+        </div>        {% endif %}
     </div>
   
     <div class='w-full lg:w-1/2'>
       <p class="text-xs text-left font-sm block w-auto dark:text-[#A1A1AA] absolute transform translate-y-[-100%]">TIME MAIS VALIOSO</p>
-      <div class="highlight_card h-full w-full max-w-sm dark:bg-zinc-900 forced-colors:outline rounded-lg 
-      dark:before:rounded-xl 
-      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-      dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
-      dark:before:pointer-events-none
-      dark:before:absolute
-      ">
         {% if top_team %}
-        <div class="flex flex-col items-center py-5 px-4">
+        <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
             <img class="h-16 lg:h-24 mb-3" src="/media/images/teams/{{top_team.slug}}{{top_team.id}}.webp" alt="{{top_team.name}}"/>
-            <a href="{% url 'country_team_detail' country_pk=country.pk pk=top_team.pk %}" class="mb-1 text-md lg:text-xl dark:text-white min-h-[50px] lg:min-h-[60px] text-center"> {{top_team.name}}</a>
-            <span class="text-md lg:text-lg text-green-700 font-bold">{{top_team.total_market_value|passToFloat }}</span>
+            <a href="{% url 'country_team_detail' country_pk=country.pk pk=top_team.pk %}" class="mb-1 text-base lg:text-xl dark:text-white min-h-[50px] lg:min-h-[60px] text-center"> {{top_team.name}}</a>
+            <span class="text-base lg:text-lg text-green-700 font-bold">{{top_team.total_market_value|passToFloat }}</span>
         </div>
         {% else %}
-        <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
+        <div class="card h-full ">
+          <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
+        </div>
         {% endif %}
-      </div>
     </div>
   </div>
 
@@ -72,37 +61,32 @@
 
     <!-- Table for displaying league data -->
     <div class="overflow-auto shadow h-full">
-      <div class="px-1 rounded-lg h-full overflow-hidden dark:bg-zinc-900 forced-colors:outline border-t-[1px] border-t-[#a1a1aa30]   
-        dark:before:rounded-xl 
-        dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-        dark:before:shadow-[0px_2px_8px_0px_rgba(0,_0,_0,_0.20),_0px_1px_0px_0px_rgba(255,_255,_255,_0.06)_inset]
-        dark:before:pointer-events-none
-        dark:before:absolute">        
+      <div class="table_wrapper rounded-lg">        
         <table class="min-w-full h-full">
-          <thead class="border-bottom-white border-solid border-b-[#a1a1aa30] border-b-solid border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+          <thead class="table_thead">
             <tr>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-1 py-4 text-center"
+                class="mini_table_th md:text-sm text-center"
               >
   
                   Jogador
               </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-1 py-4 text-left"
+                class="mini_table_th md:text-sm"
               >
                   Posição
               </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-1 py-4 text-center"
+                class="mini_table_th md:text-sm text-center"
               >
                   País de origem 
               </th>
               <th
                 scope="col"
-                class="text-xs md:text-sm lg:text-md px-1 py-4 text-right"
+                class="mini_table_th md:text-sm text-right"
               >
   
                   Valor de mercado 
@@ -113,28 +97,28 @@
           <tbody class="text-gray-900 dark:text-[#A1A1AA]">
             {% if top_players %}
             {% for player in top_players %}
-            <tr class="border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
-              <td class="text-xs md:text-sm lg:text-md px-1 py-2 whitespace-normal font-medium text-gray-900 dark:text-[#A1A1AA] flex flex-col justify-left align-left">
-                <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px] m-auto block">
-                  <a href="#" class="gap-1 text-center hover:underline w-[70px] m-auto">
+            <tr class="border-b-[#a1a1aa30] border-b-[1px] last-of-type:border-0">
+              <td class="mini_table_td  flex flex-col justify-left align-left items-center gap-1 relative">
+                <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px]  block">
+                  <a href="#" class="gap-1 hover:underline max-w-[100px] text-left">
                     {{ player.name }}
                   </a>
               </td>
   
-              <td class="text-xs md:text-sm lg:text-md font-light px-1 py-4 whitespace-normal w-[70px]">
+              <td class="mini_table_td w-[70px]">
                 <span>{{ player.pos }}</span>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-1 py-4 whitespace-nowrap text-center">
+              <td class="mini_table_td text-center">
                 <img src="{{ player.country_flag }}"  title="{{ player.country_name }}" class="inline-block"/>
                 <span>{{ player.country_name }}</span>
               </td>
-              <td class="text-xs md:text-sm lg:text-md font-light px-1 py-4 whitespace-nowrap text-right">
+              <td class="mini_table_td text-right">
                 <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
               </td>
             </tr>
             {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900 dark:text-[#A1A1AA] border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr class="bg-white dark:bg-zinc-900 dark:text-[#A1A1AA] border-b-[#a1a1aa30]  border-b-[1px]">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
               </td>
@@ -150,10 +134,10 @@
 
 
 <!-- Overflow container for horizontal scrolling -->
-<div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 ">
-  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+<div class="sm:mx-0.5">
+  <div class="w-full py-2 inline-block min-w-ful sm:px-6 lg:px-8">
 
-    <div class="table_tabs flex justify-evenly gap-1 relative z-10 w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 shadow  bg-white dark:bg-zinc-900">
+    <div class="table_tabs flex justify-evenly gap-1 relative z-20 bottom-[-1px] w-[250px] rounded-t-md text-xs dark:text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1  bg-white dark:bg-zinc-900">
       <div table="leagues" class="leagues_tab tab w-1/3 text-center {% if request.GET.tab == 'leagues' or not request.GET.tab %} font-bold {% endif %}">LIGAS</div>
       <span class="inline-block mx-2">|</span>
       <div table="teams" class="teams_tab tab w-1/3 text-center {% if request.GET.tab == 'teams' %} font-bold {% endif %}">EQUIPES</div>
@@ -161,43 +145,36 @@
       <div table="players" class="players_tab tab w-1/3 text-center {% if request.GET.tab == 'players' %} font-bold {% endif %}">JOGADORES</div>
     </div>
 
-    <div class="country_tables overflow-hidden relative z-10 rounded-md rounded-tl-[0px]  
-      dark:bg-zinc-900       
-      dark:before:rounded-xl 
-      dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-      dark:before:pointer-events-none
-      dark:before:absolute
-      dark:before:rounded-tl-xl 
-    ">
+    <div class="country_tables table_wrapper">
       <!-- Table for displaying league data -->
-      <div class="px-3">
-        <table class="{% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %} leagues_table min-w-full">
-          <thead class="dark:text-white text-gray-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+      <div class="overflow-auto">
+        <table class="{% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %} leagues_table min-w-[800px] w-full">
+          <thead class="thead">
             <tr>
               <!-- Table headers -->
-              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">#</th>
-              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+              <th scope="col" class="table_th"></th>
+              <th scope="col" class="table_th">
                 <!-- Column header for league name -->
                 <a href="?tab=leagues&field_league=name{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">  
                   Liga 
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+              <th scope="col" class="table_th">
                 <!-- Column header for expenses -->
                 <a href="?tab=leagues&field_league=outcomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                 
                   Despesas 
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+              <th scope="col" class="table_th">
                 <!-- Column header for income -->
                 <a href="?tab=leagues&field_league=incomes{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">                   
                   Renda 
                   <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="text-sm font-medium px-6 py-4 text-left">
+              <th scope="col" class="table_th text-right">
                 <!-- Column header for balance -->
                 <a href="?tab=leagues&field_league=balance{% if request.GET.order_league == 'asc' %}&order_league=desc{% else %}&order_league=asc{% endif %}">     
                    Saldo 
@@ -212,26 +189,26 @@
               <!-- Loop through league objects -->
               {% for league in leagues %}
               <!-- Alternating row colors -->
-              <tr class=" border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+              <tr class=" border-b-[#a1a1aa30] border-b-[1px] dark:bg-zinc-900 left-0 z-10 pl-3">
                 <!-- League data -->
-                <td class="px-6 py-4 whitespace-nowrap text-sm ">
+                <td class="table_td">
                   <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
                 </td>
-                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                <td class="table_td">
                   <!-- League name -->
                   <a href="{% url 'country_league_detail' country_pk=country.pk pk=league.pk %}" class="flex items-center justify-start gap-1">
                     <span class="hover:underline"> {{ league.name }} </span>
                   </a>
                 </td>
-                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                <td class="table_td">
                   <!-- Expenses -->
                   <span> {{ league.outcomes|passToFloat }} </span>
                 </td>
-                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                <td class="table_td">
                   <!-- Income -->
                   <span>{{ league.incomes|passToFloat }}</span>
                 </td>
-                <td class="text-sm  font-light px-6 py-4 whitespace-nowrap">
+                <td class="table_td text-right">
                   <!-- Balance -->
                   {% if "-" in league.balance %}
                       <span class="text-red-700 font-bold"> {{ league.balance | passToFloat }} </span>
@@ -242,7 +219,7 @@
               </tr>
               {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30]  border-b-[1px]">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
               </td>
@@ -254,31 +231,31 @@
 
 
       <!-- Table for displaying team data -->
-      <div class="px-3">
-        <table class="{% if request.GET.tab != 'teams' %} hidden {% endif %} teams_table min-w-full">
-          <thead class="dark:text-white">
+      <div class="overflow-auto">
+        <table class="{% if request.GET.tab != 'teams' %} hidden {% endif %} teams_table min-w-[800px] w-full">
+          <thead class="table_thead">
             <tr>
               <!-- Table headers -->
-              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">#</th>
-              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+              <th scope="col" class="table_th"></th>
+              <th scope="col" class="table_th">
                 <!-- Column header for team name -->
                 <a href="?tab=teams&field_team=name{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
                   Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="px-6 py-4 text-sm font-medium text-left">
+              <th scope="col" class="table_th">
                 <!-- Column header for average market value -->
                 <a href="?tab=teams&field_team=average_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
                   Valor médio de mercado <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="px-6 py-4 text-sm font-medium text-right">
+              <th scope="col" class="table_th text-right">
                 <!-- Column header for total market value -->
                 <a href="?tab=teams&field_team=total_market_value{% if request.GET.order_team == 'asc' %}&order_team=desc{% else %}&order_team=asc{% endif %}">
                   Valor de mercado total <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </a>
               </th>
-              <th scope="col" class="px-6 py-4 text-sm font-medium text-right">
+              <th scope="col" class="table_th text-right">
                 <!-- Column header for number of leagues -->
                 <a href="?tab=teams">
                   Competições que joga <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -290,31 +267,31 @@
             <!-- Teams list -->
             {% if teams %}
             {% for team in teams %}
-            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
               <!-- Team data -->
-              <td class="px-6 py-4 whitespace-nowrap text-sm">
+              <td class="table_td">
                 <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
               </td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+              <td class="table_td">
                 <!-- Team name -->
                 <a href="{% url 'country_team_detail' country_pk=country.pk pk=team.pk %}" class="hover:underline">{{ team.name }}</a>
               </td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap">
+              <td class="table_td">
                 <!-- Average market value -->
                 <span>{{ team.average_market_value|passToFloat }}</span>
               </td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap text-right">
+              <td class="table_td text-right">
                 <!-- Total market value -->
                 <span class="text-green-700 font-bold">{{ team.total_market_value|passToFloat }}</span>
               </td>
-              <td class="px-6 py-4 text-sm font-light whitespace-nowrap text-right">
+              <td class="table_td text-right">
                 <!-- Number of leagues -->
                 <span>{{ team.num_leagues }}</span>
               </td>
             </tr>
             {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
               </td>
@@ -325,19 +302,18 @@
       </div>
 
       <!-- Table for displaying player data -->
-      <div class="px-3">
-        <table class="{% if request.GET.tab != 'players' %} hidden {% endif %} players_table min-w-full">
-          <thead class="dark:text-white text-gray-900">
+      <div class="overflow-auto">
+        <table class="{% if request.GET.tab != 'players' %} hidden {% endif %} players_table min-w-[800px] w-full">
+          <thead class="table_thead">
             <tr>
               <th
                 scope="col"
-                class="text-sm font-medium px-6 py-4 text-left"
+                class="table_th"
               >
-                  #
               </th>
               <th
                 scope="col"
-                class="text-sm font-medium px-6 py-4 text-left"
+                class="table_th"
               >
               <a href="?tab=players&field_player=name{% if request.GET.order_player == 'desc' %}&order_player=asc{% else %}&order_player=desc{% endif %}">
   
@@ -347,7 +323,7 @@
               </th>
               <th
               scope="col"
-              class="text-sm font-medium px-6 py-4 text-left"s
+              class="table_th"
             >
             <a href="?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
               Posição
@@ -356,7 +332,7 @@
             </th>
               <th
                 scope="col"
-                class="text-sm font-medium px-6 py-4 text-left"
+                class="table_th"
               >
               <a href="?tab=players&field_player=birthdate{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
                 Nascimento              
@@ -365,12 +341,7 @@
               </th>
               <th
                 scope="col"
-                class="text-sm font-medium px-6 py-4 text-left"
-              >
-              </th>
-              <th
-                scope="col"
-                class="text-sm font-medium px-6 py-4 text-right"
+                class="table_th text-right"
               >
               <a href="?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}&order_player=desc{% else %}&order_player=asc{% endif %}">
   
@@ -384,31 +355,30 @@
           <tbody class="dark:text-[#A1A1AA] text-gray-900">
             {% if players %}
               {% for player in players %}
-              <tr class="bg-gray-100 border-b bg-white dark:bg-zinc-900 border-b-[#a1a1aa30] dark:text-[#A1A1AA] border-b-solid border-b-[1px]">
-                <td class="px-6 py-4 whitespace-nowrap text-sm ">
+              <tr class=" border-b-[#a1a1aa30] border-b-[1px] dark:bg-zinc-900 left-0 z-10 pl-3">
+                <td class="table_td">
                   <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] min-w-[52px] min-h-[52px] block" />
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm  ">
+                <td class="table_td">
                   <a href="#" class="gap-1 text-center hover:underline">
                     {{ player.name }}
                   </a>
                 </td>
   
-                <td class="px-6 py-4 whitespace-nowrap text-sm  ">
+                <td class="table_td">
                   <span>{{ player.pos }}</span>
                 </td>
   
-                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap">
+                <td class="table_td">
                     <span class="hover:underline">{{ player.birthdate }}</span>
                 </td>
-                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap">
-                <td class="text-sm   font-light px-6 py-4 whitespace-nowrap text-right">
+                <td class="table_td text-right">
                   <span class="text-green-700 font-bold">{{ player.value_market|passToFloat }}</span>
                 </td>
               </tr>
               {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30] border-b-solid border-b-[1px]">
+            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30]  border-b-[1px]">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
               </td>
@@ -457,7 +427,7 @@
       e.target.classList.add("font-bold");
       tab_table = e.currentTarget.getAttribute("table")
 
-      document.querySelectorAll(".country_tables table.min-w-full").forEach(table=>{
+      document.querySelectorAll(".country_tables table").forEach(table=>{
         if(table.className.includes(tab_table)){
           table.classList.remove("hidden")
         }else{
