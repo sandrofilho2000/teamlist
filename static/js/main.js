@@ -110,10 +110,10 @@ $(".search_field input").keyup((e) => {
                                 const li = document.createElement("li");
                                 li.setAttribute("title", item.name);
                                 li.innerHTML = `
-                                    <a class="flex gap-2 w-full" href="#">
+                                    <a class="flex gap-2 w-full items-center" href="/players/player/${item.id}">
                                         <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                            <img class="w-[32px] h-[32px] rounded-full object-cover" src="${item.img}" />
-                                        </span>
+                                            <img height="36" width="36" class="max-w-9 max-h-9 w-9 h-9 rounded-full object-cover" style="max-height: 36px" src="${item.img}" />
+                                        </span
                                         <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                     </a>
                                 `;

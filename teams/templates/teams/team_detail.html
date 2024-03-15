@@ -140,7 +140,7 @@
   
               <td class="table_td flex flex-col justify-left align-center">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[38px] h-[38px] md:w-[52px] md:h-[52px] m-auto block" />
-                  <a href="#" class="block lg:max-w-[160px] max-w-[80px] m-auto text-center hover:underline whitespace-normal">
+                <a href="{% url 'player_detail' pk=player.id %}"class="block lg:max-w-[160px] max-w-[80px] m-auto text-center hover:underline whitespace-normal">
                     {{ player.name }}
                   </a>
               </td>
@@ -171,7 +171,7 @@
       <!-- Table for displaying trophies data -->
       <div class="overflow-auto px-3">
         <table class="{% if request.GET.tab != 'trophies' %} hidden {% endif %} trophies_table min-w-[800px] md:min-w-full">
-          <thead class="border-b-white  border-b-[#a1a1aa30]  border-b-[1px] text-gray-900 dark:text-[#A1A1AA]">
+          <thead class="table_thead">
             <tr>
               <!-- Table headers -->
               <th scope="col" class="table_th text-left"></th>

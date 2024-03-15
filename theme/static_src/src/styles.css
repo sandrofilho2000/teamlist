@@ -168,6 +168,11 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input[type="search"] {
+    border: unset;
+    border-bottom: 1px solid white;
+}
+
 input::placeholder {
   user-select: none;
   color: white;
