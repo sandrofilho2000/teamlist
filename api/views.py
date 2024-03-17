@@ -1,6 +1,7 @@
+import os
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from PIL import Image
 from countries.models import Country
 
 
@@ -9,10 +10,30 @@ def rgb_to_hex(rgb):
     return hex_color
 
 
+
+
 def get_most_common_colors(folder, image_filename):
+    # Open the image file
+    image_path = os.path.join("static", "images", folder, image_filename)
+    with Image.open(image_path) as img:
+        # Convert the image to RGB mode
+        img = img.convert("RGB")
+        # Resize the image to reduce processing time
+        img.thumbnail((200, 200))
 
+        # Get pixel colors
+        colors = list(img.getdata())
 
-    return ""
+        # Count the occurrence of each color
+        color_counter = Counter(colors)
+
+        # Get the four most common colors
+        most_common_colors = color_counter.most_common(10)
+
+        # Convert RGB colors to RGB format
+        rgb_colors = [rgb for rgb, _ in most_common_colors]
+
+        return rgb_colors
     
 
 def remove_duplicate_colors(colors):
@@ -49,8 +70,10 @@ def getDesignUi(request):
     img_name = request.query_params.get('img_name')
     colors = get_most_common_colors(folder, img_name)
     colors = remove_duplicate_colors(colors)
+
+    print(colors)
     
-    """ if len(colors) >=5:
+    if len(colors) >=5:
         background_color = colors[2]
         if sum(background_color) < 300:
             text_color = colors[-1]
@@ -95,9 +118,10 @@ def getDesignUi(request):
             background_color = colors[0]
     
         
-    print({"background_color": f"{rgb_to_hex(background_color)}", "text_color": f"{rgb_to_hex(text_color)}"}) """
+    print({"background_color": f"{rgb_to_hex(background_color)}", "text_color": f"{rgb_to_hex(text_color)}"})
    
-    return Response({"background_color": f"{'#FFFFFF'}", "text_color": f"{'#FFFFFF'}"})
+    return Response({"background_color": f"{rgb_to_hex(background_color)}", "text_color": f"{rgb_to_hex(text_color)}"})
+
 
 
 @api_view(['GET'])
