@@ -18,10 +18,10 @@
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="table_wrapper rounded-md"> 
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr class="">
+            <tr class="table_tr">
                 <!-- Table headers -->
               <th scope="col" class="table_th">
                 
@@ -46,7 +46,7 @@
           </thead>
           <tbody class="text-gray-900 dark:text-[#A1A1AA]">
             {% for trophy in page_obj %} 
-            <tr class="border-b-[#a1a1aa30] border-b-[1px]">
+            <tr class="table_tr">
                 <td class="table_td">
                     <img height="52" src="{{ trophy.id_trophy__img }}" class="object-cover rounded-full w-[52px] h-[52px] block" />
                 </td>

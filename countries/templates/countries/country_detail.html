@@ -64,7 +64,7 @@
       <div class="overflow-auto shadow h-full">
         <table class="min-w-[600px] w-full h-full">
           <thead class="table_thead">
-            <tr>
+            <tr class="table_tr">
               <th
                 scope="col"
                 class="mini_table_th md:text-sm text-center"
@@ -103,7 +103,7 @@
           <tbody class="text-gray-900 dark:text-[#A1A1AA]">
             {% if top_players %}
             {% for player in top_players %}
-            <tr class="border-b-[#a1a1aa30] border-b-[1px] last-of-type:border-0">
+            <tr class="table_tr">
               <td class="mini_table_td  flex flex-col justify-left align-left items-center gap-1 relative">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px]  block">
                   <a href="{% url 'player_detail' pk=player.id %}" class="gap-1 hover:underline max-w-[100px] text-left">
@@ -129,7 +129,7 @@
             </tr>
             {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900 dark:text-[#A1A1AA] border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
               </td>
@@ -162,7 +162,7 @@
       <div class="overflow-auto">
         <table class="{% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %} leagues_table min-w-[800px] w-full">
           <thead class="thead">
-            <tr>
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th"></th>
               <th scope="col" class="table_th">
@@ -201,7 +201,7 @@
               <!-- Loop through league objects -->
               {% for league in leagues %}
               <!-- Alternating row colors -->
-              <tr class=" border-b-[#a1a1aa30] border-b-[1px] dark:bg-zinc-900 left-0 z-10 pl-3">
+              <tr class="table_tr dark:bg-zinc-900 left-0 z-10 pl-3">
                 <!-- League data -->
                 <td class="table_td">
                   <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
@@ -231,7 +231,7 @@
               </tr>
               {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
               </td>
@@ -246,7 +246,7 @@
       <div class="overflow-auto">
         <table class="{% if request.GET.tab != 'teams' %} hidden {% endif %} teams_table min-w-[800px] w-full">
           <thead class="table_thead">
-            <tr>
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th"></th>
               <th scope="col" class="table_th">
@@ -279,7 +279,7 @@
             <!-- Teams list -->
             {% if teams %}
             {% for team in teams %}
-            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <!-- Team data -->
               <td class="table_td">
                 <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />
@@ -303,7 +303,7 @@
             </tr>
             {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1">SEM DADOS</p>
               </td>
@@ -317,7 +317,7 @@
       <div class="overflow-auto">
         <table class="{% if request.GET.tab != 'players' %} hidden {% endif %} players_table min-w-[800px] w-full">
           <thead class="table_thead">
-            <tr>
+            <tr class="table_tr">
               <th
                 scope="col"
                 class="table_th"
@@ -376,7 +376,7 @@
           <tbody class="dark:text-[#A1A1AA] text-gray-900">
             {% if players %}
               {% for player in players %}
-              <tr class=" border-b-[#a1a1aa30] border-b-[1px] dark:bg-zinc-900 left-0 z-10 pl-3">
+              <tr class="table_tr">
                 <td class="table_td">
                   <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] min-w-[52px] min-h-[52px] block" />
                 </td>
@@ -404,7 +404,7 @@
               </tr>
               {% endfor %}
             {% else %}
-            <tr class="bg-white dark:bg-zinc-900  border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td>
                 <p class="text-xs text-center font-sm block w-auto p-1 ">SEM DADOS</p>
               </td>

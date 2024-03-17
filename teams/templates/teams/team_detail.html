@@ -64,10 +64,10 @@
 
     <div class="team_tables table_wrapper">
       <!-- Table for displaying players data -->
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="{% if request.GET.tab == 'players' or not request.GET.tab %}{% else %} hidden {% endif %} players_table min-w-[800px] md:min-w-full">
           <thead class="thead">
-            <tr>
+            <tr class="table_tr">
               <th
                 scope="col"
                 class="table_th text-left"
@@ -133,7 +133,7 @@
           </thead>
           <tbody>
             {% for player in players %}
-            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td class="table_td">
                 <span>{{ player.num }}</span>
               </td>
@@ -169,10 +169,10 @@
       </div>
       
       <!-- Table for displaying trophies data -->
-      <div class="overflow-auto px-3">
+      <div class="overflow-auto">
         <table class="{% if request.GET.tab != 'trophies' %} hidden {% endif %} trophies_table min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr>
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th text-left"></th>
               <th scope="col" class="table_th text-left">
@@ -193,7 +193,7 @@
             <!-- Teams list -->
             {% if trophies %}
               {% for trophy in trophies %}
-                <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
+                <tr class="table_tr">
                   <!-- Team data -->
                   <td class="table_td">
                     <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
@@ -209,7 +209,7 @@
                 </tr>
               {% endfor %}
             {% else %}
-              <tr class="bg-white dark:bg-zinc-900 border-b-[#a1a1aa30]  border-b-[1px]">
+              <tr class="table_tr">
                 <td>
                   <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
                 </td>

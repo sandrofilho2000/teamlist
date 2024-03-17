@@ -21,10 +21,10 @@
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="table_wrapper rounded-md"> 
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr class="">
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3"></th>
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-[60px] z-10">
@@ -56,7 +56,7 @@
           <tbody>
             <!-- Teams list -->
             {% for team in page_obj %}
-            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <!-- Team data -->
               <td class="table_td text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
                 <img width="40" src="{{ team.small_img }}" class="min-w-[40px]" />

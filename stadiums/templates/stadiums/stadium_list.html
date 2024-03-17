@@ -20,10 +20,10 @@
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="table_wrapper rounded-md"> 
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr class="">
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th"></th>
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3">
@@ -62,7 +62,7 @@
             <!-- Loop through countries -->
             {% for stadium in page_obj %}
             <!-- Apply row class -->
-            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td class="table_td flex flex-col justify-left align-center">
                 <!-- Country name -->
                 <img src = "{{ stadium.imgs | get_stadium_img }}" width="190" height="127" class="min-w-[40px]" />

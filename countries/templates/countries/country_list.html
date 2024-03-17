@@ -18,10 +18,10 @@
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="table_wrapper rounded-md"> 
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr class="">
+            <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[50px]"></th>
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-[50px] z-10">
@@ -54,7 +54,7 @@
             <!-- Loop through countries -->
             {% for country in page_obj %}
             <!-- Apply row class -->
-            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <!-- Country data -->
               <td class="px-2 py-4 whitespace-nowrap text-xs md:text-sm lg:text-base flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[50px]">
                 <!-- Country flag -->

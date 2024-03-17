@@ -18,10 +18,10 @@
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
     <div class="table_wrapper rounded-md"> 
-      <div class="overflow-auto pr-3"> 
+      <div class="overflow-auto"> 
         <table class="min-w-[800px] md:min-w-full">
           <thead class="table_thead">
-            <tr class="">
+            <tr class="table_tr">
                 <!-- Table headers -->
               <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
                 <a
@@ -79,7 +79,7 @@
           </thead>
           <tbody class="text-gray-900 dark:text-[#A1A1AA]">
             {% for player in page_obj %}
-            <tr class="border-b-[#a1a1aa30]  border-b-[1px]">
+            <tr class="table_tr">
               <td class="table_td flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
                   <a href="{% url "player_detail" pk=player.pk %}" class="gap-1 text-center hover:underline">
