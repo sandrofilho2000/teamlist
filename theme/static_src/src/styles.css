@@ -159,6 +159,33 @@
   }
 }
 
+* ::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  left: -10px;
+  margin-left: -10px;
+}
+
+/* Track */
+* ::-webkit-scrollbar-track {
+  background: #fff;
+  margin-left: -10px;
+}
+
+/* Handle */
+* ::-webkit-scrollbar-thumb {
+  margin-left: -10px;
+  background: #a3a3a3;
+  width: 5px;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+* ::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
 
 table tr > td:first-child {
   padding-left: 3em;
