@@ -10,7 +10,7 @@ class Trophy(models.Model):
         return self.pk
     
     def __str__(self):
-        return self.img
+        return self.name
     
     class Meta:
         verbose_name_plural = "Troféus"

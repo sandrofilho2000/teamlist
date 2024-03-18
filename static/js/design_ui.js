@@ -130,12 +130,7 @@ $(document).ready(async function () {
             text_color.value = bg_color
 
             apply_colors(txt_color, bg_color)
-
-            if (txt_color !== old_text_color) {
-                unable_button()
-            } else {
-                enable_button()
-            }
+            enable_button()
         })
 
 

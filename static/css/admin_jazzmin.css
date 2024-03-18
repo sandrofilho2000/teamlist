@@ -37,3 +37,18 @@ html .btn-danger:hover{
     border-color: #dc3545;
     box-shadow: none;
 }
+
+
+html .btn-primary{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+html .btn-primary:hover{
+    color: #007bff;
+    background-color: #fff;
+    border-color: #007bff;
+    box-shadow: none;
+}
