@@ -26,9 +26,10 @@ class Country(models.Model):
         return self.pk
 
     class Meta:
-        verbose_name_plural = "Countries"
+        verbose_name_plural = "Países"
+        verbose_name = "País"
         ordering = ["name"]
-
+    
 
 
 class CountryColorForm(forms.ModelForm):

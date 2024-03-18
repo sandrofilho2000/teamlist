@@ -14,10 +14,10 @@ from trophies.views import TrophyListView
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("search_items/<str:query>/", SearchItemsView.as_view(), name="search_items"),  
-    path("", include("api.urls")),  # Include API URLs
     path("", TeamListView.as_view(), name="team_list"),
+    path("admin/", admin.site.urls),
+    path("", include("api.urls")),  
 ]
 
 countries_patterns = [
@@ -37,18 +37,22 @@ stadiums_patterns = [
 ]
 
 players_patterns = [
-    path("players/", PlayerListView.as_view(), name="player_list"),
     path("players/player/<int:pk>", PlayerInfoView.as_view(), name="player_detail"),
+    path("players/", PlayerListView.as_view(), name="player_list"),
 ]
 
 trophies_patterns = [
-    path("trophies/", TeamTrophyListView.as_view(), name="team_trophy_list"),
-    path("trophies/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="team_trophy_detail"),
+    path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_league_team_trophy_detail"),
+    path("countries/country/<int:country_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_team_trophy_detail"),
+    path("leagues/league/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="league_team_trophy_detail"),
+    path("teams/team/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="team_trophy_detail"),
+    path("trophies/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="trophy_detail"),
+    path("trophies/", TeamTrophyListView.as_view(), name="trophy_list"),
 ]
 
 teams_patterns = [
-    path("countries/country/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
     path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_league_team_detail"), 
+    path("countries/country/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
     path("leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="league_team_detail"), 
     path("teams/team/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
     path("teams/", TeamListView.as_view(), name="team_list"),
@@ -63,6 +67,10 @@ urlpatterns += trophies_patterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += path("__reload__/", include("django_browser_reload.urls")),
 urlpatterns += path('i18n/', include('django.conf.urls.i18n')), 
+
+handler404 = 'teams.views.handler404'
+
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += path("__debug__/", include("debug_toolbar.urls")),

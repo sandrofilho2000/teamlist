@@ -20,5 +20,5 @@ class TeamTrophy(models.Model):
 
     class Meta:
         db_table = 'team_trophy'  
-        verbose_name_plural = "Teams and Trophies"
-        verbose_name = 'Team Trophies'
+        verbose_name_plural = "Equipes e troféus"
+        verbose_name = 'Equipe e troféu'

@@ -164,7 +164,6 @@
             </tr>
             {% endfor %}
           </tbody>
-        
         </table>
       </div>
       
@@ -200,7 +199,16 @@
                   </td>
                   <td class="table_td">
                     <!-- Team name -->
-                      <a href="{% url "team_trophy_detail" pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                    {% if country_pk and league_pk %}
+                      <a href="{% url 'country_league_team_trophy_detail' country_pk=country_pk league_pk=league_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                    {% elif country_pk and not league_pk %}
+                      <a href="{% url 'country_team_trophy_detail' country_pk=country_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                    {% elif league_pk and not country_pk %}
+                      <a href="{% url 'league_team_trophy_detail' league_pk=league_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                    {% else %}
+                      <a href="{% url "team_trophy_detail" team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                    {% endif %}
+
                   </td>
                   <td class="table_td">
                     <!-- Average market value -->

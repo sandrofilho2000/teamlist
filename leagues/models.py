@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django import forms
 from django.db import models
 from colorfield.fields import ColorField
@@ -56,6 +57,7 @@ class League(models.Model):
 
     class Meta:
         ordering = ["id"]
+        verbose_name_plural = "Ligas"
 
 
 class LeagueColorForm(forms.ModelForm):

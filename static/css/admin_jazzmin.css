@@ -1,4 +1,39 @@
-#jazzy-logo{
-    display: flex;
-    align-items: center;
+html .btn-success{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    box-shadow: none;
+}
+html .btn-success:hover{
+    color: #218838;
+    background-color: #FFF;
+    border-color: #1e7e34;
+}
+
+html .btn-info{
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    box-shadow: none;
+}
+
+html .btn-info:hover{
+    color: #17a2b8;
+    background-color: #fff;
+    border-color: #17a2b8;
+    box-shadow: none;
+}
+
+html .btn-danger{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    box-shadow: none;
+}
+
+html .btn-danger:hover{
+    color: #dc3545;
+    background-color: #fff;
+    border-color: #dc3545;
+    box-shadow: none;
 }

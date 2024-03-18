@@ -144,7 +144,9 @@ class TeamInfoView(View):
             'paginator_players': paginator_players,
             'paginator_trophies': paginator_trophies,
             'image_url': image_url,
-            'form': form
+            'form': form,
+            'country_pk': country_pk,
+            'league_pk': league_pk,
         }
 
         return render(request, self.template_name, context)
@@ -164,3 +166,8 @@ class TeamInfoView(View):
         }
         
         return render(request, self.template_name, context)
+
+
+def handler404(request, exception):
+    # Render the 404.html template
+    return render(request, 'templates/atomic/pages/404.html', status=404)

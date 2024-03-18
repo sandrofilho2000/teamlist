@@ -13,6 +13,7 @@ class Trophy(models.Model):
         return self.img
     
     class Meta:
-        verbose_name_plural = "Trophies"
+        verbose_name_plural = "Troféus"
+        verbose_name = "Troféu"
 
     

@@ -17,6 +17,11 @@ class Player(models.Model):
     country_flag = models.CharField(max_length=255)
     country_name = models.CharField(max_length=255)
     value_market = models.FloatField(null=True, blank=True)
+    
+    class Meta:
+        verbose_name = "Jogador"
+        verbose_name_plural = "Jogadores"
+        ordering = ["name"]
 
     def __str__(self):
         return self.name

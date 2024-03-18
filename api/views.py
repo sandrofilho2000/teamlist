@@ -78,9 +78,6 @@ def getDesignUi(request):
     colors = get_most_common_colors(folder, img_name)
     colors = remove_duplicate_colors(colors)
     
-    print("IMG NAME: ", img_name)
-    print("FOLDER: ", folder)
-    
     if len(colors) >=5:
         background_color = colors[2]
         if sum(background_color) < 300:

@@ -19,6 +19,10 @@ class Team(models.Model):
     id_stadium = models.ForeignKey(Stadium, verbose_name="Stadium", on_delete=models.SET_NULL, null=True, blank=True)
     id_country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True)
     
+    class Meta:
+        verbose_name_plural = "Equipes"
+        verbose_name = 'Equipe'
+    
     def __str__(self):
         return self.name
     
