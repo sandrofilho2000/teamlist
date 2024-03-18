@@ -1,5 +1,7 @@
 from django.views.generic import ListView
 from stadiums.models import Stadium
+from django.shortcuts import get_object_or_404, render
+from django.views import View
 
 # Create your views here.
 def order_list(list=[], key="", order=""):
@@ -27,3 +29,31 @@ class StadiumListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+
+
+
+class StadiumInfoView(View):
+    model = Stadium
+    template_name = 'stadiums/stadium_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+
+        stadium = get_object_or_404(Stadium, pk=pk)
+        
+        imgs = ''
+        
+        if stadium.imgs:
+            imgs = stadium.imgs.split("%%")
+            imgs = [img for img in imgs if img]
+
+        print("STADIUM: ", stadium)    
+        
+        context = {
+            'stadium': stadium,
+            'imgs': imgs
+        }
+
+        return render(request, self.template_name, context)

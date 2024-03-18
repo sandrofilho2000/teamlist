@@ -44,11 +44,19 @@
     <span class="text-green-700 font-bold text-sm"> {{ team.total_market_value | passToFloat }} </span>
   </div>
 
+
   <div class="detail_card">
     <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
       ESTÁDIO: 
     </span>
-    <span class="text-green-700 font-bold text-sm"> {{ stadium.name }} </span>
+    {% if stadium.pk %}
+      <a href="{% url "stadium_detail" pk=stadium.pk %}" class="text-green-700 font-bold text-sm"> {{ stadium.name }} </a>
+
+    {% else %}
+      <span>
+        Sem dados
+      </span>
+    {% endif %}
   </div>
 </div>
 

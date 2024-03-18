@@ -3,7 +3,7 @@ from countries.views import CountryListView, CountryDetailView
 from leagues.views import LeagueListView, LeagueInfoView
 from players.views import PlayerInfoView, PlayerListView
 from search_items.views import SearchItemsView
-from stadiums.views import StadiumListView
+from stadiums.views import StadiumInfoView, StadiumListView
 from team_trophy.views import TeamTrophyInfoView, TeamTrophyListView
 from teams.views import TeamListView, TeamInfoView
 from django.contrib import admin
@@ -32,10 +32,6 @@ leagues_patterns = [
     path("leagues/", LeagueListView.as_view(), name="league_list"),
 ]
 
-stadiums_patterns = [
-    path("stadiums/", StadiumListView.as_view(), name="stadium_list"),
-]
-
 players_patterns = [
     path("countries/<int:country_pk>/leagues/<int:league_pk>/teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="country_league_team_player_detail"),
     path("countries/<int:country_pk>/teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="country_team_player_detail"),
@@ -61,6 +57,11 @@ teams_patterns = [
     path("leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="league_team_detail"), 
     path("teams/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
     path("teams/", TeamListView.as_view(), name="team_list"),
+]
+
+stadiums_patterns = [
+    path("stadium/<int:pk>/", StadiumInfoView.as_view(), name="stadium_detail"), 
+    path("stadiums/", StadiumListView.as_view(), name="stadium_list"),
 ]
 
 urlpatterns += countries_patterns
