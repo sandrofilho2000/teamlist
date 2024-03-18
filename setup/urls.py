@@ -62,6 +62,7 @@ urlpatterns += players_patterns
 urlpatterns += trophies_patterns
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += path("__reload__/", include("django_browser_reload.urls")),
+urlpatterns += path('i18n/', include('django.conf.urls.i18n')), 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += path("__debug__/", include("debug_toolbar.urls")),

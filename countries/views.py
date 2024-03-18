@@ -135,6 +135,8 @@ class CountryDetailView(ListView):
 
         context = {
             'country': country,
+            'main_item': country,
+            'main_item_admin': f"/admin/countries/country/{country.pk}/change/",
             'leagues': leagues,
             'top_league': top_league,
             'country_flag': country_flag,

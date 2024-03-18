@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from .admin_jazzmin import JAZZMIN_SETTINGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,10 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
-# Application definition
-
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -92,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "setup.wsgi.application"
 
-
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -158,3 +157,5 @@ INTERNAL_IPS = [
 
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+

@@ -18,6 +18,12 @@ class Country(models.Model):
     
     background_color = ColorField(verbose_name="Cor de fundo (vazio para automático)", null=True)  
     text_color = ColorField(verbose_name="Cor do texto (vazio para automático)", null=True)   
+    
+    def __str__(self):
+        return self.name
+    
+    def __int__(self):
+        return self.pk
 
     class Meta:
         verbose_name_plural = "Countries"

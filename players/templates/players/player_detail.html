@@ -34,7 +34,7 @@
       TIME ATUAL:
     </span>
     <a href={% url "team_detail" pk=related_team.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium dark:text-white">
-      <img width="16" src="/media/images/teams/{{ related_team.slug }}{{ related_team.id }}.webp" class="inline-block" />
+      <img width="16" src="/media/images/teams/{{ related_team.slug }}{{ related_team.id }}.webp" class="team_main_img inline-block" />
       {{ related_team.name | upper }} 
     </a> 
   </div>

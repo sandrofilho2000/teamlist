@@ -1,7 +1,6 @@
 async function get_colors_by_img() {
     imgName = $("img.league_main_img, img.team_main_img, img.country_flag").attr("src");
     imgClass = $("img.league_main_img, img.team_main_img, img.country_flag").attr("class");
-    console.log("IMG NAME: ", imgName)
     imgName = imgName.split("/")
     imgName = imgName[imgName.length - 1]
     folder = "leagues"
@@ -33,34 +32,37 @@ async function get_colors_by_img() {
 
 }
 
+function enable_button(){
+    $(".update_color_form button").removeClass("opacity-40")
+    $(".update_color_form button").removeClass("pointer-events-none")
+}
+
+function unable_button(){
+    $(".update_color_form button").addClass("opacity-40")
+    $(".update_color_form button").addClass("pointer-events-none")
+}
 
 
 function apply_colors(background_color = false, text_color = false) {
     if (background_color) {
-        $(".background-color").css("background-color", background_color).css("fill", background_color)
-        $(".edit_component").css("border-color", background_color)
-        $(".edit_component *").css("color", background_color)
-        $(".edit_component *").css("fill", background_color)
+        $(".table_tr:not(:has(th)), .card, .detail_card").hover(function() {
+            $(this).css("background-color", background_color);
+        }, function() {
+            $(this).css("background-color", ""); 
+        });
 
         $("#id_background_color").val(background_color)
     }
-
+    
     if (text_color) {
-        $("body > nav *:not(small)").css("color", text_color)
-        $("body > nav .line").css("background-color", text_color)
-        $("body > nav input").css("border-bottom-color", text_color)
-        $("body > nav").css("fill", text_color)
-        $("body > nav").css("stroke", text_color)
-        $(".data_list_ul").css("border-color", background_color)
-        $("aside").css("background-color", text_color)
-        $("aside").css("border-left-color", text_color)
-        $(".edit_component").css("background-color", text_color)
-        $("aside ul").css("background-color", text_color)
+        $(".table_tr:not(:has(th)), .card, .detail_card").hover(function() {
+            $(this).find("*").css("color", text_color);
+        }, function() {
+            $(this).find("*").css("color", ""); // Reset to default text color when not hovered
+        });
 
         $("#id_text_color").val(text_color)
     }
-
-
 }
 
 
@@ -83,20 +85,18 @@ $(document).ready(async function () {
     if ($("img.league_main_img, img.team_main_img, img.country_flag").attr("src")) {
         var { background_color: background_color_from_img, text_color: text_color_from_img } = await get_colors_by_img()
 
-
-
         var background_color = document.querySelector("input#new_background_color")
         background_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors(new_color, "")
-            $(".update_color_form button").removeClass("opacity-40")
+            enable_button()
         })
 
         var text_color = document.querySelector("input#new_text_color")
         text_color.addEventListener("change", function (e) {
             new_color = e.target.value
             apply_colors("", new_color)
-            $(".update_color_form button").removeClass("opacity-40")
+            enable_button()
         })
 
 
@@ -107,7 +107,7 @@ $(document).ready(async function () {
             apply_colors(old_background_color, old_text_color)
             background_color.value = old_background_color
             text_color.value = old_text_color
-            $(".update_color_form button").addClass("opacity-40")
+            unable_button()
         })
 
 
@@ -117,7 +117,7 @@ $(document).ready(async function () {
             background_color.value = background_color_from_img
             text_color.value = text_color_from_img
 
-            $(".update_color_form button").removeClass("opacity-40")
+            enable_button()
         })
 
 
@@ -132,9 +132,9 @@ $(document).ready(async function () {
             apply_colors(txt_color, bg_color)
 
             if (txt_color !== old_text_color) {
-                $(".update_color_form button").addClass("opacity-40")
+                unable_button()
             } else {
-                $(".update_color_form button").removeClass("opacity-40")
+                enable_button()
             }
         })
 

@@ -90,8 +90,7 @@
       border-b-[#a1a1aa30]
       border-b-[1px]
       last-of-type:border-0
-      hover:bg-[#3e1253]
-      transition-all
+      transition-primary
   }
 
   .mini_table_th {
@@ -141,10 +140,23 @@
     p-0
   }
 
-}
-
-.table_tr:hover .table_td {
-  color: #FFFFFF;
+  .edit_buttons{
+    @apply
+    fixed rounded-md 
+    right-2 z-20 
+    bottom-2 h-10 
+    w-10 grid 
+    place-items-center 
+    text-2xl
+    bg-zinc-900       
+    before:rounded-xl 
+    shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    before:pointer-events-none
+    before:absolute
+    before:rounded-tl-xl 
+    cursor-pointer
+    text-white
+  }
 }
 
 
@@ -214,7 +226,7 @@ input::placeholder {
 
 
 .transition-primary {
-  transition: all 0.3s ease 0s;
+  transition: all 100ms ease-out;
 }
 
 .toggle-menu {

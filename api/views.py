@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from PIL import Image
 from countries.models import Country
+from collections import Counter
 
 
 def rgb_to_hex(rgb):
@@ -14,7 +15,7 @@ def rgb_to_hex(rgb):
 
 def get_most_common_colors(folder, image_filename):
     # Open the image file
-    image_path = os.path.join("static", "images", folder, image_filename)
+    image_path = os.path.join("media", "images", folder, image_filename)
     with Image.open(image_path) as img:
         # Convert the image to RGB mode
         img = img.convert("RGB")
@@ -62,7 +63,13 @@ def remove_duplicate_colors(colors):
             new_colors.append(curr_color)
 
     new_colors = sorted(new_colors, key=lambda x: sum(x))
-    return new_colors
+    
+    if new_colors:
+        return new_colors
+    else:
+        colors.append((255, 255, 255))
+        colors.append((24, 24, 27))
+        return colors
   
 @api_view(['GET'])
 def getDesignUi(request):
@@ -70,8 +77,9 @@ def getDesignUi(request):
     img_name = request.query_params.get('img_name')
     colors = get_most_common_colors(folder, img_name)
     colors = remove_duplicate_colors(colors)
-
-    print(colors)
+    
+    print("IMG NAME: ", img_name)
+    print("FOLDER: ", folder)
     
     if len(colors) >=5:
         background_color = colors[2]

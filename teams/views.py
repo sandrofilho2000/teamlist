@@ -133,6 +133,8 @@ class TeamInfoView(View):
 
         context = {
             'team': team,
+            'main_item': team,
+            'main_item_admin': f"/admin/teams/team/{team.pk}/change/",
             'breadcrumbs': breadcrumbs,
             'players': players,
             'trophies': trophies,
@@ -151,13 +153,14 @@ class TeamInfoView(View):
         pk = kwargs.get('pk')
         team = get_object_or_404(Team, pk=pk)
         form = TeamColorForm(request.POST, instance=team)
+        
         if form.is_valid():
-            form.save()
-            return redirect('team_detail', pk=pk)  # Redirect to the same team detail page after updating color
-        # If form is not valid, re-render the team detail page with the form and team details
+            form.save() 
+            return redirect('team_detail', pk=pk) 
+        
         context = {
             'team': team,
             'form': form,
-            # Other context variables...
         }
+        
         return render(request, self.template_name, context)

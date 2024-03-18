@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Team
 from django.shortcuts import render, get_object_or_404
+from django.contrib import admin
+
+admin.site.site_header = "Sandro Filho DEV"
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):

@@ -1,4 +1,4 @@
-#!C:\xampp\htdocs\Not legacy\Python\Futeapp\.venv\Scripts\python.exe
+#!c:\xampp\htdocs\Not legacy\Python\Futeapp\.venv\Scripts\python.exe
 # -*- coding: utf-8 -*-
 import argparse
 import sys
