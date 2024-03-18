@@ -75,7 +75,7 @@ class LeagueInfoView(View):
         if country_pk:
             breadcrumbs+=[
                 {'url': f"/countries/", 'name': "Países"},
-                {'url': f"/countries/country/{country_pk}", 'name': related_country.name},
+                {'url': f"/countries/{country_pk}", 'name': related_country.name},
                 {'url': f"", 'name': league.name}
             ]
         else:
@@ -96,7 +96,7 @@ class LeagueInfoView(View):
             'league': league,
             'related_teams': related_teams ,
             'main_item': league,
-            'main_item_admin': f"/admin/leagues/league/{league.pk}/change/",
+            'main_item_admin': f"/admin/league/{league.pk}/change/",
             'related_teams_count': related_teams_count,
             'paginator': paginator,
             'related_country': related_country,

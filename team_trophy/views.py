@@ -57,7 +57,7 @@ class TeamTrophyInfoView(View):
         team_pk = kwargs.get('team_pk')
         league_pk = kwargs.get('league_pk')
         country_pk = kwargs.get('country_pk')
-        print("TEAM PK: ", team_pk)
+
         if team_pk:
             team = get_object_or_404(Team, pk=team_pk)
 
@@ -97,47 +97,44 @@ class TeamTrophyInfoView(View):
             if country_pk:
                 breadcrumbs += [
                     {'url': f"/countries/", 'name': "Países"},
-                    {'url': f"/countries/country/{country.id}", 'name': country.name}
+                    {'url': f"/countries/{country.id}", 'name': country.name}
                 ]
                 
                 if league_pk:
                     breadcrumbs += [
-                        {'url': f"/leagues/league/{league.id}", 'name': league.name}
+                        {'url': f"/countries/{country.id}/leagues/{league.id}", 'name': league.name}
                     ] 
                     
-                if team_pk:
+                    if team_pk:
+                        breadcrumbs += [
+                            {'url': f"/countries/{country.id}/leagues/{league.id}/teams/{team.id}", 'name': team.name}
+                        ] 
+                        
+                if team_pk and not league_pk:
                     breadcrumbs += [
-                        {'url': f"/teams/team/{team.id}", 'name': team.name}
+                        {'url': f"/countries/{country.id}/teams/{team.id}", 'name': team.name}
                     ] 
-                
                 
             elif league_pk:
                 breadcrumbs += [
                     {'url': f"/leagues/", 'name': "Ligas"},
-                    {'url': f"/leagues/league/{league.id}", 'name': league.name}
+                    {'url': f"/leagues/{league.id}", 'name': league.name}
                 ]
                 if team_pk:
                     breadcrumbs += [
-                        {'url': f"/teams/team/{team.id}", 'name': team.name}
+                        {'url': f"/teams/{team.id}", 'name': team.name}
                     ] 
-            elif team_pk:
+                    
+            elif team_pk and not league_pk:
                 breadcrumbs += [
                     {'url': f"/teams/", 'name': "Equipes"},
-                    {'url': f"/teams/team/{team.id}", 'name': team.name}
+                    {'url': f"/teams/{team.id}", 'name': team.name}
                 ]
 
                     
             breadcrumbs += [
                 {'url': "", 'name': trophy.name}
             ]
-            
-            
-        else:
-            breadcrumbs += [
-                {'url': f"/trophies/", 'name': 'Taças'},
-                {'url': "", 'name': trophy.name}
-            ]
-
  
         context = {
             'breadcrumbs': breadcrumbs,

@@ -68,7 +68,7 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/leagues/league/${item.id}/">
+                                <a class="flex gap-2 w-full" href="/league/${item.id}/">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
                                         <img width="28" height="28" src="${item.img}" />
                                     </span>
@@ -89,7 +89,7 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/teams/team/${item.id}/">
+                                <a class="flex gap-2 w-full" href="/teams/${item.id}/">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
                                         <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.webp" />
                                     </span>
@@ -131,7 +131,7 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/countries/country/${item.id}">
+                                <a class="flex gap-2 w-full" href="/countries/${item.id}">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
                                         <img width="28" height="28" src="${item.img}" />
                                     </span>

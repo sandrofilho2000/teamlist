@@ -21,14 +21,14 @@ urlpatterns = [
 ]
 
 countries_patterns = [
-    path("countries/country/<int:pk>", CountryDetailView.as_view(), name='countries_detail'),
+    path("countries/<int:pk>", CountryDetailView.as_view(), name='countries_detail'),
     path("country/<int:pk>", CountryDetailView.as_view(), name='country_detail'),
     path("countries/", CountryListView.as_view(), name='country_list'),
 ]
 
 leagues_patterns = [
-    path("countries/country/<int:country_pk>/leagues/<int:pk>/", LeagueInfoView.as_view(), name="country_league_detail"),  
-    path("leagues/league/<int:pk>/", LeagueInfoView.as_view(), name="league_detail"),  
+    path("countries/<int:country_pk>/leagues/<int:pk>/", LeagueInfoView.as_view(), name="country_league_detail"),  
+    path("league/<int:pk>/", LeagueInfoView.as_view(), name="league_detail"),  
     path("leagues/", LeagueListView.as_view(), name="league_list"),
 ]
 
@@ -37,24 +37,29 @@ stadiums_patterns = [
 ]
 
 players_patterns = [
+    path("countries/<int:country_pk>/leagues/<int:league_pk>/teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="country_league_team_player_detail"),
+    path("countries/<int:country_pk>/teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="country_team_player_detail"),
+    path("leagues/<int:league_pk>/teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="league_team_player_detail"),
+    path("countries/<int:country_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="country_player_detail"),
+    path("teams/<int:team_pk>/player/<int:pk>", PlayerInfoView.as_view(), name="team_player_detail"),
     path("players/player/<int:pk>", PlayerInfoView.as_view(), name="player_detail"),
     path("players/", PlayerListView.as_view(), name="player_list"),
 ]
 
 trophies_patterns = [
-    path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_league_team_trophy_detail"),
-    path("countries/country/<int:country_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_team_trophy_detail"),
-    path("leagues/league/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="league_team_trophy_detail"),
-    path("teams/team/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="team_trophy_detail"),
+    path("countries/<int:country_pk>/leagues/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_league_team_trophy_detail"),
+    path("countries/<int:country_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="country_team_trophy_detail"),
+    path("leagues/<int:league_pk>/teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="league_team_trophy_detail"),
+    path("teams/<int:team_pk>/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="team_trophy_detail"),
     path("trophies/trophy/<int:pk>", TeamTrophyInfoView.as_view(), name="trophy_detail"),
     path("trophies/", TeamTrophyListView.as_view(), name="trophy_list"),
 ]
 
 teams_patterns = [
-    path("countries/country/<int:country_pk>/leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_league_team_detail"), 
-    path("countries/country/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
+    path("countries/<int:country_pk>/leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_league_team_detail"), 
+    path("countries/<int:country_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="country_team_detail"), 
     path("leagues/<int:league_pk>/teams/<int:pk>/", TeamInfoView.as_view(), name="league_team_detail"), 
-    path("teams/team/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
+    path("teams/<int:pk>/", TeamInfoView.as_view(), name="team_detail"), 
     path("teams/", TeamListView.as_view(), name="team_list"),
 ]
 

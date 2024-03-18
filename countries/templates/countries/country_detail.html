@@ -106,7 +106,7 @@
             <tr class="table_tr">
               <td class="mini_table_td  flex flex-col justify-left align-left items-center gap-1 relative">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[35px] h-[35px]  block">
-                  <a href="{% url 'player_detail' pk=player.id %}" class="gap-1 hover:underline max-w-[100px] text-left">
+                  <a href="{% url 'country_player_detail' country_pk=country.pk pk=player.id %}" class="gap-1 hover:underline max-w-[100px] text-left">
                     {{ player.name }}
                   </a>
               </td>
@@ -381,7 +381,7 @@
                   <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[52px] h-[52px] min-w-[52px] min-h-[52px] block" />
                 </td>
                 <td class="table_td">
-                  <a href="{% url 'player_detail' pk=player.id %}" class="gap-1 text-center hover:underline">
+                  <a href="{% url 'country_player_detail' country_pk=country.pk pk=player.id %}" class="gap-1 hover:underline max-w-[100px] text-left">
                     {{ player.name }}
                   </a>
                 </td>

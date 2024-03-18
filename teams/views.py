@@ -110,17 +110,17 @@ class TeamInfoView(View):
             if country_pk:
                 breadcrumbs += [
                     {'url': f"/countries/", 'name': "Países"},
-                    {'url': f"/countries/country/{country.id}", 'name': country.name}
+                    {'url': f"/countries/{country.id}", 'name': country.name}
                 ]
             if league_pk:
                 if country_pk:
                     breadcrumbs += [
-                        {'url': f"/countries/country/{country.id}/leagues/{league.id}", 'name': league.name}
+                        {'url': f"/countries/{country.id}/leagues/{league.id}", 'name': league.name}
                     ]
                 else:
                     breadcrumbs += [
                         {'url': f"/leagues/", 'name': "Ligas"},
-                        {'url': f"/leagues/league/{league.id}", 'name': league.name}
+                        {'url': f"/league/{league.id}", 'name': league.name}
                     ]
             breadcrumbs += [
                 {'url': "", 'name': team.name}
@@ -134,7 +134,7 @@ class TeamInfoView(View):
         context = {
             'team': team,
             'main_item': team,
-            'main_item_admin': f"/admin/teams/team/{team.pk}/change/",
+            'main_item_admin': f"/admin/teams/{team.pk}/change/",
             'breadcrumbs': breadcrumbs,
             'players': players,
             'trophies': trophies,

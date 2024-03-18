@@ -140,9 +140,15 @@
   
               <td class="table_td flex flex-col justify-left align-center">
                 <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[38px] h-[38px] md:w-[52px] md:h-[52px] m-auto block" />
-                <a href="{% url 'player_detail' pk=player.id %}"class="block lg:max-w-[160px] max-w-[80px] m-auto text-center hover:underline whitespace-normal">
-                    {{ player.name }}
-                  </a>
+                {% if country_pk and league_pk %}
+                  <a class="text-center" href="{% url 'country_league_team_player_detail' country_pk=country_pk league_pk=league_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                {% elif country_pk and not league_pk %}
+                  <a class="text-center" href="{% url 'country_team_player_detail' country_pk=country_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                {% elif league_pk and not country_pk %}
+                  <a class="text-center" href="{% url 'league_team_player_detail' league_pk=league_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                {% else %}
+                  <a class="text-center" href="{% url "team_player_detail" team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                {% endif %}
               </td>
 
               <td class="table_td">
