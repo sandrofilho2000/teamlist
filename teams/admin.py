@@ -5,8 +5,8 @@ from django.contrib import admin
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'background_color', 'text_color']  # Adjusted list_display
-    search_fields = ['name']  # Adjusted search_fields
+    list_display = ['name', 'background_color', 'text_color']  
+    search_fields = ['name', 'slug'] 
 
 
     def get_readonly_fields(self, request, obj=None):

@@ -12,7 +12,7 @@
 
 <div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/ball.html' %}
-  <h2 class="background-color rounded-md"> 
+  <h2 class="h2_title"> 
     EQUIPES
   </h2>
 </div>
@@ -58,7 +58,7 @@
             {% for team in page_obj %}
             <tr class="table_tr">
               <!-- Team data -->
-              <td class="table_td text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+              <td class="table_td text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10">
                 <img width="40" src="{{ team.img }}" class="min-w-[40px]" />
               </td>
               <td class="table_td sticky dark:bg-zinc-900 left-[60px] z-10">

@@ -3,6 +3,9 @@ from stadiums.models import Stadium
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 
+from teams.models import Team
+from trophies.models import Trophy
+
 # Create your views here.
 def order_list(list=[], key="", order=""):
     if key:
@@ -40,6 +43,8 @@ class StadiumInfoView(View):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
+        team_pk = kwargs.get('team_pk')
+        team = Team.objects.filter(pk=team_pk).first()
 
         stadium = get_object_or_404(Stadium, pk=pk)
         
@@ -48,10 +53,27 @@ class StadiumInfoView(View):
         if stadium.imgs:
             imgs = stadium.imgs.split("%%")
             imgs = [img for img in imgs if img]
+            
+        else:
+            imgs = ["https://t4.ftcdn.net/jpg/04/17/36/11/360_F_417361125_RnrhT3Np0zB0UpeD7QlwuOoyghEGGjBX.jpg"]
+            
+        breadcrumbs = []
 
-        print("STADIUM: ", stadium)    
+        if team_pk:
+            breadcrumbs += [
+                {'url': f"/teams/", 'name': "Equipes"},
+                {'url': f"/teams/{team_pk}", 'name': team.name},
+                {'url': f"#", 'name': stadium.name}
+            ]
+            
+        else:
+            breadcrumbs += [
+                {'url': f"/stadiums/", 'name': 'Estádios'},
+                {'url': "", 'name': stadium.name}
+            ]
         
         context = {
+            'breadcrumbs':breadcrumbs,
             'stadium': stadium,
             'imgs': imgs
         }

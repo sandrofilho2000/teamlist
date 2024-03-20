@@ -5,7 +5,7 @@ from countries.models import Country
 @admin.register(Country)
 class TeamAdmin(admin.ModelAdmin):
     list_display = ['name'] 
-    search_fields = ['name']  
+    search_fields = ['name', 'slug']  
     
     def get_readonly_fields(self, request, obj=None):
         if request.user.groups.filter(name='Guest').exists():  # Assuming 'Guest' is the group name

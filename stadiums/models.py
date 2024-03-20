@@ -2,6 +2,7 @@ from django.db import models
 
 class Stadium(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
     seats = models.IntegerField(default=0)
     build_year = models.CharField(max_length=255)

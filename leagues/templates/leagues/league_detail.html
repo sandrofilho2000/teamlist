@@ -17,7 +17,7 @@
 <div class="flex justify-center">
   <div class="card ">
   <img width="80" src="{{ image_url }}" class="m-auto block league_main_img" />
-  <h2 class="text-center dark:text-white text-md font-medium">{{ league.name | upper }}</h2>
+  <h2 class="h2_title">{{ league.name | upper }}</h2>
   </div>
 </div>
 
@@ -104,7 +104,7 @@
           {% for team in related_teams %}
           <tr class="table_tr">
             <td class="table_td">
-                <img width="52" height="52" src="{{ team.img }}" class="object-cover w-[38px] md:w-[52px] m-auto block" />
+                <img width="52" height="52" src="{{ team.img }}" class="object-cover min-w-[38px] w-[38px] md:w-[52px] m-auto block" />
             </td>
             <td class="table_td">
               {% if country_pk %}

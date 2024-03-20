@@ -67,7 +67,8 @@
       text-xs
       md:text-sm
       text-left
-      px-2
+      px-3
+      md:px-6
       py-4
       last-of-type:text-right
   }
@@ -77,7 +78,8 @@
       text-xs
       md:text-sm
       font-light
-      px-2
+      px-3
+      md:px-6
       py-4
       whitespace-nowrap
       text-[#A1A1AA]
@@ -100,7 +102,8 @@
       text-xs
       md:text-sm
       text-left
-      px-2
+      px-3
+      md:px-6
       py-4
   }
 
@@ -108,7 +111,8 @@
     @apply 
       text-xs
       font-light
-      px-2
+      px-3
+      md:px-6
       py-4
       whitespace-nowrap
       text-[#A1A1AA]
@@ -158,6 +162,16 @@
     cursor-pointer
     text-white
   }
+
+  .h2_title{
+    @apply
+    text-base
+    inline-block
+    px-1
+    lg:px-4
+    dark:text-white
+    lg:text-2xl
+  }
 }
 
 * ::-webkit-scrollbar {
@@ -188,21 +202,6 @@
 }
 
 
-table tr > td:first-child {
-  padding-left: 3em;
-}
-
-table tr > td:last-child {
-  padding-right: 3em;
-}
-
-table thead th:first-child {
-  padding-left: 3em;
-}
-
-table thead th:last-child {
-  padding-right: 3em;
-}
 
 .montserrat {
   font-family: "Montserrat", sans-serif;
@@ -395,6 +394,10 @@ main h1 {
 
 .trophies_datalist_ul.active li:first-of-type::before{
   content: "Taças";
+}
+
+.stadiums_datalist_ul.active li:first-of-type::before{
+  content: "Estadios";
 }
 
 .datalist_ul.active li:first-of-type::before{

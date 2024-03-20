@@ -13,7 +13,7 @@
 
 <div class="inline-block m-auto mb-4 pr-1 relative left-1/2 -translate-x-1/2 pl-10">
   <img width="36" height="16" src="{{ country_flag }}" class="inline-block country_flag absolute top-1/2 transform -translate-y-[50%] left-2"/>
-  <h2 class="inline-block px-4 dark:text-white text-2xl font-regular">
+  <h2 class="h2_title ml-1">
     {{ country.name | upper }} 
   </h2>
 </div>
@@ -25,19 +25,20 @@
 
   
         {% if top_league %}
-        <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
-          <img class="h-16 lg:h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.webp" alt="{{top_league.name}}"/>
-          <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="dark:text-white mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
-          {% if "-" in top_league.balance %}
-              <span class="text-base lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
-          {% else %}
-              <span class="text-base lg:text-lg text-green-700 font-bold">{{ top_league.balance|passToFloat }}</span>      
-          {% endif %}
-        </div>
+          <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
+            <img class="h-16 lg:h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.webp" alt="{{top_league.name}}"/>
+            <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="dark:text-white mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
+            {% if "-" in top_league.balance %}
+                <span class="text-base lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
+            {% else %}
+                <span class="text-base lg:text-lg text-green-700 font-bold">{{ top_league.balance|passToFloat }}</span>      
+            {% endif %}
+          </div>
         {% else %}
-        <div class="card h-full ">
-          <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
-        </div>        {% endif %}
+          <div class="card h-full ">
+            <p class="text-xs text-center font-sm block w-auto p-1 dark:text-[#A1A1AA]">SEM DADOS</p>
+          </div>        
+        {% endif %}
     </div>
   
     <div class='w-full lg:w-1/2'>

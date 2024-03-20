@@ -24,6 +24,7 @@ class LeagueAdmin(admin.ModelAdmin):
         "country_name",
         "country_img",
         "small_img",
+        "slug"
     ]
     
     def get_readonly_fields(self, request, obj=None):

@@ -11,9 +11,9 @@
 
 
 <!-- Main content section -->
-<div class="flex gap-2 justify-center">
+<div class="flex gap-20 justify-center">
   <div class="card">
-  <h2 class="text-center dark:text-white text-base font-medium">{{ stadium.name | upper }}</h2>
+  <h2 class="h2_title">{{ stadium.name | upper }}</h2>
   </div>
 </div>
 
@@ -21,98 +21,98 @@
 <!-- Table container -->
 <div class="sm:mx-0.5">
   <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
-    <div class="team_tables table_wrapper rounded-md flex p-3 gap-3">
+    <div class="team_tables max-w-[600px] m-auto mt-3 table_wrapper rounded-md flex justify-between p-6 gap-3">
       <!-- Table for displaying trophies data -->
-      <div class="overflow-auto imgs wrapper flex flex-col items-start justify-center gap-3 px-3 max-h-[420px] ">
+      <div class="overflow-auto imgs wrapper flex flex-col items-start justify-center gap-3 max-h-[420px] ">
         {% for img in imgs %}
-          <img src="{{ img }}" alt="{{ stadium.name }}" >
+          <img class="w-52" src="{{ img }}" alt="{{ stadium.name }}" >
           {% endfor %}
         </div>
-        <div class="infos text-white">
+        <div class="infos text-white flex flex-col gap-3 justify-center">
           {% if stadium.seats %}
-            <div class="flex gap-2 justify-between seats">
-              <span>
+            <div class="flex gap-20 justify-between seats">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Assentos: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.seats }}
               </span>
             </div>
           {% endif %}
           {% if stadium.staterooms %}
-            <div class="flex gap-2 justify-between staterooms">
-              <span>
+            <div class="flex gap-20 justify-between staterooms">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Camarotes: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.staterooms }}
               </span>
             </div>
           {% endif %}
           {% if stadium.build_year %}
-            <div class="flex gap-2 justify-between build_year">
-              <span>
+            <div class="flex gap-20 justify-between build_year">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Ano de construção: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.build_year }}
               </span>
             </div>
           {% endif %}
           {% if stadium.grass_type %}
-            <div class="flex gap-2 justify-between grasstype">
-              <span>
+            <div class="flex gap-20 justify-between grasstype">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Tipo de gramado: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.grass_type }}
               </span>
             </div>
           {% endif %}
           {% if stadium.grass_heat %}
-            <div class="flex gap-2 justify-between grassheat">
-              <span>
+            <div class="flex gap-20 justify-between grassheat">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Aquecimento do gramado: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.grass_heat }}
               </span>
             </div>
           {% endif %}
           {% if stadium.grass_size %}
-            <div class="flex gap-2 justify-between grasssize">
-              <span>
+            <div class="flex gap-20 justify-between grasssize">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Tamanho do campo: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.grass_size }}
               </span>
             </div>
           {% endif %}
           {% if stadium.build_value %}
-            <div class="flex gap-2 justify-between build_value">
-              <span>
+            <div class="flex gap-20 justify-between build_value">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Valor da construção: 
               </span>
 
-              <span class="text-right">
+              <span class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.build_value | passToFloat }}
               </span>
             </div>
           {% endif %}
           {% if stadium.build_value %}
-            <div class="flex gap-2 justify-between build_value">
-              <span>
+            <div class="flex gap-20 justify-between build_value">
+              <span class="text-xs md:text-sm text-[#A1A1AA]">
                 Site oficial: 
               </span>
 
-              <a href="{{ stadium.oficial_site }}" class="text-right">
+              <a href="{{ stadium.oficial_site }}" class="text-right text-xs md:text-sm text-[#A1A1AA]">
                 {{ stadium.oficial_site }}
               </a>
             </div>

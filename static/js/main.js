@@ -53,7 +53,7 @@ $(".search_field input").keyup((e) => {
                     return response.json();
                 })
                 .then(data => {
-                    let { leagues, teams, players, countries, trophies } =  data
+                    let { leagues, teams, players, countries, trophies, stadiums } =  data
                                         
                     $(".search_recomendation").removeClass("hidden")
                     if (leagues.length) {
@@ -63,7 +63,7 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/league/${item.id}/">
+                                <a class="flex gap-2 w-full" href="/leagues/${item.id}/">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
                                         <img width="28" height="28" src="${item.img}" />
                                     </span>
@@ -180,6 +180,37 @@ $(".search_field input").keyup((e) => {
                         });
                         if (trophies.length == 10){
                             $(".trophies_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/trophies/${query}'>Ver todos os resultados para taças</a></li>`)
+                        }
+
+
+                    }else{
+                        $(".trophies_datalist_ul").removeClass("content")
+                        $(".trophies_datalist_ul").html("<small>Nenhuma taça encontrada</small>");
+                    }
+
+
+                    if (stadiums.length) {
+                        $(".stadiums_datalist_ul").addClass("active")
+                        stadiums.forEach((item) => {
+                            const li = document.createElement("li");
+                            li.setAttribute("title", item.name);
+                            let img = 'https://t4.ftcdn.net/jpg/04/17/36/11/360_F_417361125_RnrhT3Np0zB0UpeD7QlwuOoyghEGGjBX.jpg'
+                            if (item.imgs){
+                                img = item.imgs.split("%%")[0]
+                            }
+                            li.innerHTML = `
+                                <a class="flex gap-2 w-full" href="/stadiums/${item.id}">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center pl-4">
+                                        <img height="28" src="${img}" style="max-height: 36px; max-width: 40px"  />
+                                    </span>
+                                    <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
+                                </a>
+                            `;
+                            $(".stadiums_datalist_ul").append(li);
+
+                        });
+                        if (stadiums.length == 10){
+                            $(".stadiums_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/stadiums/${query}'>Ver todos os resultados para estádios</a></li>`)
                         }
 
 

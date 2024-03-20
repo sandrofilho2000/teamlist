@@ -21,7 +21,7 @@ urlpatterns = [
 ]
 
 countries_patterns = [
-    path("country/<int:pk>", CountryDetailView.as_view(), name='country_detail'),
+    path("countries/<int:pk>", CountryDetailView.as_view(), name='country_detail'),
     path("countries/", CountryListView.as_view(), name='country_list'),
 ]
 
@@ -59,7 +59,8 @@ teams_patterns = [
 ]
 
 stadiums_patterns = [
-    path("stadium/<int:pk>/", StadiumInfoView.as_view(), name="stadium_detail"), 
+    path("stadiums/<int:pk>/", StadiumInfoView.as_view(), name="stadium_detail"), 
+    path("teams/<int:team_pk>/stadiums/<int:pk>/", StadiumInfoView.as_view(), name="team_stadium_detail"), 
     path("stadiums/", StadiumListView.as_view(), name="stadium_list"),
 ]
 

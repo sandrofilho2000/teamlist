@@ -8,9 +8,9 @@
 {% block list_content %}
 {% load custom_filters %}
 
-<div class="block sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/flag.html' %}
-  <h2 class="background-color rounded-md">
+  <h2 class="h2_title">
     PAÍSES
   </h2>
 </div>
@@ -63,7 +63,7 @@
               </td>
               <td class="table_td sticky dark:bg-zinc-900 left-[50px] z-10">
                 <!-- Country name -->
-                <a href="{% url 'countries_detail' pk=country.pk %}">
+                <a href="{% url 'country_detail' pk=country.pk %}">
                   <span class="hover:underline">{{ country.name }}</span>
                 </a>
               </td>

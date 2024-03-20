@@ -15,7 +15,7 @@
 <div class="flex justify-center">
   <div class="card">
   <img width="80" src="{{ image_url }}" class="m-auto block team_main_img" />
-  <h2 class="text-center dark:text-white text-base font-medium">{{ team.name | upper }}</h2>
+  <h2 class="h2_title">{{ team.name | upper }}</h2>
   </div>
 </div>
 
@@ -50,7 +50,7 @@
       ESTÁDIO: 
     </span>
     {% if stadium.pk %}
-      <a href="{% url "stadium_detail" pk=stadium.pk %}" class="text-green-700 font-bold text-sm"> {{ stadium.name }} </a>
+      <a href="{% url "team_stadium_detail" team_pk=team.pk pk=stadium.pk %}" class="text-green-700 font-bold text-sm"> {{ stadium.name }} </a>
 
     {% else %}
       <span>
