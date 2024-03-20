@@ -83,11 +83,6 @@ class LeagueInfoView(View):
                 {'url': f"/leagues/", 'name': "Ligas"},
                 {'url': f"", 'name': league.name}
             ]
-            
-        
-
-        
-        
         
         image_name = f"{league.slug}{league.id}.webp"
         image_url = f"/media/images/leagues/{image_name}"  

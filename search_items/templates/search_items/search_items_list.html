@@ -1,0 +1,36 @@
+{% extends "atomic/pages/list.html" %} 
+
+{% block list_page_title %}
+  Resultados | Teams List
+{% endblock list_page_title %}
+
+{% block list_content %}
+{% load custom_filters %}
+
+<!-- Main content section -->
+<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+  <h2 class="background-color rounded-md">
+    RESULTADOS PARA "{{ query }}"
+  </h2>
+</div>
+
+<div class="sm:mx-0.5">
+  <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
+    <div class="table_wrapper rounded-md p-3">
+      <ul>
+      {% for item in page_obj %}
+          <li class="text-[#A1A1AA] flex items-center justify-start p-2 border-b-[#a1a1aa30] border-b-[1px] last-of-type:border-b-0 last-of-type:pb-0 first-of-type:pt-0">
+            <img src="{% if table == "countries" %}{{item.flag}}{% else %}{{item.img}}{% endif %}" class="{% if table == "players" %} rounded-full w-[52px] h-[52px] {% endif %} object-cover block max-w-[50px]" />
+            <a href="/{{table}}/{{item.pk}}" class="ml-1 text-left hover:underline">
+              {{ item.name }}
+            </a>
+          </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Include pagination -->
+{% include 'atomic/organisms/list_pagination.html' %}
+{% endblock list_content %}

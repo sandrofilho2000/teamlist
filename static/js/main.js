@@ -34,6 +34,7 @@ $(".search_field input").keyup((e) => {
     $(".datalist_ul").html("");
     $(".datalist_ul").removeClass("active")
     
+    console.log(e.target.value)
 
     clearTimeout(typingTimer);
     if (e.target.value) {
@@ -52,14 +53,8 @@ $(".search_field input").keyup((e) => {
                     return response.json();
                 })
                 .then(data => {
-                    let { leagues } =  data
-                    let { teams } =  data
-                    let { players } =  data
-                    let { countries } =  data
-                    let { trophies } =  data
-                    
-                    let data_length = leagues.length + teams.length + players.length + countries.length + trophies.length
-                    
+                    let { leagues, teams, players, countries, trophies } =  data
+                                        
                     $(".search_recomendation").removeClass("hidden")
                     if (leagues.length) {
                         $(".leagues_datalist_ul").addClass("active")
@@ -76,8 +71,13 @@ $(".search_field input").keyup((e) => {
                                 </a>
                             `;
                             $(".leagues_datalist_ul").append(li);
-
                         });
+
+                        if (leagues.length == 10){
+                            $(".leagues_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/leagues/${query}'>Ver todos os resultados para ligas</a></li>`)
+                        }
+                        
+
                     }else{
                         $(".leagues_datalist_ul").removeClass("content")
                         $(".leagues_datalist_ul").html("<small>Nenhuma liga encontrada</small>");
@@ -97,8 +97,12 @@ $(".search_field input").keyup((e) => {
                                 </a>
                             `;
                             $(".teams_datalist_ul").append(li);
-
                         });
+                        if (teams.length == 10){
+                            $(".teams_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/teams/${query}'>Ver todos os resultados para equipes</a></li>`)
+                        }
+
+
                     }else{
                         $(".teams_datalist_ul").removeClass("content")
                         $(".teams_datalist_ul").html("<small>Nenhum time encontrado</small>");
@@ -110,8 +114,8 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full items-center" href="/players/player/${item.id}">
-                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center">
+                                <a class="flex gap-2 w-full items-center text-sm" href="/players/${item.id}">
+                                    <span class="min-w-[50px] min-h-[50px] grid place-items-center text-sm">
                                         <img height="36" width="36" class="max-w-9 max-h-9 w-9 h-9 rounded-full object-cover" style="max-height: 36px" src="${item.img}" />
                                     </span
                                     <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
@@ -120,6 +124,12 @@ $(".search_field input").keyup((e) => {
                             $(".players_datalist_ul").append(li);
 
                         });
+                        
+                        if (players.length == 10){
+                            $(".players_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/players/${query}'>Ver todos os resultados para jogadores</a></li>`)
+                        }
+
+
                     }else{
                         $(".players_datalist_ul").removeClass("content")
                         $(".players_datalist_ul").html("<small>Nenhum jogador encontrado</small>");
@@ -141,6 +151,12 @@ $(".search_field input").keyup((e) => {
                             $(".countries_datalist_ul").append(li);
 
                         });
+                        if (countries.length == 10){
+                            $(".countries_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/countries/${query}'>Ver todos os resultados para países</a></li>`)
+
+                        }
+
+
                     }else{
                         $(".countries_datalist_ul").removeClass("content")
                         $(".countries_datalist_ul").html("<small>Nenhum país encontrado</small>");
@@ -152,7 +168,7 @@ $(".search_field input").keyup((e) => {
                             const li = document.createElement("li");
                             li.setAttribute("title", item.name);
                             li.innerHTML = `
-                                <a class="flex gap-2 w-full" href="/trophies/trophy/${item.id}">
+                                <a class="flex gap-2 w-full" href="/trophies/${item.id}">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
                                         <img height="28" src="${item.img}" style="max-height: 36px"  />
                                     </span>
@@ -162,6 +178,11 @@ $(".search_field input").keyup((e) => {
                             $(".trophies_datalist_ul").append(li);
 
                         });
+                        if (trophies.length == 10){
+                            $(".trophies_datalist_ul").append(`<li class='text-center text-xs' style='padding: 20px 40px;'><a href='/search/trophies/${query}'>Ver todos os resultados para taças</a></li>`)
+                        }
+
+
                     }else{
                         $(".trophies_datalist_ul").removeClass("content")
                         $(".trophies_datalist_ul").html("<small>Nenhuma taça encontrada</small>");

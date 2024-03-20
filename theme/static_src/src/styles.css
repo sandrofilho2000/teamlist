@@ -91,6 +91,7 @@
       border-b-[1px]
       last-of-type:border-0
       transition-primary
+      last-of-type:border-b-0
   }
 
   .mini_table_th {
