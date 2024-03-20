@@ -13,7 +13,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from .jazzmin_settings import JAZZMIN_SETTINGS
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "theme/static",
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
