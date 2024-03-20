@@ -137,11 +137,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "theme/static",
-]
-
+STATIC_URL = "theme/static/"
+STATICFILES_DIRS = [BASE_DIR / "theme/static"]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
@@ -154,11 +151,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 INTERNAL_IPS = [
-    
     "127.0.0.1"
-    
 ]
 
 
-NPM_BIN_PATH = "npm"  
+NPM_BIN_PATH = "npm"
 
