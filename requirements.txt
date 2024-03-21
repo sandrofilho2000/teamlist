@@ -9,16 +9,12 @@ datetime-truncate
 Django
 django-bower
 django-colorfield
-django-debug-toolbar
-django-geojson
 django-jazzmin
-django-leaflet
 django-memoize
 django-multiselectfield
 django-nvd3
 django-tailwind
 djangorestframework
-folium
 googletrans
 h11
 h2
