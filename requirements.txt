@@ -1,5 +1,5 @@
 admin_tools==0.1
-asgiref==3.5.2
+asgiref==asgiref==3.7.2
 beautifulsoup4==4.12.3
 branca==0.7.1
 certifi==2024.2.2
