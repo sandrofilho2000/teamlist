@@ -7,9 +7,8 @@ chardet
 charset-normalizer
 datetime-truncate
 Django
-django-admin-charts
 django-bower
-django-browser-reload
+django-browser-reload==1.12.1
 django-colorfield
 django-debug-toolbar
 django-geojson
