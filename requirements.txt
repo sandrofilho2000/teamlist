@@ -1,6 +1,6 @@
 admin_tools>=0.1
 asgiref
-beautifulsoup4==4.12.3
+beautifulsoup4
 branca==0.7.1
 certifi==2024.2.2
 chardet==3.0.4
