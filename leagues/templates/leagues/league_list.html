@@ -9,7 +9,7 @@
 {% load custom_filters %}
 
 <!-- Main content section -->
-<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/league.html' %}
   <h2 class="h2_title">
     LIGAS
@@ -26,7 +26,7 @@
             <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th"></th>
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+              <th scope="col" class="table_th sticky bg-zinc-900 left-0 z-10 pl-3">
                 <!-- Column header for league name -->
                 <a href="{% url 'league_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Liga 
@@ -72,7 +72,7 @@
               <td class="table_td">
                 <img width="40" src="{{ league.small_img }}" class="min-w-[40px]" />
               </td>
-              <td class="table_td dark:bg-zinc-900 sticky left-0 z-10 pl-3">
+              <td class="table_td bg-zinc-900 sticky left-0 z-10 pl-3">
                 <!-- League name -->
                 <a href="{% url 'league_detail' pk=league.pk %}" class="flex items-center justify-start gap-1">
                   <img src="{{ league.country_img }}" />

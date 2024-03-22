@@ -8,7 +8,7 @@
 {% block list_content %}
 {% load custom_filters %}
 
-<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/flag.html' %}
   <h2 class="h2_title">
     PAÍSES
@@ -23,8 +23,8 @@
           <thead class="table_thead">
             <tr class="table_tr">
               <!-- Table headers -->
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[50px]"></th>
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-[50px] z-10">
+              <th scope="col" class="table_th sticky bg-zinc-900 left-0 z-10 pl-3 w-[50px]"></th>
+              <th scope="col" class="table_th sticky bg-zinc-900 left-[50px] z-10">
                 <!-- Column header for country -->
                 <a href="{% url 'country_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   País <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -50,7 +50,7 @@
               </th>
             </tr>
           </thead>
-          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+          <tbody class="text-gray-900 text-[#A1A1AA]">
             <!-- Loop through countries -->
             {% for country in page_obj %}
             <!-- Apply row class -->
@@ -61,7 +61,7 @@
                 <img src="/media/images/countries/{{ country.slug }}{{ country.id }}.webp" class="inline-block w-[30px] min-w-[30px]"/>
 
               </td>
-              <td class="table_td sticky dark:bg-zinc-900 left-[50px] z-10">
+              <td class="table_td sticky bg-zinc-900 left-[50px] z-10">
                 <!-- Country name -->
                 <a href="{% url 'country_detail' pk=country.pk %}">
                   <span class="hover:underline">{{ country.name }}</span>

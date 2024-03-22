@@ -123,12 +123,12 @@
     items-center
     justify-center
     rounded-sm
-    dark:before:rounded-xl
-    dark:shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
-    dark:before:pointer-events-none
-    dark:before:-inset-px
-    dark:before:absolute
-    dark:bg-zinc-900
+    before:rounded-xl
+    shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
+    before:pointer-events-none
+    before:-inset-px
+    before:absolute
+    bg-zinc-900
   }
 
   .pagination_input{
@@ -167,7 +167,7 @@
     inline-block
     px-1
     lg:px-4
-    dark:text-white
+    text-white
     lg:text-2xl
   }
 }

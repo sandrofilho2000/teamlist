@@ -13,7 +13,7 @@
   {% include 'atomic/cells/links.html' %}
 </head>
 
-<body class=" dark:bg-[#09090b] {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
+<body class=" bg-[#09090b] {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
   <!-- Include admin header -->
   {% include 'atomic/organisms/admin_header.html' %}
 
@@ -30,8 +30,8 @@
 
     {% block content %}{% endblock content %}
     <a href="https://www.sandrofilho.dev/" target="_blank" class="feito_por absolute bottom-2 left-1/2 gap-1 transform translate-x-[-50%] flex items-center">
-      <img src="/media/images/system/sandro_filho_dev.webp" class="dark:brightness-0 dark:invert"/>
-      <span class="text-sm dark:text-[#A1A1AA] whitespace-nowrap">
+      <img src="/media/images/system/sandro_filho_dev.webp" class="brightness-0 invert"/>
+      <span class="text-sm text-[#A1A1AA] whitespace-nowrap">
         Feito por <strong>Sandro Filho DEV</strong> 
       </span>
     </a>

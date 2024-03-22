@@ -20,39 +20,39 @@
 
 <div class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-2 my-6 mx-auto min-w-full sm:px-6 lg:px-8">
   <div class="detail_card">
-    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+    <span class="text-xs md:text-sm text-[#A1A1AA]">
       NACIONALIDADE:
     </span>
-    <a href={% url "country_detail" pk=related_country.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium dark:text-white">
+    <a href={% url "country_detail" pk=related_country.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium text-white">
       <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.webp" class="inline-block h-[16px]" />
       {{ related_country.name | upper }} 
     </a>  
   </div>
 
   <div class="detail_card">
-    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+    <span class="text-xs md:text-sm text-[#A1A1AA]">
       TIME ATUAL:
     </span>
-    <a href={% url "team_detail" pk=related_team.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium dark:text-white">
+    <a href={% url "team_detail" pk=related_team.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium text-white">
       <img width="16" src="/media/images/teams/{{ related_team.slug }}{{ related_team.id }}.webp" class="team_main_img inline-block" />
       {{ related_team.name | upper }} 
     </a> 
   </div>
   
   <div class="detail_card">
-    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+    <span class="text-xs md:text-sm text-[#A1A1AA]">
       NASCIMENTO:
     </span>
-    <span class="text-xs md:text-sm font-medium dark:text-white">
+    <span class="text-xs md:text-sm font-medium text-white">
       {{ player.birthdate | format_date_with_age }}
     </span> 
   </div>
 
   <div class="detail_card">
-    <span class="text-xs md:text-sm dark:text-[#A1A1AA]">
+    <span class="text-xs md:text-sm text-[#A1A1AA]">
       VALOR DE MERCADO:
     </span>
-    <span class="text-xs md:text-sm dark:text-green-700 font-bold">
+    <span class="text-xs md:text-sm text-green-700 font-bold">
       {{ player.value_market|passToFloat }}
     </span> 
   </div>

@@ -8,7 +8,7 @@
 {% block list_content %}
 {% load custom_filters %}
 
-<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/trophy.html' %}
   <h2 class="h2_title">
     Jogadores
@@ -23,7 +23,7 @@
           <thead class="table_thead">
             <tr class="table_tr">
                 <!-- Table headers -->
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
+              <th scope="col" class="table_th sticky bg-zinc-900 left-0 z-10 pl-3 w-[120px] text-center">
                 <a
                   href="{% url 'trophy_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}"
                 >
@@ -34,10 +34,10 @@
               </th>
             </tr>
           </thead>
-          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+          <tbody class="text-gray-900 text-[#A1A1AA]">
             {% for trophy in page_obj %}
             <tr class="table_tr">
-              <td class="table_td flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+              <td class="table_td flex flex-col justify-left align-center sticky bg-zinc-900 left-0 z-10 pl-3">
                 <img width="52" height="52" src="{{ trophy.id_trophy.img }}" class="object-cover rounded-full w-[52px] h-[52px] m-auto block" />
                   <a href="{% url "trophy_detail" pk=trophy.pk %}" class="gap-1 text-center hover:underline">
                     {{ trophy.id_trophy.name }}

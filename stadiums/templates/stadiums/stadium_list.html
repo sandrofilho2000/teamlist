@@ -8,7 +8,7 @@
 {% block list_content %}
 {% load custom_filters %}
 
-<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/stadium.html' %}
   <h2 class="h2_title">
     Estádios
@@ -26,7 +26,7 @@
             <tr class="table_tr">
               <!-- Table headers -->
               <th scope="col" class="table_th"></th>
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+              <th scope="col" class="table_th sticky bg-zinc-900 left-0 z-10 pl-3">
                 <!-- Column header for stadium -->
                 <a href="{% url 'stadium_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Estádio <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
               </th>
             </tr>
           </thead>
-          <tbody class="text-gray-900 dark:text-[#A1A1AA]">
+          <tbody class="text-gray-900 text-[#A1A1AA]">
             <!-- Loop through countries -->
             {% for stadium in page_obj %}
             <!-- Apply row class -->
@@ -67,7 +67,7 @@
                 <!-- Country name -->
                 <img src = "{{ stadium.imgs | get_stadium_img }}" width="190" height="127" class="min-w-[40px]" />
               </td>
-              <td class="table_td sticky dark:bg-zinc-900 left-0 z-10 pl-3">
+              <td class="table_td sticky bg-zinc-900 left-0 z-10 pl-3">
                 <!-- Country name -->
                 <a href="{% url "stadium_detail" pk=stadium.pk %}">
                   <span class="hover:underline">{{ stadium.name }}</span>
@@ -96,7 +96,7 @@
                   {% endif %}
                 </span>
               </td>  
-              <td class="table_td sticky dark:bg-zinc-900 left-[60px] z-10 ">
+              <td class="table_td sticky bg-zinc-900 left-[60px] z-10 ">
                 <span>
                   {{ stadium.build_value | passToFloat }}
                 </span>

@@ -10,7 +10,7 @@
 
 <!-- Main content section -->
 
-<div class="sm:px-6 lg:px-8 text-2xl dark:text-white flex items-center gap-1 justify-center my-[14px]">
+<div class="sm:px-6 lg:px-8 text-2xl text-white flex items-center gap-1 justify-center my-[14px]">
   {% include 'icons/ball.html' %}
   <h2 class="h2_title"> 
     EQUIPES
@@ -26,8 +26,8 @@
           <thead class="table_thead">
             <tr class="table_tr">
               <!-- Table headers -->
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-0 z-10 pl-3"></th>
-              <th scope="col" class="table_th sticky dark:bg-zinc-900 left-[60px] z-10">
+              <th scope="col" class="table_th sticky bg-zinc-900 left-0 z-10 pl-3"></th>
+              <th scope="col" class="table_th sticky bg-zinc-900 left-[60px] z-10">
                 <!-- Column header for team name -->
                 <a href="{% url 'team_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                   Equipe <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -58,10 +58,10 @@
             {% for team in page_obj %}
             <tr class="table_tr">
               <!-- Team data -->
-              <td class="table_td text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky dark:bg-zinc-900 left-0 z-10">
+              <td class="table_td text-xs md:text-sm lg:text-md flex flex-col justify-left align-center sticky bg-zinc-900 left-0 z-10">
                 <img width="40" src="{{ team.img }}" class="min-w-[40px]" />
               </td>
-              <td class="table_td sticky dark:bg-zinc-900 left-[60px] z-10">
+              <td class="table_td sticky bg-zinc-900 left-[60px] z-10">
                 <!-- Team name -->
                 <a href="{% url 'team_detail' pk=team.pk %}" class="flex items-center justify-start gap-1 hover:underline">{{ team.name }}</a>
               </td>

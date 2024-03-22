@@ -3,7 +3,7 @@
 {% if breadcrumbs %}
 <div class="w-max text-left max-w-[340px] block">
     <nav aria-label="breadcrumb" class="mb-4">
-      <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 text-blue-gray-900 dark:text-white sm:px-6 lg:px-8">
+      <ol class="flex w-full flex-wrap items-center rounded-md bg-blue-gray-50 bg-opacity-60 py-2 text-blue-gray-900 text-white sm:px-6 lg:px-8">
         {% for breadcrumb in breadcrumbs %}
         {% cycle '' 'opacity-60' as row_class silent %}
             <li class="flex cursor-pointer mb-[-3px] items-center font-sans text-sm font-normal leading-normal antialiased transition-colors duration-300 hover:opacity-80 first-of-type:opacity-60">

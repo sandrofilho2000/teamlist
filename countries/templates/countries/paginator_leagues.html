@@ -2,7 +2,7 @@
 
 {% if paginator_leagues.num_pages > 1 %}
   <div tab="leagues" class="pagination pagination_leagues mt-4 sm:px-6 lg:px-8 {% if request.GET.tab == 'leagues' or not request.GET.tab %}{% else %} hidden {% endif %}">
-    <span class="text-sm text-gray-700 dark:text-white  flex gap-1 pb-5 items-center step-links">
+    <span class="text-sm text-gray-700 text-white  flex gap-1 pb-5 items-center step-links">
       {% if related_items.has_previous %}
         <a href="{{ url|set_pagination_params }}page=1" class="pagination_a
         ">
