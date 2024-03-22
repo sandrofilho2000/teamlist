@@ -2,7 +2,7 @@
 
 {% if paginator.num_pages > 1 %}
   <div class="pagination mt-4 sm:px-6 lg:px-8">
-    <span class="text-sm text-gray-700 flex gap-1 pb-5 items-center step-links">
+    <span class="text-sm  flex gap-1 pb-5 items-center step-links">
       {% if related_items.has_previous %}
         <a href="{{ url|set_pagination_params }}page=1" class="pagination_a">
           <i class="fa fa-caret-left" aria-hidden="true"></i>

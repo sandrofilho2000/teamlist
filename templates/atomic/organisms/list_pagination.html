@@ -1,7 +1,7 @@
 {% load custom_filters %}
 
 <div class="mt-4 sm:px-6 lg:px-8">
-    <span class="text-sm text-gray-700 text-white flex gap-1 pb-5 items-center">
+    <span class="text-sm  text-white flex gap-1 pb-5 items-center">
       {% if page_obj.has_previous %}
       <a href="?page=1{% url_params request %}" class="pagination_a">
         <i class="fa fa-caret-left" aria-hidden="true"></i>

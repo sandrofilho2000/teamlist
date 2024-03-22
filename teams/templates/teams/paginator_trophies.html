@@ -2,7 +2,7 @@
 
 {% if paginator_trophies.num_pages > 1 %}
   <div tab="trophies" class="pagination pagination_trophies mt-4 sm:px-6 lg:px-8 {% if request.GET.tab != 'trophies' %} hidden {% endif %}">
-    <span class="text-sm text-gray-700 text-white  flex gap-1 pb-5 items-center step-links">
+    <span class="text-sm  text-white  flex gap-1 pb-5 items-center step-links">
       {% if related_items.has_previous %}
         <a href="{{ url|set_pagination_params }}page=1" class="pagination_a">
           <i class="fa fa-caret-left" aria-hidden="true"></i>
