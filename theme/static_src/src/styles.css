@@ -15,7 +15,6 @@
       backdrop-filter
       backdrop-blur-md
       px-2 
-      forced-colors:outline 
       py-1
       flex
       rounded-sm
@@ -32,7 +31,6 @@
     @apply 
       p-3 
       bg-zinc-900
-      forced-colors:outline
       rounded-lg   
       before:rounded-xl 
       shadow-[0px_0px_0px_1px_rgba(255,255,255,0.1)]
