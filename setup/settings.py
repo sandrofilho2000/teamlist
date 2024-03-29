@@ -13,23 +13,31 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from .jazzmin_settings import JAZZMIN_SETTINGS
-from decouple import config, Csv
 
 from dj_database_url import parse as db_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool, default=False)
-
-allowed_hosts_str = config("ALLOWED_HOSTS")
+DEBUG = os.environ.get("DEBUG", default=False)
+if DEBUG in ["true", "1", True, "True"]:
+    DEBUG = True
+else:
+    DEBUG = False
+    
+    
+allowed_hosts_str = os.environ.get("ALLOWED_HOSTS")
 
 # Split the string into a list using comma as delimiter
 ALLOWED_HOSTS = allowed_hosts_str.split(',')
@@ -111,10 +119,13 @@ JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": config("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", cast=db_url)
-}
+# Using os.environ.get for DATABASES variable
+DATABASE_URL = os.environ.get("DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 
+# Assuming db_url is a custom function to parse database URLs
+DATABASES = {
+    "default": db_url(DATABASE_URL)
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -146,16 +157,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = "theme/static/"
-STATICFILES_DIRS = [BASE_DIR / "theme/static"]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -170,19 +171,29 @@ INTERNAL_IPS = [
 NPM_BIN_PATH = "npm"
 
 
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 
 AWS_STORAGE_BUCKET_NAME = "teamlist-bkt-1"
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
 
+
+
 STORAGES = {
     "default": {
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage"
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
     "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3StaticStorage"
-    }
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
 }
+
+
+STATIC_URL = "theme/static/"
+STATICFILES_DIRS = [BASE_DIR / "theme/static"]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

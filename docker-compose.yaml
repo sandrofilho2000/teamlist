@@ -6,6 +6,8 @@ services:
       - .:/django
     ports: 
       - 8000:8000
-    image: application:django
-    container_name: app_container
+    image: teamlist:latest
+    container_name: teamlist_container
     command: gunicorn setup.wsgi:application --bind 0.0.0.0:8000
+    env_file:
+      - .env 

@@ -27,7 +27,7 @@
         {% if top_league %}
           <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
             <img class="h-16 lg:h-24 mb-3" src="/media/images/leagues/{{top_league.slug}}{{top_league.id}}.webp" alt="{{top_league.name}}"/>
-            <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="text-white mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
+            <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
             {% if "-" in top_league.balance %}
                 <span class="text-base lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
             {% else %}
