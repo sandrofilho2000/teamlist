@@ -34,8 +34,6 @@ $(".search_field input").keyup((e) => {
     $(".datalist_ul").html("");
     $(".datalist_ul").removeClass("active")
     
-    console.log(e.target.value)
-
     clearTimeout(typingTimer);
     if (e.target.value) {
         $(".datalist_skeleton.skeleton-loading").fadeIn();
@@ -44,7 +42,7 @@ $(".search_field input").keyup((e) => {
         typingTimer = setTimeout(() => {
             const query = slugify(e.target.value.trim())
             const apiUrl = `/search_items/${query}/`;
-            console.log(query)
+
             fetch(apiUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -91,7 +89,7 @@ $(".search_field input").keyup((e) => {
                             li.innerHTML = `
                                 <a class="flex gap-2 w-full" href="/teams/${item.id}/">
                                     <span class="min-w-[50px] min-h-[50px] grid place-items-center">
-                                        <img width="28" height="28" src="/media/images/teams/${slugify(item.name)}${item.id}.webp" />
+                                        <img width="28" height="28" src="${item.img}" />
                                     </span>
                                     <span class="whitespace-nowrap flex items-center text-sm">${enshort_name(item.name)}</span>
                                 </a>
@@ -134,7 +132,6 @@ $(".search_field input").keyup((e) => {
                         $(".players_datalist_ul").removeClass("content")
                         $(".players_datalist_ul").html("<small>Nenhum jogador encontrado</small>");
                     }
-
                     if (countries.length) {
                         $(".countries_datalist_ul").addClass("active")
                         countries.forEach((item) => {

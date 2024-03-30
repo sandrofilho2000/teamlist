@@ -18,12 +18,19 @@ class SearchItemsView(View):
         filtered_trophies = Trophy.objects.filter(slug__icontains=query)[:10]
         filtered_stadiums = Stadium.objects.filter(slug__icontains=query)[:10]
         
-        leagues_data = [{'name': league.name, 'img': league.img, 'id': league.id} for league in filtered_leagues]
-        teams_data = [{'name': team.name, 'img': team.img, 'id': team.id} for team in filtered_teams]
+
+        leagues_data = [{'name': league.name, 'img': f"https://teamlist-bkt-1.s3.amazonaws.com/images/leagues/{league.slug}{league.id}.webp", 'id': league.id} for league in filtered_leagues]
+
+        teams_data = [{'name': team.name, 'img': f"https://teamlist-bkt-1.s3.amazonaws.com/images/teams/{team.slug}{team.id}.webp", 'id': team.id} for team in filtered_teams]
+
         players_data = [{'name': player.name, 'img': player.img, 'id': player.id} for player in filtered_players]
-        countries_data = [{'name': country.name, 'img': country.flag, 'id': country.id} for country in filtered_countries]
+
+        countries_data = [{'name': country.name, 'img': f"https://teamlist-bkt-1.s3.amazonaws.com/images/countries/{country.slug}{country.id}.webp", 'id': country.id} for country in filtered_countries]
+
         trophies_data = [{'name': trophy.name, 'img': trophy.img, 'id': trophy.id} for trophy in filtered_trophies]
+
         stadiums_data = [{'name': stadium.name, 'imgs': stadium.imgs, 'id': stadium.id} for stadium in filtered_stadiums]
+        
         return JsonResponse({"leagues": leagues_data, "teams": teams_data, "players": players_data, "countries": countries_data, "trophies": trophies_data, "stadiums": stadiums_data}, safe=False)
     
 class SearchView(ListView):

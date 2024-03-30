@@ -28,7 +28,7 @@
         PAÍS:
       </span>
       <a href={% url "country_detail" pk=related_country.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium text-white">
-        <img width="26" height="16" src="/media/images/countries/{{ related_country.slug }}{{ related_country.id }}.webp" class="inline-block h-[16px]" />
+        <img width="26" height="16" src="https://teamlist-bkt-1.s3.amazonaws.com/images/countries/{{ related_country.slug }}{{ related_country.id }}.webp" class="inline-block h-[16px]" />
         {{ related_country.name | upper }} 
       </a>  
     </div>

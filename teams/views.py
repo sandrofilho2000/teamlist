@@ -30,6 +30,8 @@ class TeamListView(ListView):
             queryset = order_list(queryset, order_by_param, "")
 
         return queryset
+    
+    
 
 class TeamInfoView(View):
     model = League
@@ -102,7 +104,7 @@ class TeamInfoView(View):
             trophies = paginator_trophies.page(paginator_trophies.num_pages)
 
         image_name = f"{team.slug}{team.id}.webp"
-        image_url = f"/media/images/teams/{image_name}"
+        image_url = f"https://teamlist-bkt-1.s3.amazonaws.com/images/teams/{image_name}"
 
         breadcrumbs = []
 
@@ -134,7 +136,7 @@ class TeamInfoView(View):
         context = {
             'team': team,
             'main_item': team,
-            'main_item_admin': f"/admin/teams/{team.pk}/change/",
+            'main_item_admin': f"/admin/teams/team/{team.pk}/change/",
             'breadcrumbs': breadcrumbs,
             'players': players,
             'trophies': trophies,

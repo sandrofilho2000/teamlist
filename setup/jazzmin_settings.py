@@ -3,7 +3,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "Library Admin",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "TEAMS LIST",
+    "site_header": "TEAMLIST",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Sandro Filho DEV",
@@ -12,10 +12,10 @@ JAZZMIN_SETTINGS = {
     "site_logo": "system/sandro_filho_dev.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": True,
+    "login_logo": "images/system/logo.png",
     
     # Logo to use for login form in dark themes (defaults to login_logo)
-    "login_logo_dark": True,
+    "login_logo_dark": "images/system/logo_dark.png",
 
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img-fluid",
@@ -24,7 +24,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": "system/sandro_filho_dev.png",
 
     # Welcome text on the login screen
-    "welcome_sign": "Bem-vindo ao Team List",
+    "welcome_sign": "Bem-vindo ao Teamlist",
 
     # Copyright on the footer
     "copyright": "Sandro Filho DEV",
@@ -35,7 +35,7 @@ JAZZMIN_SETTINGS = {
     "search_model": ["auth.User", "auth.Group"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
-    "user_avatar": "system/eu.png",
+    "user_avatar": "system/eu.webp",
 
     ############
     # Top Menu #

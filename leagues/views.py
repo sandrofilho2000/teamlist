@@ -85,13 +85,13 @@ class LeagueInfoView(View):
             ]
         
         image_name = f"{league.slug}{league.id}.webp"
-        image_url = f"/media/images/leagues/{image_name}"  
+        image_url = f"https://teamlist-bkt-1.s3.amazonaws.com/images/leagues/{image_name}"  
         
         context = {
             'league': league,
             'related_teams': related_teams ,
             'main_item': league,
-            'main_item_admin': f"/admin/league/{league.pk}/change/",
+            'main_item_admin': f"/admin/leagues/league/{league.pk}/change/",
             'related_teams_count': related_teams_count,
             'paginator': paginator,
             'related_country': related_country,

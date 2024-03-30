@@ -30,7 +30,7 @@ load_dotenv()
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", default=False)
+DEBUG = os.environ.get("DEBUG")
 if DEBUG in ["true", "1", True, "True"]:
     DEBUG = True
 else:
@@ -57,12 +57,12 @@ MY_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "jazzmin",
-    "debug_toolbar",
     "tailwind",
     "django_browser_reload",
     "theme", 
     "colorfield",
-    "storages"
+    "storages",
+    "fontawesomefree"
 ]
 
 DJANGO_APPS = [
@@ -76,7 +76,6 @@ DJANGO_APPS = [
 
 INSTALLED_APPS = MY_APPS + THIRD_PARTY_APPS + DJANGO_APPS
 
-
 TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
@@ -87,7 +86,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
@@ -127,9 +125,6 @@ DATABASES = {
     "default": db_url(DATABASE_URL)
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -167,19 +162,15 @@ INTERNAL_IPS = [
     "127.0.0.1"
 ]
 
-
-NPM_BIN_PATH = "npm"
-
+if os.environ.get('DEPLOYMENT_ENV') == 'remote':
+    NPM_BIN_PATH = 'npm'  
 
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
-
 AWS_STORAGE_BUCKET_NAME = "teamlist-bkt-1"
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_FILE_OVERWRITE = False
-
-
 
 STORAGES = {
     "default": {
@@ -191,9 +182,10 @@ STORAGES = {
 }
 
 
-STATIC_URL = "theme/static/"
-STATICFILES_DIRS = [BASE_DIR / "theme/static"]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/theme/static/"
+STATICFILES_DIRS = [BASE_DIR / "/theme/static"]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+    

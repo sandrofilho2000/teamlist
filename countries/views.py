@@ -96,7 +96,7 @@ class CountryDetailView(ListView):
         form = CountryColorForm(instance=Country)
                    
         image_name = f"{country.slug}{country.id}.webp"
-        country_flag = f"/media/images/countries/{image_name}"  
+        country_flag = f"https://teamlist-bkt-1.s3.amazonaws.com/images/countries/{image_name}"  
         
         page = request.GET.get('page')
 
@@ -136,7 +136,7 @@ class CountryDetailView(ListView):
         context = {
             'country': country,
             'main_item': country,
-            'main_item_admin': f"/admin/countries/{country.pk}/change/",
+            'main_item_admin': f"/admin/countries/country/{country.pk}/change/",
             'leagues': leagues,
             'top_league': top_league,
             'country_flag': country_flag,
