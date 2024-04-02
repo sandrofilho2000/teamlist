@@ -1,5 +1,15 @@
 # [⚽Teamlist](https://teamlist-fpfslipaga-uc.a.run.app/)
 
+  <div style="display: inline"><br>
+    <img align="center" alt="Teamlist-django" height="30" width="40" src="https://github.com/devicons/devicon/blob/master/icons/django/django-plain.svg">
+    <img align="center" alt="Teamlist-Python" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
+    <img align="center" alt="Teamlist-mysql" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" />
+    <img align="center" alt="Teamlist-php" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" />
+    <img align="center" alt="Teamlist-nodejs" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
+    <img align="center" alt="Teamlist-Js" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
+  </div>
+<br />
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/sandrofilho2000/teamlist?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/sandrofilho2000/teamlist?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/sandrofilho2000/teamlist?style=for-the-badge)
@@ -9,6 +19,7 @@
 ![image](https://github.com/sandrofilho2000/teamlist/assets/75636911/3e08d8b4-68c3-4f47-b5a5-75c18de0bd1d)
 
 > Football almanac gathering data from over 100,000 players, 3,700 teams, and 250 leagues.
+
 
 ### Adjustments and Improvements
 
