@@ -24,7 +24,7 @@ The project is still in development, and the next updates will focus on the foll
 
 Before you start, make sure you meet the following requirements:
 
-- You have installed the latest version of python on your machine
+- You have installed the latest version of `python` on your machine
 
 ## ☕ Running Teamlist
 
