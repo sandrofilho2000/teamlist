@@ -1,67 +1,65 @@
 # Nome do projeto
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge).
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/sandrofilho2000/teamlist?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/sandrofilho2000/teamlist?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/sandrofilho2000/teamlist?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/sandrofilho2000/teamlist?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/sandrofilho2000/teamlist?style=for-the-badge)
 
 <img src="teamlist.png" alt="Exemplo imagem">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+> Almanaque futebolístico que reúne dados de mais de 100.000 jogadores, 3.700 equipes e 250 ligas.
 
 ### Ajustes e melhorias
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Realizar deploy na Google Cloud Service
+- [x] Criar página de estádios
+- [x] Relacionar troféus à equipes
+- [ ] Criar a página de transferências de jogadores
+- [ ] Buscar informações adicionais de jogadores
 
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-- Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-- Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-- Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+- Você instalou a versão mais recente do `python` em sua máquina
 
-## 🚀 Instalando <nome_do_projeto>
+## ☕ Rodando o Teamlist
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
-
-Linux e macOS:
+Para rodar Teamlist, siga estas etapas após clonar o repositório:
 
 ```
-<comando_de_instalação>
+python venv -m venv
 ```
 
-Windows:
-
 ```
-<comando_de_instalação>
+pip install requirements.txt
 ```
 
-## ☕ Usando <nome_do_projeto>
-
-Para usar <nome_do_projeto>, siga estas etapas:
-
 ```
-<exemplo_de_uso>
+python manage.py makemigrations
 ```
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
+```
+python manage.py migrate
+```
 
-## 📫 Contribuindo para <nome_do_projeto>
+```
+python manage.py runserver
+```
 
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+## 💻 Acessando o painel do Django
+
+## 📫 Contribuindo para Teamlist
+
+Para contribuir com Teamlist, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
 3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+4. Envie para o branch original: `git push origin Teamlist / <local>`
 5. Crie a solicitação de pull.
 
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
