@@ -9,13 +9,10 @@ from bs4 import BeautifulSoup
 
 from slugify import slugify
 
+from utils.sql_commands import select_rows
+
 root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_dir)
-
-from teams.utils.get_imgs import download_image
-from teams.utils.passToFloat import pass_to_float
-from teams.utils.slugfy import *
-from teams.utils.sql_commands import *
 
 
 players_link = []
@@ -44,6 +41,7 @@ def get_player_img(url):
         
     else:
         return ""
+
 
 def get_players(url, slug, team_id = 0):
     global teams_link_error, players_link_error
@@ -144,13 +142,6 @@ def get_players(url, slug, team_id = 0):
             print("An error occurred:", e)
             traceback.print_exc()
       
-    
-
-
-
-
-
-    
 
 def get_stadium(url):
     headers = {

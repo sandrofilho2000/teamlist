@@ -13,11 +13,16 @@ from django.conf.urls.static import static
 from trophies.views import TrophyListView
 
 
+# Root URL Configuration
 urlpatterns = [
-    path("search_items/<str:query>/", SearchItemsView.as_view(), name="search_items"),  
+    # Search items view
+    path("search_items/<str:query>/", SearchItemsView.as_view(), name="search_items"),
+    # Team list view
     path("", TeamListView.as_view(), name="team_list"),
+    # Admin site
     path("admin/", admin.site.urls),
-    path("", include("api.urls")),  
+    # Include API URLs
+    path("", include("api.urls")),
 ]
 
 countries_patterns = [
@@ -64,6 +69,7 @@ stadiums_patterns = [
     path("stadiums/", StadiumListView.as_view(), name="stadium_list"),
 ]
 
+# Add URL patterns to urlpatterns
 urlpatterns += countries_patterns
 urlpatterns += leagues_patterns
 urlpatterns += teams_patterns
@@ -74,12 +80,3 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += path("__reload__/", include("django_browser_reload.urls")),
 urlpatterns += path('i18n/', include('django.conf.urls.i18n')), 
 urlpatterns += path('search/<str:table>/<str:query>/', SearchView.as_view(), name='search'),
-
-
-
-handler404 = 'teams.views.handler404'
-
-
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += path("__debug__/", include("debug_toolbar.urls")),

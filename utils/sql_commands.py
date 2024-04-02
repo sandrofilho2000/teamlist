@@ -1,12 +1,16 @@
+import os
 import sqlite3
 from sqlite3 import Error
+from dotenv import load_dotenv
 
 
 def create_connection():
     """ create a database connection to a SQLite database """
     conn = None
+    DB_PATH = os.environ.get("DB_PATH")
+
     try:
-        conn = sqlite3.connect(r"C:\xampp\htdocs\Not legacy\Python\Futeapp\db.sqlite3")
+        conn = sqlite3.connect(DB_PATH)
 
     except Error as e:
         print(e)

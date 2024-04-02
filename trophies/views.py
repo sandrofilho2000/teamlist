@@ -3,17 +3,17 @@ from django.views.generic import ListView
 from team_trophy.models import TeamTrophy
 from trophies.models import Trophy
 
-
-def order_list(list=[], key="", order=""):
+# Function to order a list by a specified key and order
+def order_list(queryset, key="", order=""):
     if key:
-        list = list.order_by(f"{order}{key}")
-    return list
-
+        return queryset.order_by(f"{order}{key}")
+    return queryset
 
 class TrophyListView(ListView):
     model = TeamTrophy
     paginate_by = 50  
 
+    # Get queryset based on user input parameters for ordering
     def get_queryset(self):
         queryset = super().get_queryset()
 
@@ -26,6 +26,7 @@ class TrophyListView(ListView):
 
         return queryset
 
+    # Get context data for the view
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context

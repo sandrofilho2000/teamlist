@@ -36,7 +36,7 @@
       </span>
       <a href={% url "team_detail" pk=greatest_champion.pk %} class="flex items-center gap-1 text-xs md:text-sm font-medium text-white">
         <img width="16" src="https://teamlist-bkt-1.s3.amazonaws.com/images/teams/{{ greatest_champion.slug }}{{ greatest_champion.id }}.webp" class="team_main_img inline-block" />
-        {{ greatest_champion.name | upper }} 
+        {{ greatest_champion.name | upper }} ({{ greatest_champion_count }})
       </a> 
     </div>
 </div>

@@ -22,12 +22,10 @@
   <div class="flex w-full lg:w-1/2 gap-4 lg:gap-6">
     <div class='w-full lg:w-1/2'>
       <p class="text-xs text-left font-sm block w-auto text-[#A1A1AA] absolute transform translate-y-[-100%]">PRINCIPAL LIGA</p>
-
-  
         {% if top_league %}
           <div class="card h-full flex justify-center flex-col items-center py-5 px-4">
             <img class="h-16 lg:h-24 mb-3" src="https://teamlist-bkt-1.s3.amazonaws.com/images/leagues/{{top_league.slug}}{{top_league.id}}.webp" alt="{{top_league.name}}"/>
-            <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="mb-1 text-base lg:text-xl font-medium text-gray-900 min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
+            <a href="{% url 'country_league_detail' country_pk=country.pk pk=top_league.pk %}" class="mb-1 text-base lg:text-xl font-medium text-white min-h-[50px] lg:min-h-[60px] text-center">{{top_league.name}}</a>
             {% if "-" in top_league.balance %}
                 <span class="text-base lg:text-lg text-red-700 font-bold">{{ top_league.balance|passToFloat }}</span>       
             {% else %}

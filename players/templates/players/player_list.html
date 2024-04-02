@@ -52,7 +52,7 @@
                   scope="col"
                   class="table_th"
                 >
-                  <a href="{% url 'player_list' %}?field=name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
+                  <a href="{% url 'player_list' %}?field=id_country__name{% if request.GET.order == 'asc' %}&order=desc{% else %}&order=asc{% endif %}">
                     País de origem 
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                   </a>

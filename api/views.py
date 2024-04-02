@@ -5,14 +5,12 @@ from PIL import Image
 from countries.models import Country
 from collections import Counter
 
-
+# Function to convert RGB color to hexadecimal color
 def rgb_to_hex(rgb):
     hex_color = '#{:02x}{:02x}{:02x}'.format(rgb[0], rgb[1], rgb[2])
     return hex_color
 
-
-
-
+# Function to get the most common colors in an image
 def get_most_common_colors(folder, image_filename):
     # Open the image file
     image_path = os.path.join("media", "images", folder, image_filename)
@@ -28,15 +26,15 @@ def get_most_common_colors(folder, image_filename):
         # Count the occurrence of each color
         color_counter = Counter(colors)
 
-        # Get the four most common colors
+        # Get the ten most common colors
         most_common_colors = color_counter.most_common(10)
 
-        # Convert RGB colors to RGB format
+        # Extract RGB values from the most common colors
         rgb_colors = [rgb for rgb, _ in most_common_colors]
 
         return rgb_colors
-    
 
+# Function to remove duplicate colors
 def remove_duplicate_colors(colors):
     colors = sorted(colors, key=lambda x: sum(x))
     new_colors = []
@@ -57,8 +55,10 @@ def remove_duplicate_colors(colors):
         curr_green = curr_color[1]
         curr_blue = curr_color[2]
         
+        # Calculate the difference in RGB values
         diff = (last_red - curr_red) + (last_green - curr_green) + (last_blue - curr_blue)
         
+        # If the difference is significant, add the color to the list of new colors
         if diff < -20 or diff > 20:
             new_colors.append(curr_color)
 
@@ -67,10 +67,12 @@ def remove_duplicate_colors(colors):
     if new_colors:
         return new_colors
     else:
+        # If no new colors found, add default colors
         colors.append((255, 255, 255))
         colors.append((24, 24, 27))
         return colors
   
+# API view to get design UI colors
 @api_view(['GET'])
 def getDesignUi(request):
     folder = request.query_params.get('folder')
@@ -78,11 +80,11 @@ def getDesignUi(request):
     colors = get_most_common_colors(folder, img_name)
     colors = remove_duplicate_colors(colors)
     
-    if len(colors) >=5:
+    # Logic to determine background and text colors based on the image colors
+    if len(colors) >= 5:
         background_color = colors[2]
         if sum(background_color) < 300:
             text_color = colors[-1]
-            
         else:
             background_color = colors[1]
             if sum(background_color) < 200:
@@ -90,15 +92,14 @@ def getDesignUi(request):
             else:
                 text_color = colors[-1]
     
+    # Handle case when there are exactly 4 colors
     elif len(colors) == 4:
         if sum(colors[0]) > 10:
             background_color = colors[0]
             if sum(background_color) < 300:
                 text_color = colors[-1]
-                
             else:
                 text_color = colors[-1]
-            
         else:
             background_color = colors[1]
             if sum(background_color) < 154 and sum(colors[-2]) > 120:
@@ -106,8 +107,7 @@ def getDesignUi(request):
             else:
                 text_color = colors[-1]
                 
-
-            
+    # Handle case when there are less than 4 colors
     else:
         text_color = colors[-1]
         if sum(colors[0]) > 100 and sum(colors[-1]) > 500:
@@ -122,13 +122,11 @@ def getDesignUi(request):
         else:
             background_color = colors[0]
     
-        
+    # Print and return the background and text colors
     print({"background_color": f"{rgb_to_hex(background_color)}", "text_color": f"{rgb_to_hex(text_color)}"})
-   
     return Response({"background_color": f"{rgb_to_hex(background_color)}", "text_color": f"{rgb_to_hex(text_color)}"})
 
-
-
+# API view to get country counts
 @api_view(['GET'])
 def country_counts(request):
     # Get the query parameters from the request URL
@@ -143,8 +141,7 @@ def country_counts(request):
         first_index = (int(page) - 1) * 30
         last_index = int(page) * 30
 
-
-
+    # Get countries from the database based on the specified field
     countries = Country.objects.all().order_by(field)[first_index:last_index]
     counts = []
     for country in countries:

@@ -59,11 +59,6 @@ def get_trophies(link, team_id):
                             )
                     """)
                     
-                    
-                
-  
-                    
-    
 
 def get_trophy_count(letter):
     
