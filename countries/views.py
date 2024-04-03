@@ -111,7 +111,7 @@ class CountryDetailView(ListView):
             {'url': f"/countries/", 'name': "Países"},
             {'url': f"", 'name': country.name}
         ]
-
+        
         context = {
             'country': country,
             'main_item': country,

@@ -467,7 +467,8 @@
         }
 
         item.querySelectorAll("a").forEach(a => {
-          href = a.href.split("&page=")
+          href = a.href.includes("&page=") ? a.href.split("&page=") : a.href.split("?page=")
+
           if(href.length){
             tab = a.closest("[tab]").getAttribute("tab")
             a.setAttribute("href", "?tab=" + tab + "&page=" + href[1])
@@ -497,7 +498,6 @@
         value = e.target.value;
         e.target.setAttribute("url", setInputUrl(value, tab))
         url = e.target.getAttribute("url")
-        console.log(e.target.closest("[tab]"))
 
         if(value > 99){
           paginationInput.classList.add("w-[25px]")

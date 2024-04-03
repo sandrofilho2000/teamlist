@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block page_title %}{% endblock page_title %}</title>
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  {% include 'atomic/organisms/metatags.html' %}
   {% tailwind_css %}
   <!-- Include links -->
   {% include 'atomic/cells/links.html' %}
