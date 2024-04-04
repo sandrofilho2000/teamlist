@@ -87,6 +87,8 @@ class TeamTrophyInfoView(View):
         except EmptyPage:
             related_teams = paginator.page(paginator.num_pages)
 
+        editions_count = TeamTrophy.objects.filter(id_trophy=pk).count()
+        
         # Construct breadcrumbs based on context
         breadcrumbs = []
         if league_pk or team_pk or country_pk:
@@ -133,7 +135,7 @@ class TeamTrophyInfoView(View):
             'greatest_champion': greatest_champion,
             'greatest_champion_count': greatest_champion_count,
             'related_teams': related_teams,
-            'editions_count': related_teams.count()  # Total count of related team trophies
+            'editions_count': editions_count  # Total count of related team trophies
         }
 
         return render(request, self.template_name, context)

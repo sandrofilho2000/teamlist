@@ -2,3 +2,4 @@
 .env
 teamlist.png
 gcloud_deploy.txt
+db.sqlite3
