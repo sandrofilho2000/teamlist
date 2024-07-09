@@ -1,0 +1,53 @@
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-66LZ24GM6F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-66LZ24GM6F');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block page_title %}{% endblock page_title %}</title>
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+  {% include 'atomic/organisms/metatags.html' %}
+  {% tailwind_css %}
+  <!-- Include links -->
+  {% include 'atomic/cells/links.html' %}
+</head>
+
+<body class=" bg-[#09090b] {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
+  <!-- Include admin header -->
+  {% include 'atomic/organisms/admin_header.html' %}
+
+  <!-- Navigation -->
+  {% include 'atomic/organisms/nav.html' %}
+
+  <!-- Sidebar -->
+  {% include 'atomic/organisms/aside.html' %}
+
+  <!-- Main content -->
+  <main class="z-10 absolute min-h-[100vh] overflow-hidden pb-8 transition-primary pt-0 {% if user.is_authenticated and user.is_staff %}pt-[35px]{% endif %}">
+
+    {% include 'atomic/organisms/breadcrumb.html' %}
+
+    {% block content %}{% endblock content %}
+    <a href="https://www.sandrofilho.dev/" target="_blank" class="feito_por absolute bottom-2 left-1/2 gap-1 transform translate-x-[-50%] flex items-center">
+      <img height="18" width="24" src="{% static 'images/system/logo_dark.png' %}" class="brightness-0 invert"/>
+      <span class="text-sm text-[#A1A1AA] whitespace-nowrap">
+        Feito por <strong>Sandro Filho DEV</strong> 
+      </span>
+    </a>
+  </main>
+  <!-- Include scripts -->
+  {% include 'atomic/cells/scripts.html' %}
+
+</body>
+</html>

@@ -1,0 +1,633 @@
+{% extends 'atomic/pages/detail.html' %}
+{% load custom_filters %}
+
+{% block detail_page_title %}
+  {{ team.name }} | Teams List
+{% endblock %}
+
+{% block detail_content %}
+  {% include 'atomic/organisms/color_palette.html' with background_color=team.background_color text_color=team.text_color %}
+
+  <!-- Main content section -->
+  <div class="flex justify-center">
+    <div class="card">
+      <img width="80" src="{{ team_img }}" class="m-auto block team_main_img" />
+      <h2 class="h2_title text-base">{{ team.name|upper }}</h2>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-2 my-6 mx-auto min-w-full sm:px-6 lg:px-8">
+    <div class="detail_card">
+      <span class="text-xs md:text-sm text-[#A1A1AA]">PAÍS:</span>
+      <a href="{% url 'country_detail' pk=related_country.pk %}" class="flex items-center gap-1 text-xs md:text-sm font-medium text-white">
+        <img width="26" height="16" src="{{ team.country_img }}" class="inline-block h-[16px]" />
+        {{ related_country.name|upper }}
+      </a>
+    </div>
+
+    <div class="detail_card">
+      <span class="text-xs md:text-sm text-[#A1A1AA]">VALOR DO ELENCO:</span>
+      <span class="text-green-700 font-bold text-sm">{{ team_players_value|passToFloat }}</span>
+    </div>
+
+    <div class="detail_card">
+      <span class="text-xs md:text-sm text-[#A1A1AA]">VALOR DE MERCADO:</span>
+      <span class="text-green-700 font-bold text-sm">{{ team.total_market_value|passToFloat }}</span>
+    </div>
+
+    <div class="detail_card">
+      <span class="text-xs md:text-sm text-[#A1A1AA]">ESTÁDIO:</span>
+      {% if stadium.pk %}
+        <a href="{% url 'team_stadium_detail' team_pk=team.pk pk=stadium.pk %}" class="text-green-700 font-bold text-sm">{{ stadium.name }}</a>
+      {% else %}
+        <span>Sem dados</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Table container -->
+  <div class="sm:mx-0.5">
+    <div class="max-w-[97vw] py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="table_tabs flex justify-evenly gap-1 relative z-20 bottom-[-1px] w-[250px] rounded-t-md text-xs text-[#A1A1AA] cursor-pointer pl-2 pr-3 py-1 bg-zinc-900">
+        <div table="players" class="players_tab tab text-center {% if request.GET.tab == 'players' or not request.GET.tab %} font-bold {% endif %}">JOGADORES</div>
+        <span class="inline-block mx-2">|</span>
+        <div table="trophies" class="trophies_tab tab text-center {% if request.GET.tab == 'trophies' %} font-bold {% endif %}">TROFÉUS</div>
+      </div>
+
+      <div class="team_tables table_wrapper">
+        <!-- Table for displaying players data -->
+        <div class="overflow-auto">
+          <table class="{% if request.GET.tab == 'players' or not request.GET.tab %}
+
+            {% else %}
+              
+              
+              
+              
+              
+              
+              
+              
+              
+               hidden
+
+
+
+
+
+
+
+
+
+            {% endif %} players_table min-w-[800px] md:min-w-full">
+            <thead class="thead">
+              <tr class="table_tr">
+                <th scope="col" class="table_th text-left">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=number{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Numº
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+
+                <th scope="col" class="table_th text-center">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=name{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Jogador
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="table_th text-left">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=pos{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Posição
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="table_th text-left">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=birthdate{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Nascimento
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="table_th text-left">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=country_name{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    País de origem
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="table_th">
+                  <a href="{% url 'team_detail' pk=team.pk %}?tab=players&field_player=value_market{% if request.GET.order_player == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_player=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Valor de mercado
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for player in players %}
+                <tr class="table_tr">
+                  <td class="table_td">
+                    <span>{{ player.num }}</span>
+                  </td>
+
+                  <td class="table_td flex flex-col justify-left align-center">
+                    <img width="52" height="52" src="{{ player.img }}" class="object-cover rounded-full w-[38px] h-[38px] md:w-[52px] md:h-[52px] m-auto block" />
+                    {% if country_pk and league_pk %}
+                      <a class="text-center" href="{% url 'country_league_team_player_detail' country_pk=country_pk league_pk=league_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                    {% elif country_pk and not league_pk %}
+                      <a class="text-center" href="{% url 'country_team_player_detail' country_pk=country_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                    {% elif league_pk and not country_pk %}
+                      <a class="text-center" href="{% url 'league_team_player_detail' league_pk=league_pk team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                    {% else %}
+                      <a class="text-center" href="{% url 'team_player_detail' team_pk=team.pk pk=player.id %}">{{ player.name }}</a>
+                    {% endif %}
+                  </td>
+
+                  <td class="table_td">
+                    <span>{{ player.pos }}</span>
+                  </td>
+
+                  <td class="table_td">
+                    <span class="hover:underline">{{ player.birthdate|format_date_with_age }}</span>
+                  </td>
+                  <td class="table_td">
+                    <img src="{{ player.country_flag }}" title="{{ player.country_name }}" class="inline-block" />
+                    <a href="{% url 'country_detail' pk=player.id_country_id %}" class="hover:underline">{{ player.country_name }}</a>
+                  </td>
+                  <td class="table_td">
+                    <span>{{ player.value_market|passToFloat }}</span>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Table for displaying trophies data -->
+        <div class="overflow-auto">
+          <table class="{% if request.GET.tab != 'trophies' %} hidden {% endif %} trophies_table min-w-[800px] md:min-w-full">
+            <thead class="table_thead">
+              <tr class="table_tr">
+                <!-- Table headers -->
+                <th scope="col" class="table_th text-left"></th>
+                <th scope="col" class="table_th text-left">
+                  <!-- Column header for team name -->
+                  <a href="?tab=trophies&field_trophy=name{% if request.GET.order_trophy == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_trophy=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_trophy=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Título <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+                <th scope="col" class="table_th">
+                  <!-- Column header for average market value -->
+                  <a href="?tab=trophies&field_trophy=season{% if request.GET.order_trophy == 'asc' %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_trophy=desc
+
+
+
+
+
+
+
+
+
+                    {% else %}
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      &order_trophy=asc
+
+
+
+
+
+
+
+
+
+                    {% endif %}">
+                    Temporada <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Teams list -->
+              {% if trophies %}
+                {% for trophy in trophies %}
+                  <tr class="table_tr">
+                    <!-- Team data -->
+                    <td class="table_td">
+                      <img width="40" src="{{ trophy.id_trophy.img }}" class="min-w-[40px]" />
+                    </td>
+                    <td class="table_td">
+                      <!-- Team name -->
+                      {% if country_pk and league_pk %}
+                        <a href="{% url 'country_league_team_trophy_detail' country_pk=country_pk league_pk=league_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                      {% elif country_pk and not league_pk %}
+                        <a href="{% url 'country_team_trophy_detail' country_pk=country_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                      {% elif league_pk and not country_pk %}
+                        <a href="{% url 'league_team_trophy_detail' league_pk=league_pk team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                      {% else %}
+                        <a href="{% url 'team_trophy_detail' team_pk=team.pk pk=trophy.id_trophy_id %}">{{ trophy.id_trophy.name }}</a>
+                      {% endif %}
+                    </td>
+                    <td class="table_td">
+                      <!-- Average market value -->
+                      <span>{{ trophy.season }}</span>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr class="table_tr">
+                  <td>
+                    <p class="text-xs text-center font-sm block w-auto p-1 text-[#A1A1AA]">SEM DADOS</p>
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const setInputUrl = (page, tab) => {
+      let params = new URLSearchParams(document.location.search)
+      var new_url = ''
+    
+      if (tab == 'trophies') {
+        field = params.get('field_trophy') ? '&field_trophy=' + params.get('field_trophy') : ''
+        order = params.get('order_trophy') ? '&order_trophy=' + params.get('order_trophy') : ''
+        new_url = `?tab=${tab}${field}${order}&page=${page}`
+      } else if (tab == 'players') {
+        field = params.get('field_player') ? '&field_player=' + params.get('field_player') : ''
+        order = params.get('order_player') ? '&order_player=' + params.get('order_player') : ''
+        new_url = `?tab=${tab}${field}${order}&page=${page}`
+      } else {
+        new_url = `?page=${page}`
+      }
+    
+      return new_url
+    }
+    
+    document.querySelectorAll('.tab').forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.target.classList.add('font-bold')
+        tab_table = e.currentTarget.getAttribute('table')
+    
+        document.querySelectorAll('.team_tables table').forEach((table) => {
+          if (table.className.includes(tab_table)) {
+            table.classList.remove('hidden')
+          } else {
+            table.classList.add('hidden')
+          }
+        })
+    
+        document.querySelectorAll('.pagination.mt-4').forEach((item) => {
+          if (item.className.includes(tab_table)) {
+            item.classList.remove('hidden')
+          } else {
+            item.classList.add('hidden')
+          }
+    
+          item.querySelectorAll('a').forEach((a) => {
+            href = a.href.includes('&page=') ? a.href.split('&page=') : a.href.split('?page=')
+    
+            if (href.length) {
+              tab = a.closest('[tab]').getAttribute('tab')
+              a.setAttribute('href', '?tab=' + tab + '&page=' + href[1])
+            }
+          })
+    
+          let input = item.querySelector('input')
+          input.setAttribute('url', setInputUrl(input.value, tab_table))
+        })
+    
+        document.querySelectorAll(`.tab:not([table='${tab_table}'])`).forEach((item) => {
+          item.classList.remove('font-bold')
+        })
+      })
+    })
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.pagination.mt-4 input').forEach((paginationInput) => {
+        tab = paginationInput.closest('[tab]').getAttribute('tab')
+        paginationInput.setAttribute('url', setInputUrl(paginationInput.value, tab))
+    
+        paginationInput.addEventListener('keyup', (e) => {
+          tab = e.target.closest('[tab]').getAttribute('tab')
+          value = e.target.value
+          e.target.setAttribute('url', setInputUrl(value, tab))
+          url = e.target.getAttribute('url')
+          console.log(e.target.closest('[tab]'))
+    
+          if (value > 99) {
+            paginationInput.classList.add('w-[25px]')
+          } else {
+            paginationInput.classList.add('w-[15px]')
+          }
+    
+          if (e.key === 'Enter') {
+            window.location.href = url // Redirect the user to the new URL
+          }
+        })
+      })
+    })
+  </script>
+  <!-- Include pagination -->
+  {% include './paginator_players.html' with url=request.build_absolute_uri related_items=players %}
+  {% include './paginator_trophies.html' with url=request.build_absolute_uri related_items=trophies %}
+{% endblock %}

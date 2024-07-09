@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .aside-li {
+    @apply h-[56px]  w-full flex items-center rounded-custom transition-all cursor-pointer;
+  }
+  .aside-li:hover {
+    @apply bg-zinc-900 text-white;
+  }
+  .aside-li a {
+    @apply w-full h-full flex items-center justify-start gap-3;
+  }
+}
